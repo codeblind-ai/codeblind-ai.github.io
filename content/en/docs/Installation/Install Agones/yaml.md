@@ -1,0 +1,69 @@
+---
+title: "Install Code Blind using YAML"
+linkTitle: "YAML"
+weight: 10
+description: >
+  We can install Code Blind to the cluster using an install.yaml file.
+---
+
+## Installing Code Blind
+
+{{< alert title="Warning" color="warning">}}
+Installing Code Blind with the `install.yaml` file will use pre-generated, well known TLS
+certificates stored in this repository for securing Kubernetes webhooks communication.
+
+For production workloads, we **strongly** recommend using the
+[helm installation]({{< relref "helm.md" >}}) which allows you to generate
+new, unique certificates or provide your own certificates. Alternatively,
+you can use `helm template` as described [below](#customizing-your-install)
+to generate a custom yaml installation file with unique certificates.
+{{< /alert >}}
+
+Installing Code Blind using the pre-generated `install.yaml` file is the quickest,
+simplest way to get Code Blind up and running in your Kubernetes cluster:
+
+```bash
+kubectl create namespace agones-system
+kubectl apply --server-side -f https://raw.githubusercontent.com/googleforgames/agones/{{< release-branch >}}/install/yaml/install.yaml
+```
+
+You can also find the `install.yaml` in the latest `agones-install` zip from the [releases](https://github.com/googleforgames/agones/releases) archive.
+
+### Customizing your install
+
+To change the [configurable parameters](https://agones.dev/docs/installation/install-agones/helm/#configuration)
+in the `install.yaml` file, you can use `helm template` to generate a custom file locally
+without needing to use helm to install Code Blind into your cluster.
+
+The following example sets the `featureGates` and `generateTLS` helm parameters
+and creates a customized `install-custom.yaml` file (note that the `pull`
+command was introduced in Helm version 3):
+
+```bash
+helm pull --untar https://agones.dev/chart/stable/agones-{{< release-version >}}.tgz && \
+cd agones && \
+helm template agones-manual --namespace agones-system  . \
+  --set agones.controller.generateTLS=false \
+  --set agones.allocator.generateTLS=false \
+  --set agones.allocator.generateClientTLS=false \
+  --set agones.crds.cleanupOnDelete=false \
+  --set agones.featureGates="PlayerTracking=true" \
+  > install-custom.yaml
+```
+
+## Uninstalling Code Blind
+
+To uninstall/delete the `Code Blind` deployment and delete `agones-system` namespace:
+
+```bash
+kubectl delete fleets --all --all-namespaces
+kubectl delete gameservers --all --all-namespaces
+kubectl delete -f https://raw.githubusercontent.com/googleforgames/agones/{{< release-branch >}}/install/yaml/install.yaml
+kubectl delete namespace agones-system
+```
+
+Note: It may take a couple of minutes until all resources described in `install.yaml` file are deleted.
+
+## Next Steps
+
+- [Confirm Code Blind is up and running]({{< relref "../confirm.md" >}})

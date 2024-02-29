@@ -1,0 +1,103 @@
++++
+title = "Code Blind"
+linkTitle = "Code Blind"
+
++++
+
+{{< blocks/cover title="" image_anchor="top" height="min" color="white" >}}
+<div class="mx-auto">
+	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="{{< relref "/docs" >}}">
+		Get Started <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+	</a>
+	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://github.com/josephbarnett/codeblind.ai/releases">
+		Releases <i class="fab fa-github ml-2 "></i>
+	</a>
+	<p class="lead mt-4">Deploy intelligence &mdash; never be blind again!</p>
+	<div class="mx-auto mt-5">
+		{{< blocks/link-down color="light-secondary" >}}
+	</div>
+</div>
+{{< /blocks/cover >}}
+
+{{% blocks/lead color="secondary" %}}
+<p><strong>What is Code Blind?</strong></p>
+
+<p>An intelligence platform dedicated to embedding security, scaling developers, delivering value right when you need
+	it.</p>
+<p>We are an early stage startup, share your contact to join our partner program</p>
+
+
+<script>
+	const form = document.querySelector('form');
+	form.addEventListener('submit', async function (e) {
+		e.preventDefault();
+
+		const formData = new FormData(form);
+		const response = await fetch('YOUR_FABFORM_IO_ENDPOINT', {
+			method: 'POST',
+			body: formData,
+		});
+
+		// Handle the response as needed
+		console.log(response);
+	});
+</script>
+
+<form action="https://fabform.io/f/{form-id}" method="post">
+	<label for="email"></label>
+	<input name="email" type="email">
+	<button class="btn btn-md btn-primary me-3 mb-2" type="submit">Submit</button>
+</form>
+{{% /blocks/lead %}}
+
+{{< blocks/section color="dark" type="row" >}}
+{{% blocks/feature icon="fas fa-file-code" title="Enabling Intelligence" url="./docs/getting-started/" %}}
+<p>Rapidly integrate with out intelligence services through YAML configuration or API calls.</p>
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fas fa-wrench" title="Integrate any Engine" url="./docs/guides/client-sdks/" %}}
+<p>Integrated SDK for connecting to the tools you use in your engineering lifecycle today.
+
+Tools for local development included!</p>
+{{% /blocks/feature %}}
+
+
+{{% blocks/feature icon="fas fa-chart-area" title="Metrics and Monitoring" url="./docs/guides/metrics/" %}}
+<p>Integration with <a href="https://opentelemetry.io/">OpenTelemetry</a>
+for platform-independent compliance and intelligence metrics and monitoring dashboards</p>
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}
+
+{{< blocks/section color="primary" type="row" >}}
+<div class="col">
+	<h2 class="text-center pb-3">Companies using Code Blind</h2>
+	<p class="text-center showcase">
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_logo_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_company_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_unnamed_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_logo_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_company_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_unnamed_here.png" /></a>
+		<a href="https://codeblind.ai/"><img alt="your company" width="100" src="images/logos/your_logo_here.png" /></a>
+	</p>
+</div>
+{{< /blocks/section >}}
+
+{{< blocks/section color="secondary" type="row" >}}
+{{% blocks/feature icon="fab fa-discord" title="Join us on Discord" url="https://join.slack.com/t/codeblind/shared_invite/1234556" url_text="Join us" %}}
+Join the community on Slack
+{{% /blocks/feature %}}
+
+{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/josephbarnett/codeblind.ai" url_text="Contribute to Code Blind" %}}
+  We do a [Pull Request](https://github.com/josephbarnett/codeblind.ai/pulls) contributions workflow on **GitHub**.
+
+  New users are always welcome!
+{{% /blocks/feature %}}
+
+
+{{% blocks/feature icon="fab fa-x-twitter" title="Follow us on X!" url="https://twitter.com/codeblind" url_text="Follow us" %}}
+For announcement of latest features etc.
+{{% /blocks/feature %}}
+
+{{< /blocks/section >}}

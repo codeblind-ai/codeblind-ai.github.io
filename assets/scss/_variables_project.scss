@@ -1,0 +1,96 @@
+// see https://github.com/google/docsy/blob/main/assets/scss/_variables.scss#L34 for more variables
+
+$google_font_name: "Poppins";
+$google_font_family: "Poppins:300,300i,400,400i,700,700i";
+$primary: rgb(255, 255, 255) !default;
+$primary-light: lighten($primary, 75%) !default;
+$secondary: #2D70DE !default;
+$light: rgb(255, 255, 255) !default;
+$grey: #888 !default;
+$orange: $secondary;
+$td-sidebar-tree-root-color: #222 !default;
+
+.nav-shadow {
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
+}
+
+.navbar-brand {
+    color: black !important
+}
+
+.navbar-bg-onscroll {
+    box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .2);
+
+    #agones-top {
+        display: block !important;
+    }
+}
+
+.control-bar {
+    display: none;
+}
+
+// Front page items
+
+.asciinema-theme-asciinema .asciinema-terminal {
+    color: #cccccc;
+    background-color: #121314;
+    border-color: #121314;
+    border-radius: 8px;
+}
+
+.asciinema-theme-asciinema .bg-fg {
+    background-color: black !important;
+}
+
+.showcase img {
+    margin: 0 30px;
+}
+
+#cover-title {
+    max-width: 800px;
+}
+
+// End Front page items
+
+#agones-search {
+    background: rgba(190, 185, 185, 0.3);
+}
+
+input[type="search"]::placeholder {
+    color: #9B9595 !important;
+}
+
+.td-box--secondary p>a:hover {
+    color: #121314 !important;
+}
+
+#community a {
+    color: #121314 !important;
+}
+
+.td-search__icon {
+    color: #9B9595 !important;
+}
+
+.search-bar {
+    width: 300px;
+    height: 40px;
+}
+
+.nav-link {
+    margin-right: 20px !important;
+}
+
+// Bring this over from older Bootstrap.
+h1.display-1 {
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+p.display-2 {
+    font-size: 2.5rem;
+    font-weight: 100;
+    line-height: 1.2;
+}

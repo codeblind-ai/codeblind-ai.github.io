@@ -1,0 +1,24 @@
+{{ $col_id := .Get "color" | default "dark" }}
+{{/* Height can be one of: auto, min, med, max, full. */}}
+{{ $height := .Get "height" | default "max" }}
+<section
+  class="row td-cover-block td-cover-block--height-{{ $height }} js-td-cover td-overlay td-overlay--light -bg-{{ $col_id }}">
+  <div class="container td-overlay__inner">
+    <div class="row justify-content-center align-items-end">
+      <div class="col col-lg-4" id="cover-title">
+        <h1 class="display-0 mt-0 pb-3 text-center">
+          <img alt="codeblind" width="450" src="images/logo.svg" />
+          <p class="display-2 mb-2 text-center">Discovery Intelligence</p>
+        </h1>
+      </div>
+      <div class="col col-lg-auto mt-1 mt-lg-3 d-none d-md-block">
+        <asciinema-player loop autoplay font-size="12px" rows=12 cols=60 src="agones.cast"></asciinema-player>
+      </div>
+      <div class="col-12 pt-3">
+        <div class="pt-3 lead text-center">
+          {{ .Inner }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

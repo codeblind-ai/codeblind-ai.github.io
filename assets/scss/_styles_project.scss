@@ -1,0 +1,46 @@
+/*
+
+Nothing defined here. The Hugo project that uses this theme can override Bootstrap by adding a file to:
+
+assets/scss/_styles_project.scss
+
+See for more information:
+https: //github.com/google/docsy/blob/main/assets/scss/
+
+*/
+
+.td-navbar {
+    @extend .navbar;
+    @extend .navbar-expand;
+
+    background: $primary;
+    min-height: 4rem;
+    margin: 0;
+    z-index: 32;
+
+    .navbar-brand {
+
+        &__name {
+            display: none;
+        }
+
+        svg {
+            display: inline-block;
+            margin: 0 10px;
+            height: 50px;
+        }
+    }
+}
+
+
+btn,div.drawio button,.td-blog .td-rss-button {
+    border-radius: 1rem
+}
+
+.btn-lg,.btn-group-lg>.btn,div.drawio .btn-group-lg>button,.td-blog .td-rss-button {
+    border-radius: 2rem
+}
+
+.btn-sm,.btn-group-sm>.btn,div.drawio .btn-group-sm>button,.td-blog .btn-group-sm>.td-rss-button {
+    border-radius: 1rem
+}
