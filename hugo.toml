@@ -94,7 +94,7 @@ section = ["HTML", "print", "RSS"]
 copyright = "Copyright Code Blind LLC"
 privacy_policy = "https://policies.google.com/privacy"
 github_repo = "https://github.com/josephbarnett/codeblind.ai"
-site_app  = "https://app.codeblind.ai/login"
+site_app  = "https://app.codeblind.ai"
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "c6fbc2e4fe191475a"
 
