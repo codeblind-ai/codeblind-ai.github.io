@@ -68,7 +68,7 @@ For the site to be hosted on Github Pages, the repository name must be in the fo
 &lt;details open>
 &lt;summary>1.3 Update Build and deployment setting&lt;/summary>
 &lt;p>In the &lt;code>Pages&lt;/code> section of the repository settings, ensure the &lt;code>Source&lt;/code> is set to &lt;code>Github Actions&lt;/code> in the Build and deploy section.&lt;/p>
-&lt;img src="./spa-hosting/setting-build-and-deploy.png" alt="Setting the build and deploy options" style="width: 70%; display: block; margin-left: auto; margin-right: auto;" />
+&lt;img src="./spa-hosting/setting-build-and-deploy.png" alt="Setting the build and deploy options" style="width: 70%; display: block; margin-left: auto; margin-right: auto;">
 &lt;br/>
 &lt;p>The remainder of the configuration can remain the same for now.&lt;/p>
 &lt;/details>
@@ -156,12 +156,12 @@ For the site to be hosted on Github Pages, the repository name must be in the fo
 &lt;p>&lt;strong>Select Domain List from the left sidebar and click on the Manage button next to your domain name:&lt;/strong>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;img src="../../assets/images/blogs/spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+&lt;img src="./spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
 &lt;ol start="3">
 &lt;li>&lt;strong>Navigate to the Advanced DNS tab and click on the Add New Record button:&lt;/strong>&lt;/li>
 &lt;/ol>
-&lt;img src="../../assets/images/blogs/spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
-&lt;ol start="4">
+&lt;img src="./spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+&lt;ol>
 &lt;li>&lt;strong>Add the following records to your domain:&lt;/strong>&lt;/li>
 &lt;/ol>
 &lt;table>
