@@ -1,0 +1,242 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> – Install and configure Code Blind on Kubernetes</title>
+    <link>https://codeblind.ai/docs/installation/</link>
+    <description>Recent content in Install and configure Code Blind on Kubernetes on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://codeblind.ai/docs/installation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Create Kubernetes Cluster</title>
+      <link>https://codeblind.ai/docs/installation/creating-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/creating-cluster/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Install Code Blind</title>
+      <link>https://codeblind.ai/docs/installation/install-agones/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/install-agones/</guid>
+      <description>
+        
+        
+        &lt;p&gt;If you have not yet created a cluster, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/&#34;&gt;follow the instructions&lt;/a&gt;
+for the environment where you will be running Code Blind.&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Deploy Kubernetes cluster and install Code Blind using Terraform</title>
+      <link>https://codeblind.ai/docs/installation/terraform/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/terraform/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.terraform.io/&#34;&gt;Terraform&lt;/a&gt; v1.0.8&lt;/li&gt;
+&lt;li&gt;Access to the the Kubernetes hosting provider you are using (e.g. &lt;code&gt;gcloud&lt;/code&gt;,
+&lt;code&gt;awscli&lt;/code&gt;, or &lt;code&gt;az&lt;/code&gt; utility installed)&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    &lt;p&gt;All our Terraform modules and examples use a
+&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;Helm 3 Module&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The last Code Blind release to include a Helm 2 module was &lt;a href=&#34;https://agones.dev/blog/2020/09/29/1.9.0-kubernetes-1.16-nuget-and-tcp-udp/&#34;&gt;1.9.0&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;/div&gt;
+
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Confirming Code Blind Installation</title>
+      <link>https://codeblind.ai/docs/installation/confirm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/confirm/</guid>
+      <description>
+        
+        
+        &lt;p&gt;To confirm Code Blind is up and running, run the following command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl describe --namespace agones-system pods
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;It should describe six pods created in the &lt;code&gt;agones-system&lt;/code&gt; namespace, with no error messages or status. All &lt;code&gt;Conditions&lt;/code&gt; sections should look like this:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;All this pods should be in a &lt;code&gt;RUNNING&lt;/code&gt; state:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get pods --namespace agones-system
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME                                 READY   STATUS    RESTARTS   AGE
+agones-allocator-5c988b7b8d-cgtbs    1/1     Running   0          8m47s
+agones-allocator-5c988b7b8d-hhhr5    1/1     Running   0          8m47s
+agones-allocator-5c988b7b8d-pv577    1/1     Running   0          8m47s
+agones-controller-7db45966db-56l66   1/1     Running   0          8m44s
+agones-ping-84c64f6c9d-bdlzh         1/1     Running   0          8m37s
+agones-ping-84c64f6c9d-sjgzz         1/1     Running   0          8m47s
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s it!&lt;/p&gt;
+&lt;p&gt;Now with Code Blind installed, you can utilise its &lt;a href=&#34;https://kubernetes.io/docs/concepts/api-extension/custom-resources/&#34;&gt;Custom Resource Definitions&lt;/a&gt; to create
+resources of type &lt;code&gt;GameServer&lt;/code&gt;, &lt;code&gt;Fleet&lt;/code&gt; and more!&lt;/p&gt;
+&lt;h2 id=&#34;whats-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Go through the &lt;a href=&#34;https://codeblind.ai/docs/getting-started/create-gameserver/&#34;&gt;Create a Game Server Quickstart&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Upgrading Code Blind and Kubernetes</title>
+      <link>https://codeblind.ai/docs/installation/upgrading/</link>
+      <pubDate>Fri, 16 Aug 2019 00:19:19 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/upgrading/</guid>
+      <description>
+        
+        
+        
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    Whichever approach you take to upgrading Code Blind, make sure to test it in your development environment
+before applying it to production.
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;upgrading-code-blind&#34;&gt;Upgrading Code Blind&lt;/h2&gt;
+&lt;p&gt;The following are strategies for safely upgrading Code Blind from one version to another. They may require adjustment to
+your particular game architecture but should provide a solid foundation for updating Code Blind safely.&lt;/p&gt;
+&lt;p&gt;The recommended approach is to use &lt;a href=&#34;https://codeblind.ai/docs/installation/upgrading/#upgrading-agones-multiple-clusters&#34;&gt;multiple clusters&lt;/a&gt;, such that the upgrade can be tested
+gradually with production load and easily rolled back if the need arises.&lt;/p&gt;
+
+
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
+
+    Changing &lt;a href=&#34;https://codeblind.ai/docs/guides/feature-stages/#feature-gates&#34;&gt;Feature Gates&lt;/a&gt; within your Code Blind install
+can constitute an &amp;ldquo;upgrade&amp;rdquo; as it may create or remove functionality
+in the Code Blind installation that may not be forward or backward compatible with installed resources in an existing
+installation.
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;upgrading-code-blind-multiple-clusters&#34;&gt;Upgrading Code Blind: Multiple Clusters&lt;/h3&gt;
+&lt;p&gt;We essentially want to transition our GameServer allocations from a cluster with the old version of Code Blind,
+to a cluster with the upgraded version of Code Blind while ensuring nothing surprising
+happens during this process.&lt;/p&gt;
+&lt;p&gt;This also allows easy rollback to the previous infrastructure that we already know to be working in production, with
+minimal interruptions to player experience.&lt;/p&gt;
+&lt;p&gt;The following are steps to implement this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a new cluster of the same size or smaller as the current cluster.&lt;/li&gt;
+&lt;li&gt;Install the new version of Code Blind on the new cluster.&lt;/li&gt;
+&lt;li&gt;Deploy the same set of Fleets, GameServers and FleetAutoscalers from the old cluster into the new cluster.&lt;/li&gt;
+&lt;li&gt;With your matchmaker, start sending a small percentage of your matched players&amp;rsquo; game sessions to the new cluster.&lt;/li&gt;
+&lt;li&gt;Assuming everything is working successfully on the new cluster, slowly increase the percentage of matched sessions to the new cluster, until you reach 100%.&lt;/li&gt;
+&lt;li&gt;Once you are comfortable with the stability of the new cluster with the new Code Blind version, shut down the old cluster.&lt;/li&gt;
+&lt;li&gt;Congratulations - you have now upgraded to a new version of Code Blind! 👍&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;upgrading-code-blind-single-cluster&#34;&gt;Upgrading Code Blind: Single Cluster&lt;/h3&gt;
+&lt;p&gt;If you are upgrading a single cluster, we recommend creating a maintenance window, in which your game goes offline
+for the period of your upgrade, as there will be a short period in which Code Blind will be non-responsive during the upgrade.&lt;/p&gt;
+&lt;h4 id=&#34;installation-with-installyaml&#34;&gt;Installation with install.yaml&lt;/h4&gt;
+&lt;p&gt;If you installed &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/yaml/&#34;&gt;Code Blind with install.yaml&lt;/a&gt;, then you will need to delete
+the previous installation of Code Blind before upgrading to the new version, as we need to remove all of Code Blind before installing
+the new version.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Start your maintenance window.&lt;/li&gt;
+&lt;li&gt;Delete the current set of Fleets, GameServers and FleetAutoscalers in your cluster.&lt;/li&gt;
+&lt;li&gt;Make sure to delete the same version of Code Blind that was previously installed, for example:
+&lt;code&gt;kubectl delete -f https://raw.githubusercontent.com/googleforgames/agones/&amp;lt;old-release-version&amp;gt;/install/yaml/install.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install Code Blind &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/yaml/&#34;&gt;with install.yaml&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Deploy the same set of Fleets, GameServers and FleetAutoscalers back into the cluster.&lt;/li&gt;
+&lt;li&gt;Run any other tests to ensure the Code Blind installation is working as expected.&lt;/li&gt;
+&lt;li&gt;Close your maintenance window.&lt;/li&gt;
+&lt;li&gt;Congratulations - you have now upgraded to a new version of Code Blind! 👍&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;installation-with-helm&#34;&gt;Installation with Helm&lt;/h4&gt;
+&lt;p&gt;Helm features capabilities for upgrading to newer versions of Code Blind without having to uninstall Code Blind completely.&lt;/p&gt;
+&lt;p&gt;For details on how to use Helm for upgrades, see the &lt;a href=&#34;https://v2.helm.sh/docs/helm/#helm-upgrade&#34;&gt;helm upgrade&lt;/a&gt; documentation.&lt;/p&gt;
+&lt;p&gt;Given the above, the steps for upgrade are simpler:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Start your maintenance window.&lt;/li&gt;
+&lt;li&gt;Delete the current set of Fleets, GameServers and FleetAutoscalers in your cluster.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;helm upgrade&lt;/code&gt; with the appropriate arguments, such a &lt;code&gt;--version&lt;/code&gt;, for your specific upgrade&lt;/li&gt;
+&lt;li&gt;Deploy the same set of Fleets, GameServers and FleetAutoscalers back into the cluster.&lt;/li&gt;
+&lt;li&gt;Run any other tests to ensure the Code Blind installation is working as expected.&lt;/li&gt;
+&lt;li&gt;Close your maintenance window.&lt;/li&gt;
+&lt;li&gt;Congratulations - you have now upgraded to a new version of Code Blind! 👍&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;upgrading-kubernetes&#34;&gt;Upgrading Kubernetes&lt;/h2&gt;
+&lt;p&gt;The following are strategies for safely upgrading the underlying Kubernetes cluster from one version to another.
+They may require adjustment to your particular game architecture but should provide a solid foundation for updating your cluster safely.&lt;/p&gt;
+&lt;p&gt;The recommended approach is to use &lt;a href=&#34;https://codeblind.ai/docs/installation/upgrading/#multiple-clusters&#34;&gt;multiple clusters&lt;/a&gt;, such that the upgrade can be tested
+gradually with production load and easily rolled back if the need arises.&lt;/p&gt;
+&lt;p&gt;Code Blind has &lt;a href=&#34;https://codeblind.ai/docs/installation/#agones-and-kubernetes-supported-versions&#34;&gt;multiple supported Kubernetes versions&lt;/a&gt; for each version. You can stick with a minor Kubernetes version until it is not supported by Code Blind, but it is recommended to do supported minor (e.g. 1.12.1 ➡ 1.13.2) Kubernetes version upgrades at the same time as a matching Code Blind upgrades.&lt;/p&gt;
+&lt;p&gt;Patch upgrades (e.g. 1.12.1 ➡ 1.12.3) within the same minor version of Kubernetes can be done at any time.&lt;/p&gt;
+&lt;h3 id=&#34;multiple-clusters&#34;&gt;Multiple Clusters&lt;/h3&gt;
+&lt;p&gt;This process is very similar to the &lt;a href=&#34;https://codeblind.ai/docs/installation/upgrading/#upgrading-agones-multiple-clusters&#34;&gt;Upgrading Code Blind: Multiple Clusters&lt;/a&gt; approach above.&lt;/p&gt;
+&lt;p&gt;We essentially want to transition our GameServer allocations from a cluster with the old version of Kubernetes,
+to a cluster with the upgraded version of Kubernetes while ensuring nothing surprising
+happens during this process.&lt;/p&gt;
+&lt;p&gt;This also allows easy rollback to the previous infrastructure that we already know to be working in production, with
+minimal interruptions to player experience.&lt;/p&gt;
+&lt;p&gt;The following are steps to implement this:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a new cluster of the same size or smaller as the current cluster, with the new version of Kubernetes&lt;/li&gt;
+&lt;li&gt;Install the same version of Code Blind on the new cluster, as you have on the previous cluster.&lt;/li&gt;
+&lt;li&gt;Deploy the same set of Fleets and/or GameServers from the old cluster into the new cluster.&lt;/li&gt;
+&lt;li&gt;With your matchmaker, start sending a small percentage of your matched players&amp;rsquo; game sessions to the new cluster.&lt;/li&gt;
+&lt;li&gt;Assuming everything is working successfully on the new cluster, slowly increase the percentage of matched sessions to the new cluster, until you reach 100%.&lt;/li&gt;
+&lt;li&gt;Once you are comfortable with the stability of the new cluster with the new Kubernetes version, shut down the old cluster.&lt;/li&gt;
+&lt;li&gt;Congratulations - you have now upgraded to a new version of Kubernetes! 👍&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;single-cluster&#34;&gt;Single Cluster&lt;/h3&gt;
+&lt;p&gt;If you are upgrading a single cluster, we recommend creating a maintenance window, in which your game goes offline
+for the period of your upgrade, as there will be a short period in which Code Blind will be non-responsive during the node
+upgrades.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Start your maintenance window.&lt;/li&gt;
+&lt;li&gt;Scale your Fleets down to 0 and/or delete your GameServers. This is a good safety measure so there aren&amp;rsquo;t race conditions
+between the Code Blind controller being recreated and GameServers being deleted doesn&amp;rsquo;t occur, and GameServers can end up stuck in erroneous states.&lt;/li&gt;
+&lt;li&gt;Start and complete your control plane upgrade(s).&lt;/li&gt;
+&lt;li&gt;Start and complete your node upgrades.&lt;/li&gt;
+&lt;li&gt;Scale your Fleets back up and/or recreate your GameServers.&lt;/li&gt;
+&lt;li&gt;Run any other tests to ensure the Code Blind installation is still working as expected.&lt;/li&gt;
+&lt;li&gt;Close your maintenance window.&lt;/li&gt;
+&lt;li&gt;Congratulations - you have now upgraded to a new version of Kubernetes! 👍&lt;/li&gt;
+&lt;/ol&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

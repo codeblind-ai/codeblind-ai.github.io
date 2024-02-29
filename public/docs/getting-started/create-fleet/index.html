@@ -1,0 +1,802 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.123.6">
+
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico?v=1" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png?v=1" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png?v=1" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png?v=1" sizes="32x32">
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png?v=1" sizes="180x180">
+<title>Quickstart: Create a Game Server Fleet | </title><meta property="og:title" content="Quickstart: Create a Game Server Fleet" />
+<meta property="og:description" content="This guide covers how you can quickly get started using Code Blind to create a Fleet of warm GameServers ready for you to allocate out of and play on!
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://codeblind.ai/docs/getting-started/create-fleet/" /><meta property="article:section" content="docs" />
+<meta property="article:published_time" content="2019-01-02T06:42:20+00:00" />
+<meta property="article:modified_time" content="2024-02-28T21:08:15-03:00" /><meta property="og:site_name" content="Goldydocs" />
+
+<meta itemprop="name" content="Quickstart: Create a Game Server Fleet">
+<meta itemprop="description" content="This guide covers how you can quickly get started using Code Blind to create a Fleet of warm GameServers ready for you to allocate out of and play on!
+"><meta itemprop="datePublished" content="2019-01-02T06:42:20+00:00" />
+<meta itemprop="dateModified" content="2024-02-28T21:08:15-03:00" />
+<meta itemprop="wordCount" content="1932">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Quickstart: Create a Game Server Fleet"/>
+<meta name="twitter:description" content="This guide covers how you can quickly get started using Code Blind to create a Fleet of warm GameServers ready for you to allocate out of and play on!
+"/>
+
+
+
+<link rel="stylesheet" href="/css/prism.css"/>
+
+
+
+
+
+
+<link href="/scss/main.css" rel="stylesheet">
+
+
+<link rel="stylesheet" type="text/css" href=https://codeblind.ai/css/asciinema-player.css />
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  </head>
+  <body class="td-page">
+    <header>
+      
+<nav class="js-navbar-scroll navbar navbar-expand navbar-light  nav-shadow flex-column flex-md-row td-navbar">
+
+	<a id="agones-top"  class="navbar-brand" href="/">
+		<svg viewBox="0 -40 700 300" xmlns="http://www.w3.org/2000/svg"><g fill="#006298" fill-rule="none" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode:normal" transform="matrix(1, 0, 0, 1, 4.033676, -59.776756)"><g data-paper-data='{"isGlobalGroup":true,"bounds":{"x":65,"y":134.91096067769388,"width":420,"height":200.17807864461224}}'><g data-paper-data='{"isPrimaryText":true}' fill-rule="nonzero" transform="matrix(1.506311, 0, 0, 1.608315, -96.423798, -293.86853)" style=""><path d="M99.87138 315.5382c-1.20049 6.40261-6.57411 11.03307-12.97673 11.03307-7.14577.0-12.80523-6.00245-12.80523-13.49122.0-7.54594 5.65945-13.60555 12.80523-13.60555 4.4018.0 8.74643 2.22948 11.8334 6.80278l6.91711-4.91629c-3.83013-6.23111-10.86158-10.34708-18.80768-10.34708C74.71825 291.01391 65 300.90366 65 313.08006s9.71825 22.00898 21.89465 22.00898c11.31891.0 20.69416-8.63209 21.95182-19.55084z" data-paper-data='{"glyphName":"C","glyphIndex":0,"firstGlyphOfWord":true,"word":1}'/><path d="M134.79992 335.08904c12.1764.0 22.00898-9.88975 22.00898-22.06615s-9.83258-22.00898-22.06615-22.00898c-12.1764.0-22.00898 9.83258-22.00898 22.00898s9.83258 22.06615 22.06615 22.06615zM134.74275 299.4745c7.20294.0 12.97673 6.05962 12.97673 13.54839.0 7.6031-5.71662 13.54839-12.91956 13.54839-7.31727.0-12.97673-5.94528-12.97673-13.54839.0-7.48877 5.65945-13.54839 12.91956-13.54839z" data-paper-data='{"glyphName":"O","glyphIndex":1,"word":1}'/><path d="M163.15435 291.75707v42.58881h17.32136c12.23356.0 22.23765-9.08942 22.23765-21.32299.0-12.11923-10.00408-21.26582-22.29481-21.26582zm8.86076 34.58554v-26.58228h8.40343c7.4316.0 13.20539 5.54512 13.20539 13.26256.0 7.66027-5.77379 13.31972-13.14822 13.31972z" data-paper-data='{"glyphName":"D","glyphIndex":2,"word":1}'/><path d="M235.46958 334.34588v-8.00327h-17.55002V315.7097h16.00653v-8.00327h-16.00653v-7.9461h13.77705v-8.00327H209.0588v42.58881z" data-paper-data='{"glyphName":"E","glyphIndex":3,"word":1}'/><path d="M256.67824 334.34588c7.83177.0 15.09187-5.03062 15.09187-13.71989.0-4.11597-1.94365-7.7746-5.77379-10.40425 2.05798-1.88648 3.02981-4.2303 3.02981-7.20294.0-7.9461-5.65945-11.26174-13.54839-11.26174h-13.66272v42.58881zM250.67579 326.34261V315.3667h6.28828c3.65864.0 5.71662 2.11515 5.71662 5.54512.0 3.31564-2.05798 5.43079-5.71662 5.43079zm0-18.69334v-7.88893h4.45896c2.45815.0 4.80196.68599 4.80196 3.94447.0 1.77215-.5145 3.94447-4.80196 3.94447z" data-paper-data='{"glyphName":"B","glyphIndex":4,"word":1}'/><path d="M278.11556 291.75707v42.58881h26.01062v-8.00327h-17.14986v-34.58555z" data-paper-data='{"glyphName":"L","glyphIndex":5,"word":1}'/><path d="M317.90323 291.75707h-8.86076v42.58881h8.86076z" data-paper-data='{"glyphName":"I","glyphIndex":6,"word":1}'/><path d="M356.31891 316.3957l-30.29808-25.43895v43.38914h8.86076v-24.46713l30.29808 25.21029v-43.33197h-8.86076z" data-paper-data='{"glyphName":"N","glyphIndex":7,"word":1}'/><path d="M373.29726 291.75707v42.58881h17.32136c12.23356.0 22.23765-9.08942 22.23765-21.32299.0-12.11923-10.00408-21.26582-22.29481-21.26582zM382.15802 326.34261v-26.58228h8.40343c7.4316.0 13.20539 5.54512 13.20539 13.26256.0 7.66027-5.77379 13.31972-13.14822 13.31972z" data-paper-data='{"glyphName":"D","glyphIndex":8,"word":1}'/></g><g data-paper-data='{"fillRule":"evenodd","fillRuleOriginal":"evenodd","isIcon":true,"iconStyle":"standalone","selectedEffects":{"container":"triangle_simple_outline3","transformation":"","pattern":""},"bounds":{"x":200.4253260667158,"y":134.91096067769388,"width":149.1493478665684,"height":129.93559557606665},"widthRatioIconToContainer":0.46864262218011316,"heightRatioIconToContainer":0.5128464428206175,"relativeBoundsIconToContainer":{"top":0.1511909708697078,"left":0.00000405714571068623},"iconType":"icon","rawIconId":"22591","isDetailed":false,"blockLetter":"A","suitableAsStandaloneIcon":true}' fill-rule="evenodd" transform="matrix(0.857575, 0, 0, 0.832887, 371.420288, 37.764965)" style=""><path d="M240.08737 218.30866l-.03565-.03565.03565-.21459c0-3.26912.85904-7.02682 2.57713-11.2738 1.07363-2.36185 2.46949-4.70062 4.18758-7.01493.90657-1.24068 2.39819-2.85113 4.47346-4.83203 2.14726-1.81315 4.21134-3.26842 6.19154-4.36651 1.76562-.97857 3.99676-1.92079 6.69271-2.82736 2.19549-.71575 5.07038-1.21692 8.62538-1.5028l.85904-.03565v.03565l.07199-.03565h2.11161l.25024.03565.03565-.03565.21528.03565c2.95807.0 6.5613.69199 10.80829 2.07597 2.38631.88281 4.74815 2.02843 7.08694 3.43617 1.45527.85904 3.14959 2.11161 5.08226 3.75771 2.33878 2.21925 3.88911 3.93664 4.65239 5.15426 1.79008 2.43314 3.18594 5.04592 4.18758 7.83763 1.14562 3.4837 1.71809 6.52566 1.71809 9.12655l.03495.14259h-.03565l.03565.03565v2.2542l-.03565.03635.03565.03635c0 1.76492-.35788 4.3057-1.07363 7.62305-.66822 2.33808-1.39586 4.34205-2.18291 6.01261-.85904 1.69432-2.02773 3.51935-3.50816 5.47579-.9541 1.16939-2.19549 2.49326-3.72205 3.97299-2.4576 2.07597-4.53287 3.61511-6.22719 4.61675-.73952.38164-1.40774.57247-2.00397.57247-1.59856.0-2.67219-.78775-3.22089-2.36254-.09576-.42917-.14329-.79963-.14329-1.10928.0-1.36021 1.19316-2.66031 3.57947-3.90099.73952-.35788 1.92009-1.26515 3.54242-2.72042 2.07597-2.0522 3.51935-3.75771 4.33086-5.11791.93034-1.43151 1.70551-2.92313 2.3262-4.47346.85904-2.43314 1.28822-4.02051 1.28822-4.76003l.35858-2.29055-.07199-.03565.07199-.21528v-.32223l.03565-.03635-.03565-.03565.03565-.14329.03565-1.61045c0-7.11-2.63584-13.29036-7.90893-18.53898-1.95644-1.74185-3.39983-2.87489-4.33016-3.39983-4.86768-3.03007-10.00935-4.54545-15.42574-4.54545h-1.64609l-.21459.03565v-.03565l-.03565.03565h-.03635c-2.40937.0-5.32062.56058-8.73232 1.68244-1.81385.69199-3.63888 1.59856-5.47579 2.72042-1.16939.69199-2.79172 2.00397-4.86768 3.93664l-1.18127 1.28822c-4.55733 5.08226-6.836 10.90405-6.836 17.46535l.03565.39352h-.03635l.03565.03565v.03565c0 4.67686 1.95644 10.04501 5.86931 16.10584 3.17336 4.72439 5.51214 8.29127 7.01493 10.70135.52493.88351 1.03728 1.86068 1.53845 2.93501h-.03565c-3.19712-1.45527-6.17966-3.16147-8.94761-5.11791-2.09972-1.64609-3.80523-3.30546-5.11791-4.97462-1.5028-2.09972-2.61278-3.88911-3.32853-5.36885-.85904-1.67055-1.65868-3.75771-2.39819-6.26353-.42917-1.57479-.77517-3.2803-1.03798-5.11722l-.17894-1.96832h.03565l-.03565-.03635-.03495-1.82503v-1.00234l.03565-.03565-.03565-.03565v-.03565zm34.03601-22.7622h2.04032l.03565.07199.03635-.07199c1.59856.04753 3.65076.38164 6.15589 1.00234 2.17103.69199 3.97299 1.44339 5.40379 2.2549 1.33645.73952 2.86371 1.86138 4.58179 3.36418 2.14726 2.07597 3.53124 3.63888 4.15123 4.68874 1.16939 1.69432 2.07597 3.49558 2.72042 5.40449.52493 1.31198.89469 3.20901 1.10928 5.69038v.03565h-.03565l.03565.03565v1.32457c0 6.46554-2.67219 12.24049-8.01727 17.32206-2.4576 2.17103-4.0324 3.29288-4.72439 3.36418-.42917.19082-.89399.28588-1.39586.28588h-.07129c-1.5035.0-2.55336-.7514-3.14959-2.2549l-.17964-1.07363c0-1.57479 1.04986-2.82736 3.14959-3.75771.66822-.33481 1.44339-.93104 2.3262-1.79008 1.40844-1.47973 2.41007-2.83924 3.007-4.08063.5487-.9541 1.07363-2.28985 1.57479-4.00793.28588-1.40774.42917-2.42195.42917-3.04195h.03565l-.03565-.0727.03565-.17894v-1.93267l-.03565-.17894h.03565l-.03565-.14329c0-1.74185-.60811-3.84158-1.82503-6.29918-.59693-1.0974-1.46785-2.26679-2.61278-3.50747-1.21622-1.24068-2.24232-2.09972-3.0776-2.57713-3.38794-2.17103-6.76401-3.25724-10.12818-3.25724h-.10694l-.03635-.07199-.03565.07199h-.10764l-.03565-.07199-.03565.07199h-.39352l-.03635-.07199-.03565.07199h-.64446l-.21459.03565v-.03565c-1.5028.14329-2.67219.33411-3.50816.57247-4.00793 1.14492-7.13376 3.03007-9.37678 5.65473-1.28891 1.40774-2.29055 2.89866-3.0063 4.47346-.93034 2.17103-1.39586 4.21134-1.39586 6.12025v.7514l-.03565.03565.03565.03565v.07129c0 3.14959 1.19316 6.47812 3.57876 9.98559 6.06083 9.6389 10.72511 17.28641 13.99423 22.94114l-.03565.03565h-.03635c-4.17569-.38164-6.96741-.77517-8.37445-1.18057-5.55897-8.78056-8.67292-13.66012-9.34113-14.63729-2.95877-4.48604-4.79568-7.77892-5.51143-9.87865-.78775-2.36185-1.18127-4.80827-1.18127-7.33716.0-5.48767 1.80126-10.52241 5.40449-15.10351.5487-.71575 1.68174-1.8495 3.39983-3.39983 3.24536-2.57713 6.78777-4.28264 10.62935-5.11791 1.38467-.30685 3.0063-.52213 4.86768-.64096v.07199zM274.69654 205.06653h1.10998l.07199.07199.03565-.07199h.03565l.03635.07199.03565-.07199c1.04986.0 2.46949.25024 4.25957.7514 3.6263 1.28822 6.38236 3.67453 8.26751 7.15823 1.04986 2.17103 1.57479 4.29522 1.57479 6.37048v.21459c0 3.96111-1.7062 7.55175-5.11791 10.77264-1.43151 1.14562-2.7323 1.71809-3.90099 1.71809-1.45597.0-2.54148-.77517-3.25724-2.3262-.11883-.33411-.19012-.68011-.21459-1.03798.0-1.19246.88281-2.39749 2.64842-3.61441 1.26445-.85904 2.07597-1.8495 2.43314-2.97065.28658-.81151.42917-1.61045.42917-2.39819v-.14329c0-2.38631-1.04986-4.49792-3.14959-6.33484-1.38328-1.0261-3.10206-1.53915-5.15356-1.53915l-.28588.03565v-.03565l-.03635.03565h-.07199c-1.88444.0-3.69829.81081-5.43944 2.43314-1.40844 1.62233-2.11161 3.4837-2.11161 5.58343.0 1.78938 1.2288 4.42593 3.68641 7.90963 6.34672 9.99747 11.22628 17.88264 14.63729 23.65759-3.05383.81081-5.40379 1.21622-7.05059 1.21622-3.14959-4.5811-6.84788-10.4623-11.09487-17.64359-1.45527-2.43384-3.0776-4.95156-4.86698-7.55245-1.59856-2.48137-2.39889-5.07038-2.39889-7.76634.0-3.74582 1.37209-7.06247 4.11628-9.94925 1.47904-1.36021 2.82736-2.32689 4.04428-2.89866 2.17103-.90657 3.61511-1.36021 4.33016-1.36021.4061-.09506 1.19316-.19082 2.36254-.28588v.07199zm74.56087 55.60127c.0215.04174.0421.08398.06181.1267.01926.04277.0374.08599.05442.12966.01747.04366.03381.08771.04904.13215.01478.04448.02867.08926.04165.13436.01299.04515.02486.09058.0356.13631.0103.04573.0197.09168.02822.13785.00851.04618.0159.09253.02217.13907.00582.04653.01075.0932.01478.14001.00358.04676.00627.09361.00806.14054.00134.04694.00179.09385.00134.14074-89e-5.04694-.00291.09383-.00605.14068-.00313.04685-.00739.09358-.01277.14021-.00538.04667-.01186.09316-.01948.13947-.00761.04631-.01635.0924-.0262.13825-.00985.04591-.02083.09153-.03292.13684-.0121.04537-.0253.09038-.03964.13503-.01478.0447-.03023.08901-.04636.13295-.01657.04394-.03426.08745-.05307.13053-.01881.04304-.03852.08561-.05912.12771s-.04232.08369-.06516.12476c-.02284.04102-.0468.08147-.07188.12133-.02463.03986-.05038.07909-.07726.1177-.02642.03856-.05397.07648-.08263.11373-.02867.03722-.05822.07374-.08868.10957-.03046.03579-.06158.07081-.09338.10507-.03225.03426-.06516.06772-.09875.10037s-.06808.06445-.10346.0954c-.03538.03095-.07144.061-.10816.09015-.03673.0292-.07412.05746-.11219.08478-.03852.02736-.07748.05377-.1169.07921-.03941.02544-.0795.04989-.12025.07336-.21766.12585-.44809.22136-.69128.28652-.2432.06516-.49064.09775-.74234.09775H203.29356c-.04694.0-.09385-.00116-.14074-.00349-.04689-.00228-.0937-.00573-.14041-.01034-.04671-.00457-.09327-.0103-.13967-.0172-.04645-.0069-.09269-.01494-.13872-.02412-.04604-.00914-.09184-.01941-.13738-.03084-.04551-.01137-.09071-.02389-.13564-.03756-.04492-.01362-.08948-.02833-.13369-.04414-.04421-.01581-.08798-.03269-.13134-.05065-.0434-.01796-.08631-.03697-.12872-.05703-.04246-.02007-.08438-.04116-.12576-.06328-.04138-.02217-.0822-.0453-.12247-.0694-.04026-.02414-.07992-.04926-.11898-.07537-.03901-.02606-.07737-.05307-.11508-.08102-.03771-.028-.0747-.05686-.11098-.0866-.03628-.02979-.07182-.06044-.10661-.09197-.0348-.03153-.0688-.06389-.10198-.09707-.03319-.03319-.06554-.06718-.09707-.10198-.03153-.03475-.06217-.07029-.09191-.10661-.02979-.03628-.05867-.07327-.08666-.11098-.02795-.03771-.05495-.07607-.08102-.11508-.02611-.03905-.05121-.07871-.07531-.11898-.02414-.04022-.04727-.08104-.0694-.12247-.02213-.04138-.04324-.0833-.06335-.12576-.02007-.04241-.03908-.0853-.05703-.12865-.01796-.0434-.03484-.0872-.05065-.13141-.01581-.04416-.03052-.0887-.04414-.13362-.01366-.04492-.02618-.09015-.03756-.1357-.01142-.04555-.0217-.09134-.03084-.13738-.00918-.04604-.01722-.09226-.02412-.13866-.00685-.04645-.01259-.09302-.0172-.13974-.00462-.04671-.00806-.09352-.01034-.14041-.00233-.04689-.00349-.09381-.00349-.14074.0-.25175.03258-.4992.09775-.74234.06516-.2432.16067-.47378.28652-.69175l71.7064-124.19911c.02347-.04067.04792-.08073.07336-.12018.02544-.03946.05184-.07827.07921-.11643.02732-.03816.05558-.07563.08478-.11239.02916-.03677.0592-.0728.09015-.1081.03095-.03529.06275-.0698.0954-.10352.03265-.03372.0661-.06662.10037-.09868.03426-.03211.06929-.06335.10507-.09372.03579-.03037.07231-.05984.10957-.08841.03722-.02858.07513-.05623.11373-.08296.03861-.02669.07784-.05245.1177-.07726.03986-.02477.0803-.04855.12133-.07135.04102-.0228.08261-.04459.12476-.06536.0421-.02074.08467-.04044.12771-.05912.04308-.01867.0866-.03628.13053-.05281.04394-.01657.08823-.03202.13288-.04636.0447-.01438.08973-.02763.1351-.03977.04533-.01214.09094-.02318.13684-.03312.04586-.0099.09195-.01867.13825-.02633.04631-.00761.09278-.01411.1394-.01948.04667-.00538.09343-.00958.14027-.01263.0468-.00309.09367-.00502.14061-.00578.04694-76e-5.09387-38e-5.14081.00114.04689.00152.09374.00421.14054.00806.0468.00385.09347.00882.14001.01491.04653.00614.09289.01342.13907.02184.04618.00837.09213.01789.13785.02855.04573.01066.09116.02244.13631.03533.0451.0129.08988.02689.13436.04199.04443.01509.08848.03126.13215.0485.04366.01724.08686.03556.12959.05495.04277.01934.08503.03975.12677.0612.04178.02146.08299.04392.12361.06738.21802.1259.41604.27784.59408.45582.17798.17802.32993.37605.45582.59408l71.70627 124.19911c.02374.04062.04613.08182.06718.12361zM274.99998 143.5157l-66.73842 115.59433H341.7386z" data-paper-data='{"isPathIcon":true}'/></g></g></g></svg> <span class="text-uppercase fw-bold"></span>
+	</a>
+
+	<div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
+		<ul class="navbar-nav mt-2 mt-lg-0">
+			
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link active" href="/docs/"><span class="active">Documentation</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="/blog/"><span>Blog</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				
+				
+				
+				
+				<a class="nav-link" href="/community/"><span>Community</span></a>
+			</li>
+			
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				<a class="nav-link" href="https://github.com/josephbarnett/codeblind.ai">GitHub</a>
+			</li>
+			<li class="nav-item mr-4 mb-2 mb-lg-0">
+				<a class="nav-link" href="https://app.codeblind.ai/login">Login</a>
+			</li>
+			
+		</ul>
+	</div>
+	<div class="navbar-nav mx-lg-2 d-none d-lg-block"></div>
+</nav>
+
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            <div id="td-sidebar-menu" class="td-sidebar__inner">
+  <form class="td-sidebar__search d-flex align-items-center">
+    
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ms-3 fas fa-bars" type="button" data-bs-toggle="collapse" data-bs-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  <nav class="td-sidebar-nav collapse" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pe-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docs-li">
+  <a href="/docs/" title="Code Blind Documentation" class="align-left ps-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-docs"><span class="">Documentation</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsoverview-li">
+  <a href="/docs/overview/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsoverview"><span class="">Overview</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsprerequisite-knowledge-li">
+  <a href="/docs/prerequisite-knowledge/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsprerequisite-knowledge"><span class="">Prerequisite Knowledge</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsinstallation-li">
+  <a href="/docs/installation/" title="Install and configure Code Blind on Kubernetes" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsinstallation"><span class="">Installation</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsinstallationcreating-cluster-li">
+  <a href="/docs/installation/creating-cluster/" title="Create Kubernetes Cluster" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsinstallationcreating-cluster"><span class="">Create Cluster</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationcreating-clustergke-li">
+  <a href="/docs/installation/creating-cluster/gke/" title="Google Kubernetes Engine" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationcreating-clustergke"><span class="">Google Cloud</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationcreating-clustereks-li">
+  <a href="/docs/installation/creating-cluster/eks/" title="Amazon Elastic Kubernetes Service" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationcreating-clustereks"><span class="">Amazon Web Services</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationcreating-clusteraks-li">
+  <a href="/docs/installation/creating-cluster/aks/" title="Azure Kubernetes Service" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationcreating-clusteraks"><span class="">Azure</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationcreating-clusterminikube-li">
+  <a href="/docs/installation/creating-cluster/minikube/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationcreating-clusterminikube"><span class="">Minikube</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsinstallationinstall-agones-li">
+  <a href="/docs/installation/install-agones/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsinstallationinstall-agones"><span class="">Install Code Blind</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationinstall-agonesyaml-li">
+  <a href="/docs/installation/install-agones/yaml/" title="Install Code Blind using YAML" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationinstall-agonesyaml"><span class="">YAML</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationinstall-agoneshelm-li">
+  <a href="/docs/installation/install-agones/helm/" title="Install Code Blind using Helm" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationinstall-agoneshelm"><span class="">Helm</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsinstallationterraform-li">
+  <a href="/docs/installation/terraform/" title="Deploy Kubernetes cluster and install Code Blind using Terraform" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsinstallationterraform"><span class="">Install with Terraform</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationterraformgke-li">
+  <a href="/docs/installation/terraform/gke/" title="Installing Code Blind on Google Kubernetes Engine using Terraform" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationterraformgke"><span class="">Google Cloud</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationterraformeks-li">
+  <a href="/docs/installation/terraform/eks/" title="Installing Code Blind on AWS Elastic Kubernetes Service using Terraform" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationterraformeks"><span class="">AWS</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationterraformaks-li">
+  <a href="/docs/installation/terraform/aks/" title="Installing Code Blind on Azure Kubernetes Service using Terraform" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationterraformaks"><span class="">Azure</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationconfirm-li">
+  <a href="/docs/installation/confirm/" title="Confirming Code Blind Installation" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationconfirm"><span class="">Confirm Installation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsinstallationupgrading-li">
+  <a href="/docs/installation/upgrading/" title="Upgrading Code Blind and Kubernetes" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsinstallationupgrading"><span class="">Upgrading</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-docsgetting-started-li">
+  <a href="/docs/getting-started/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsgetting-started"><span class="">Getting Started</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startedcreate-gameserver-li">
+  <a href="/docs/getting-started/create-gameserver/" title="Quickstart: Create a Game Server" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedcreate-gameserver"><span class="">Create a Game Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-docsgetting-startedcreate-fleet-li">
+  <a href="/docs/getting-started/create-fleet/" title="Quickstart: Create a Game Server Fleet" class="align-left ps-0 active td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedcreate-fleet"><span class="td-sidebar-nav-active-item">Create a Fleet</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startedcreate-fleetautoscaler-li">
+  <a href="/docs/getting-started/create-fleetautoscaler/" title="Quickstart: Create a Fleet Autoscaler" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedcreate-fleetautoscaler"><span class="">Create a Fleetautoscaler</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startedcreate-webhook-fleetautoscaler-li">
+  <a href="/docs/getting-started/create-webhook-fleetautoscaler/" title="Quickstart: Create a Fleet Autoscaler with Webhook Policy" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startedcreate-webhook-fleetautoscaler"><span class="">Create a Webhook Fleetautoscaler</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsgetting-startededit-first-gameserver-go-li">
+  <a href="/docs/getting-started/edit-first-gameserver-go/" title="Quickstart: Edit a Game Server" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsgetting-startededit-first-gameserver-go"><span class="">Edit Your First Game Server (Go)</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguides-li">
+  <a href="/docs/guides/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsguides"><span class="">Guides</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesfeature-stages-li">
+  <a href="/docs/guides/feature-stages/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesfeature-stages"><span class="">Feature Stages</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguidesbest-practices-li">
+  <a href="/docs/guides/best-practices/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsguidesbest-practices"><span class="">Best Practices</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesbest-practicesgke-li">
+  <a href="/docs/guides/best-practices/gke/" title="Google Kubernetes Engine Best Practices" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesbest-practicesgke"><span class="">Google Cloud</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsguidesclient-sdks-li">
+  <a href="/docs/guides/client-sdks/" title="Code Blind Game Server Client SDKs" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsguidesclient-sdks"><span class="">Client SDKs</span></a>
+  <ul class="ul-3 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksunreal-li">
+  <a href="/docs/guides/client-sdks/unreal/" title="Unreal Engine Game Server Client Plugin" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksunreal"><span class="">Unreal Engine</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksunity-li">
+  <a href="/docs/guides/client-sdks/unity/" title="Unity Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksunity"><span class="">Unity</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdkscpp-li">
+  <a href="/docs/guides/client-sdks/cpp/" title="C&#43;&#43; Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdkscpp"><span class="">C&#43;&#43;</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksgo-li">
+  <a href="/docs/guides/client-sdks/go/" title="Go Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksgo"><span class="">Go</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdkscsharp-li">
+  <a href="/docs/guides/client-sdks/csharp/" title="C# Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdkscsharp"><span class="">C#</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksnodejs-li">
+  <a href="/docs/guides/client-sdks/nodejs/" title="Node.js Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksnodejs"><span class="">Node.js</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksrust-li">
+  <a href="/docs/guides/client-sdks/rust/" title="Rust Game Server Client SDK" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksrust"><span class="">Rust</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdksrest-li">
+  <a href="/docs/guides/client-sdks/rest/" title="REST Game Server Client API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdksrest"><span class="">Rest</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesclient-sdkslocal-li">
+  <a href="/docs/guides/client-sdks/local/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesclient-sdkslocal"><span class="">Local Development</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguideswindows-gameservers-li">
+  <a href="/docs/guides/windows-gameservers/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguideswindows-gameservers"><span class="">Windows Gameservers</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesfleet-updates-li">
+  <a href="/docs/guides/fleet-updates/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesfleet-updates"><span class="">Fleet Updates</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguideshealth-checking-li">
+  <a href="/docs/guides/health-checking/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguideshealth-checking"><span class="">GameServer Health Checking</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesplayer-tracking-li">
+  <a href="/docs/guides/player-tracking/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesplayer-tracking"><span class="">Player Tracking</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguideslocal-game-server-li">
+  <a href="/docs/guides/local-game-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguideslocal-game-server"><span class="">Local Game Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesping-service-li">
+  <a href="/docs/guides/ping-service/" title="Latency Testing with Multiple Clusters" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesping-service"><span class="">Latency Testing Services</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesmetrics-li">
+  <a href="/docs/guides/metrics/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesmetrics"><span class="">Metrics</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidesaccess-api-li">
+  <a href="/docs/guides/access-api/" title="Access Code Blind via the Kubernetes API" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidesaccess-api"><span class="">Access Code Blind via the K8s API</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsguidestroubleshooting-li">
+  <a href="/docs/guides/troubleshooting/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsguidestroubleshooting"><span class="">Troubleshooting</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsintegration-patterns-li">
+  <a href="/docs/integration-patterns/" title="Common Integration Patterns" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsintegration-patterns"><span class="">Integration Patterns</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternsallocation-from-fleet-li">
+  <a href="/docs/integration-patterns/allocation-from-fleet/" title="Matchmaker requests a GameServer from a Fleet" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternsallocation-from-fleet"><span class="">Allocation from a Fleet</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternsmatchmaker-registration-li">
+  <a href="/docs/integration-patterns/matchmaker-registration/" title="Matchmaker requires game server process registration" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternsmatchmaker-registration"><span class="">Matchmaker registration</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternscanary-testing-li">
+  <a href="/docs/integration-patterns/canary-testing/" title="Canary Testing a new Fleet" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternscanary-testing"><span class="">Canary Testing</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternsreusing-gameservers-li">
+  <a href="/docs/integration-patterns/reusing-gameservers/" title="Reusing Allocated GameServers for more than one game session" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternsreusing-gameservers"><span class="">Reusing Gameservers</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternshigh-density-gameservers-li">
+  <a href="/docs/integration-patterns/high-density-gameservers/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternshigh-density-gameservers"><span class="">High Density GameServers</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsintegration-patternsplayer-capacity-li">
+  <a href="/docs/integration-patterns/player-capacity/" title="Allocating based on GameServer Player Capacity" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsintegration-patternsplayer-capacity"><span class="">Player Capacity</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docstutorials-li">
+  <a href="/docs/tutorials/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docstutorials"><span class="">Tutorials</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialssimple-gameserver-rust-li">
+  <a href="/docs/tutorials/simple-gameserver-rust/" title="Tutorial Build and Run a Simple Gameserver (Rust)" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialssimple-gameserver-rust"><span class="">Build and Run a Simple Gameserver (Rust)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialssimple-gameserver-nodejs-li">
+  <a href="/docs/tutorials/simple-gameserver-nodejs/" title="Tutorial Build and Run a Simple Gameserver (node.js)" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialssimple-gameserver-nodejs"><span class="">Build and Run a Simple Gameserver (node.js)</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docstutorialssimple-gameserver-cpp-li">
+  <a href="/docs/tutorials/simple-gameserver-cpp/" title="Tutorial Build and Run a Simple Gameserver (C&#43;&#43;)" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docstutorialssimple-gameserver-cpp"><span class="">Build and Run a Simple Gameserver (C&#43;&#43;)</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsreference-li">
+  <a href="/docs/reference/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsreference"><span class="">Reference</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencegameserver-li">
+  <a href="/docs/reference/gameserver/" title="GameServer Specification" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferencegameserver"><span class="">Gameserver</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencefleet-li">
+  <a href="/docs/reference/fleet/" title="Fleet Specification" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferencefleet"><span class="">Fleet</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencegameserverallocation-li">
+  <a href="/docs/reference/gameserverallocation/" title="GameServerAllocation Specification" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferencegameserverallocation"><span class="">GameServerAllocation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferencefleetautoscaler-li">
+  <a href="/docs/reference/fleetautoscaler/" title="Fleet Autoscaler Specification" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferencefleetautoscaler"><span class="">Fleet Autoscaler</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsreferenceagones_crd_api_reference-li">
+  <a href="/docs/reference/agones_crd_api_reference/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsreferenceagones_crd_api_reference"><span class="">Code Blind Kubernetes API</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsexamples-li">
+  <a href="/docs/examples/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsexamples"><span class="">Examples</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsadvanced-li">
+  <a href="/docs/advanced/" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsadvanced"><span class="">Advanced</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedscheduling-and-autoscaling-li">
+  <a href="/docs/advanced/scheduling-and-autoscaling/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedscheduling-and-autoscaling"><span class="">Scheduling and Autoscaling</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedhigh-availability-agones-li">
+  <a href="/docs/advanced/high-availability-agones/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedhigh-availability-agones"><span class="">High Availability Code Blind</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedcontrolling-disruption-li">
+  <a href="/docs/advanced/controlling-disruption/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedcontrolling-disruption"><span class="">Controlling Disruption</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedlimiting-resources-li">
+  <a href="/docs/advanced/limiting-resources/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedlimiting-resources"><span class="">Limiting CPU &amp; Memory</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedout-of-cluster-dev-server-li">
+  <a href="/docs/advanced/out-of-cluster-dev-server/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedout-of-cluster-dev-server"><span class="">Out of Cluster Dev Server</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedallocator-service-li">
+  <a href="/docs/advanced/allocator-service/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedallocator-service"><span class="">Allocator Service</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedmulti-cluster-allocation-li">
+  <a href="/docs/advanced/multi-cluster-allocation/" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedmulti-cluster-allocation"><span class="">Multi-cluster Allocation</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsadvancedservice-accounts-li">
+  <a href="/docs/advanced/service-accounts/" title="GameServer Pod Service Accounts" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsadvancedservice-accounts"><span class="">Service Accounts</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsfaq-li">
+  <a href="/docs/faq/" title="Frequently Asked Questions" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsfaq"><span class="">FAQ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id="m-docsthird-party-content-li">
+  <a href="/docs/third-party-content/" title="Third Party Content" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docsthird-party-content"><span class="">Third Party</span></a>
+  <ul class="ul-2 foldable">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsthird-party-contentvideos-and-presentations-li">
+  <a href="/docs/third-party-content/videos-and-presentations/" title="Third Party Videos and Presentations" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsthird-party-contentvideos-and-presentations"><span class="">Videos and Presentations</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsthird-party-contentexamples-li">
+  <a href="/docs/third-party-content/examples/" title="Third Party Examples" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsthird-party-contentexamples"><span class="">Examples</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsthird-party-contentpodcasts-li">
+  <a href="/docs/third-party-content/podcasts/" title="Third Party Podcasts" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsthird-party-contentpodcasts"><span class="">Podcasts</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docsthird-party-contentlibraries-tools-li">
+  <a href="/docs/third-party-content/libraries-tools/" title="Third Party Libraries and Tools" class="align-left ps-0 td-sidebar-link td-sidebar-link__page" id="m-docsthird-party-contentlibraries-tools"><span class="">Libraries and Tools</span></a>
+</li>
+  </ul>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-docscontribute-li">
+  <a href="/docs/contribute/" title="Documentation Editing and Contribution" class="align-left ps-0 td-sidebar-link td-sidebar-link__section" id="m-docscontribute"><span class="">Contribute</span></a>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+
+
+
+
+
+
+
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+  
+  
+
+  
+
+  
+  
+
+  <a href="https://github.com/josephbarnett/codeblind.ai/edit/main/content/en/docs/getting%20started/create-fleet.md" data-proofer-ignore target="_blank"><i class="fa fa-edit fa-fw"></i> Edit this page</a>
+  <a href="https://github.com/josephbarnett/codeblind.ai/issues/new?title=Quickstart:%20Create%20a%20Game%20Server%20Fleet&amp;body=%0a%20%20**Link%20to%20page**:%0a%20%20https://codeblind.ai/docs/getting-started/create-fleet/%0a%0a%20%20**Description%20of%20documentation%20issue**:%0a%20%20A%20clear%20and%20concise%20description%20of%20what%20the%20problem%20is%20with%20this%20documentation%20-%20e.g.%20%22I%20find%20it%20hard%20to%0a%20%20understand....%22%0a%0a%20%20**What%20improvements%20to%20documentation%20would%20you%20like%20to%20see?**:%0a%20%20A%20clear%20and%20concise%20description%20of%20what%20modifications%20or%20additions%20to%20documentation%20you%20would%20like%20to%20see.%0a%0a%20%20&amp;labels=kind/documentation,area/site" target="_blank"><i class="fab fa-github fa-fw"></i> Create documentation issue</a>
+</div>
+
+
+            <div class="td-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites">Prerequisites</a></li>
+    <li><a href="#objectives">Objectives</a>
+      <ul>
+        <li><a href="#1-create-a-fleet">1. Create a Fleet</a></li>
+        <li><a href="#2-fetch-the-fleet-status">2. Fetch the Fleet status</a></li>
+        <li><a href="#3-scale-up-the-fleet">3. Scale up the Fleet</a></li>
+        <li><a href="#4-allocate-a-game-server-from-the-fleet">4. Allocate a Game Server from the Fleet</a></li>
+        <li><a href="#5-scale-down-the-fleet">5. Scale down the Fleet</a></li>
+        <li><a href="#6-connect-to-the-gameserver">6. Connect to the GameServer</a></li>
+        <li><a href="#7-deploy-a-new-version-of-the-gameserver-on-the-fleet">7. Deploy a new version of the GameServer on the Fleet</a></li>
+      </ul>
+    </li>
+    <li><a href="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+      </div>
+    
+            
+	
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
+            
+  
+
+            <nav aria-label="breadcrumb" class="td-breadcrumbs">
+  <ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="/docs/">Documentation</a></li>
+  <li class="breadcrumb-item">
+    <a href="/docs/getting-started/">Getting Started</a></li>
+  <li class="breadcrumb-item active" aria-current="page">
+    Create a Fleet</li>
+  </ol>
+</nav>
+            
+<div class="td-content">
+	<h1>Quickstart: Create a Game Server Fleet</h1>
+	<div class="lead">This guide covers how you can quickly get started using Code Blind to create a Fleet of warm GameServers ready for you to allocate out of and play on!</div>
+	<header class="article-meta">
+		
+  </header>
+	<h2 id="prerequisites">Prerequisites</h2>
+
+<p>The following prerequisites are required to create a GameServer:</p>
+<ol>
+<li>A Kubernetes cluster with the UDP port range 7000-8000 open on each node.</li>
+<li>Code Blind controller installed in the targeted cluster</li>
+<li>kubectl properly configured</li>
+<li>Netcat which is already installed on most Linux/macOS distributions, for windows you can use <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">WSL</a>.</li>
+</ol>
+<p>If you don’t have a Kubernetes cluster you can follow <a href="/docs/installation/">these instructions</a> to create a cluster on Google Kubernetes Engine (GKE), Minikube or Azure Kubernetes Service (AKS), and install Code Blind.</p>
+<p>For the purpose of this guide we’re going to use the
+<a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/examples/simple-game-server/" target="_blank" data-proofer-ignore>simple-game-server</a>
+ example as the GameServer container. This example is a very simple UDP server written in Go. Don’t hesitate to look at the code of this example for more information.</p>
+
+
+<p>While not required, you may wish to go through the <a href="/docs/getting-started/create-gameserver/">Create a Game Server</a> quickstart before this one.</p>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Create a <a href="https://agones.dev/docs/reference/fleet/">Fleet</a> in Kubernetes using an Code Blind custom resource.</li>
+<li>Scale the Fleet up from its initial configuration.</li>
+<li>Request a GameServer allocation from the Fleet to play on.</li>
+<li>Connect to the allocated GameServer.</li>
+<li>Deploy a new GameServer configuration to the Fleet.</li>
+</ul>
+<h3 id="1-create-a-fleet">1. Create a Fleet</h3>
+<p>Let&rsquo;s create a Fleet using the following command:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl apply -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/examples/simple-game-server/fleet.yaml
+</span></span></code></pre></div><p>You should see a successful output similar to this :</p>
+<pre tabindex="0"><code>fleet.agones.dev/simple-game-server created
+</code></pre><p>This has created a Fleet record inside Kubernetes, which in turn creates two warm <a href="https://codeblind.ai/docs/reference/gameserver/">GameServers</a>
+that are available to be allocated for a game session.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get fleet
+</span></span></code></pre></div><p>It should look something like this:</p>
+<pre tabindex="0"><code>NAME                 SCHEDULING   DESIRED   CURRENT   ALLOCATED   READY     AGE
+simple-game-server   Packed       2         3         0           2         9m
+</code></pre><p>You can also see the GameServers that have been created by the Fleet by running <code>kubectl get gameservers</code>,
+the GameServer will be prefixed by <code>simple-game-server</code>.</p>
+<pre tabindex="0"><code>NAME                             STATE     ADDRESS            PORT   NODE      AGE
+simple-game-server-llg4x-rx6rc   Ready     192.168.122.205    7752   minikube   9m
+simple-game-server-llg4x-v6g2r   Ready     192.168.122.205    7623   minikube   9m
+</code></pre><p>For the full details of the YAML file head to the <a href="https://codeblind.ai/docs/reference/fleet/">Fleet Specification Guide</a></p>
+
+
+<div class="alert alert-info" role="alert">
+<h4 class="alert-heading">Note</h4>
+
+    The game servers deployed from a <code>Fleet</code> resource will be deployed in the same namespace. The above example omits specifying a namespace, which implies both the <code>Fleet</code> and the associated <code>GameServer</code> resources will be deployed to the <code>default</code> namespace.
+
+</div>
+
+<h3 id="2-fetch-the-fleet-status">2. Fetch the Fleet status</h3>
+<p>Let&rsquo;s wait for the two <code>GameServers</code> to become ready.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>watch kubectl describe fleet simple-game-server
+</span></span></code></pre></div><pre tabindex="0"><code>Name:         simple-game-server
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={&#34;apiVersion&#34;:&#34;agones.dev/v1&#34;,&#34;kind&#34;:&#34;Fleet&#34;,&#34;metadata&#34;:{&#34;annotations&#34;:{},&#34;name&#34;:&#34;simple-game-server&#34;,&#34;namespace&#34;:&#34;default&#34;},&#34;spec&#34;:{&#34;replicas&#34;:2,...
+API Version:  agones.dev/v1
+Kind:         Fleet
+Metadata:
+  Cluster Name:
+  Creation Timestamp:  2018-07-01T18:55:35Z
+  Generation:          1
+  Resource Version:    24685
+  Self Link:           /apis/agones.dev/v1/namespaces/default/fleets/simple-game-server
+  UID:                 56710a91-7d60-11e8-b2dd-08002703ef08
+Spec:
+  Replicas:  2
+  Strategy:
+    Rolling Update:
+      Max Surge:        25%
+      Max Unavailable:  25%
+    Type:               RollingUpdate
+  Template:
+    Metadata:
+      Creation Timestamp:  &lt;nil&gt;
+    Spec:
+      Health:
+      Ports:
+        Container Port:  7654
+        Name:            default
+        Port Policy:     Dynamic
+      Template:
+        Metadata:
+          Creation Timestamp:  &lt;nil&gt;
+        Spec:
+          Containers:
+            Image:  us-docker.pkg.dev/codeblind/examples/simple-server:0.27
+            Name:   simple-game-server
+            Resources:
+Status:
+  Allocated Replicas:  0
+  Ready Replicas:      2
+  Replicas:            2
+Events:
+  Type    Reason                 Age   From              Message
+  ----    ------                 ----  ----              -------
+  Normal  CreatingGameServerSet  13s   fleet-controller  Created GameServerSet simple-game-server-wlqnd
+</code></pre><p>If you look towards the bottom, you can see there is a section of <code>Status &gt; Ready Replicas</code> which will tell you
+how many <code>GameServers</code> are currently in a Ready state. After a short period, there should be 2 <code>Ready Replicas</code>.</p>
+<h3 id="3-scale-up-the-fleet">3. Scale up the Fleet</h3>
+<p>Let&rsquo;s scale up the <code>Fleet</code> from 2 <code>replicates</code> to 5.</p>
+<p>Run <code>kubectl scale fleet simple-game-server --replicas=5</code> to change Replicas count from 2 to 5.</p>
+<p>If we now run <code>kubectl get gameservers</code> we should see 5 <code>GameServers</code> prefixed by <code>simple-game-server</code>.</p>
+<pre tabindex="0"><code>NAME                             STATE    ADDRESS           PORT    NODE       AGE
+simple-game-server-sdhzn-kcmh6   Ready    192.168.122.205   7191    minikube   52m
+simple-game-server-sdhzn-pdpk5   Ready    192.168.122.205   7752    minikube   53m
+simple-game-server-sdhzn-r4d6x   Ready    192.168.122.205   7623    minikube   52m
+simple-game-server-sdhzn-wng5k   Ready    192.168.122.205   7709    minikube   53m
+simple-game-server-sdhzn-wnhsw   Ready    192.168.122.205   7478    minikube   52m
+</code></pre><h3 id="4-allocate-a-game-server-from-the-fleet">4. Allocate a Game Server from the Fleet</h3>
+<p>Since we have a fleet of warm gameservers, we need a way to request one of them for usage, and mark that it has
+players accessing it (and therefore, it should not be deleted until they are finished with it).</p>
+
+
+<div class="alert alert-info" role="alert">
+<h4 class="alert-heading">Note</h4>
+
+    In production, you would likely do the following through a <a href="https://codeblind.ai/docs/guides/access-api/">Kubernetes API call</a>, but we can also
+do this through <code>kubectl</code> as well, and ask it to return the response in yaml so that we can see what has happened.
+
+</div>
+
+<p>We can do the allocation of a GameServer for usage through a <code>GameServerAllocation</code>, which will both
+return to us the details of a <code>GameServer</code> (assuming one is available), and also move it to the <code>Allocated</code> state,
+which demarcates that it has players on it, and should not be removed until <code>SDK.Shutdown()</code> is called, or it is manually deleted.</p>
+<p>It is worth noting that there is nothing specific that ties a <code>GameServerAllocation</code> to a fleet.
+A <code>GameServerAllocation</code> uses a <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">label selector</a>
+to determine what group of <code>GameServers</code> it will attempt to allocate out of. That being said, a <code>Fleet</code> and <code>GameServerAllocation</code>
+are often used in conjunction.</p>
+<p>
+<a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>This example</a> uses the label selector to specifically target the <code>simple-game-server</code> fleet that we just created.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/examples/simple-game-server/gameserverallocation.yaml -o yaml
+</span></span></code></pre></div><p>For the full details of the YAML file head to the <a href="https://codeblind.ai/docs/reference/gameserverallocation/">GameServerAllocation Specification Guide</a></p>
+<p>You should get back a response that looks like the following:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">apiVersion</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">allocation.agones.dev/v1</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">kind</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">GameServerAllocation</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">creationTimestamp</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">2019-02-19T02:13:12Z</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">simple-game-server-dph9b-hfk24</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">namespace</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">spec</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">metadata</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span>{}<span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">required</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">matchLabels</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">      </span><span style="color:#204a87;font-weight:bold">agones.dev/fleet</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">simple-game-server</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">scheduling</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Packed</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline"></span><span style="color:#204a87;font-weight:bold">status</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">address</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">192.168.122.152</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">gameServerName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">simple-game-server-dph9b-hfk24</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">nodeName</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">minikube</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">ports</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span>- <span style="color:#204a87;font-weight:bold">name</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">default</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">    </span><span style="color:#204a87;font-weight:bold">port</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#0000cf;font-weight:bold">7714</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span><span style="display:flex;"><span><span style="color:#f8f8f8;text-decoration:underline">  </span><span style="color:#204a87;font-weight:bold">state</span><span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8;text-decoration:underline"> </span><span style="color:#000">Allocated</span><span style="color:#f8f8f8;text-decoration:underline">
+</span></span></span></code></pre></div><p>If you look at the <code>status</code> section, there are several things to take note of. The <code>state</code> value will tell if
+a <code>GameServer</code> was allocated or not. If a <code>GameServer</code> could not be found, this will be set to <code>UnAllocated</code>.
+If there are too many concurrent requests overwhelmed the system, <code>state</code> will be set to
+<code>Contention</code> even though there are available <code>GameServers</code>.</p>
+<p>However, we see that the <code>status.state</code> value was set to <code>Allocated</code>.
+This means you have been successfully allocated a <code>GameServer</code> out of the fleet, and you can now connect your players to it!</p>
+<p>You can see various immutable details of the <code>GameServer</code> in the status - the <code>address</code>, <code>ports</code> and the name
+of the <code>GameServer</code>, in case you want to use it to retrieve more details.</p>
+<p>We can also check to see how many <code>GameServers</code> you have <code>Allocated</code> vs <code>Ready</code> with the following command
+(&ldquo;gs&rdquo; is shorthand for &ldquo;gameserver&rdquo;).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get gs
+</span></span></code></pre></div><p>This will get you a list of all the current <code>GameServers</code> and their <code>Status.State</code>.</p>
+<pre tabindex="0"><code>NAME                             STATE       ADDRESS           PORT   NODE      AGE
+simple-game-server-sdhzn-kcmh6   Ready       192.168.122.205   7191   minikube  52m
+simple-game-server-sdhzn-pdpk5   Ready       192.168.122.205   7752   minikube  53m
+simple-game-server-sdhzn-r4d6x   Allocated   192.168.122.205   7623   minikube  52m
+simple-game-server-sdhzn-wng5k   Ready       192.168.122.205   7709   minikube  53m
+simple-game-server-sdhzn-wnhsw   Ready       192.168.122.205   7478   minikube  52m
+</code></pre>
+
+<div class="alert alert-info" role="alert">
+<h4 class="alert-heading">Note</h4>
+
+    <code>GameServerAllocations</code> are create only and not stored for performance reasons, so you won&rsquo;t be able to list
+them after they have been created - but you can see their effects on <code>GameServers</code>
+
+</div>
+
+<p>A handy trick for checking to see how many <code>GameServers</code> you have <code>Allocated</code> vs <code>Ready</code>, run the following:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get gs
+</span></span></code></pre></div><p>This will get you a list of all the current <code>GameServers</code> and their <code>Status &gt; State</code>.</p>
+<pre tabindex="0"><code>NAME                             STATE       ADDRESS          PORT   NODE        AGE
+simple-game-server-tfqn7-c9tqz   Ready       192.168.39.150   7136   minikube    52m
+simple-game-server-tfqn7-g8fhq   Allocated   192.168.39.150   7148   minikube    53m
+simple-game-server-tfqn7-p8wnl   Ready       192.168.39.150   7453   minikube    52m
+simple-game-server-tfqn7-t6bwp   Ready       192.168.39.150   7228   minikube    53m
+simple-game-server-tfqn7-wkb7b   Ready       192.168.39.150   7226   minikube    52m
+</code></pre><h3 id="5-scale-down-the-fleet">5. Scale down the Fleet</h3>
+<p>Not only can we scale our fleet up, but we can scale it down as well.</p>
+<p>The nice thing about Code Blind is that it is smart enough to know when <code>GameServers</code> have been moved to <code>Allocated</code>
+and will automatically leave them running on scale down &ndash; as we assume that players are playing on this game server,
+and we shouldn&rsquo;t disconnect them!</p>
+<p>Let&rsquo;s scale down our Fleet to 0 (yep! you can do that!), and watch what happens.</p>
+<p>Run <code>kubectl scale fleet simple-game-server --replicas=0</code> to change Replicas count from 5 to 0.</p>
+<p>It may take a moment for all the <code>GameServers</code> to shut down, so let&rsquo;s watch them all and see what happens:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>watch kubectl get gs
+</span></span></code></pre></div><p>Eventually, one by one they will be removed from the list, and you should simply see:</p>
+<pre tabindex="0"><code>NAME                             STATUS      ADDRESS          PORT    NODE       AGE
+simple-game-server-tfqn7-g8fhq   Allocated   192.168.39.150   7148    minikube   55m
+</code></pre><p>That lone <code>Allocated</code> <code>GameServer</code> is left all alone, but still running!</p>
+<p>If you would like, try editing the <code>Fleet</code> configuration <code>replicas</code> field and watch the list of <code>GameServers</code>
+grow and shrink.</p>
+<h3 id="6-connect-to-the-gameserver">6. Connect to the GameServer</h3>
+<p>Since we&rsquo;ve only got one allocation, we&rsquo;ll just grab the details of the IP and port of the
+only allocated <code>GameServer</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl get gameservers <span style="color:#000;font-weight:bold">|</span> grep Allocated <span style="color:#000;font-weight:bold">|</span> awk <span style="color:#4e9a06">&#39;{print $3&#34;:&#34;$4 }&#39;</span>
+</span></span></code></pre></div><p>This should output your Game Server IP address and port. (eg <code>10.130.65.208:7936</code>)</p>
+<p>You can now communicate with the <code>GameServer</code>:</p>
+<pre tabindex="0"><code>nc -u {IP} {PORT}
+Hello World !
+ACK: Hello World !
+EXIT
+</code></pre><p>You can finally type <code>EXIT</code> which tells the SDK to run the <a href="https://codeblind.ai/docs/guides/client-sdks/#shutdown">Shutdown command</a>, and therefore shuts down the <code>GameServer</code>.</p>
+<p>If you run <code>kubectl describe gs | grep State</code> again - either the GameServer will be replaced with a new, <code>Ready</code> <code>GameServer</code>
+, or it will be in <code>Shutdown</code> state, on the way to being deleted.</p>
+<p>Since we are running a <code>Fleet</code>, Code Blind will always do it&rsquo;s best to ensure there are always the configured number
+of <code>GameServers</code> in the pool in either a <code>Ready</code> or <code>Allocated</code> state.</p>
+<h3 id="7-deploy-a-new-version-of-the-gameserver-on-the-fleet">7. Deploy a new version of the GameServer on the Fleet</h3>
+<p>We can also change the configuration of the <code>GameServer</code> of the running <code>Fleet</code>, and have the changes
+roll out, without interrupting the currently <code>Allocated</code> <code>GameServers</code>.</p>
+<p>Let&rsquo;s take this for a spin! Run <code>kubectl scale fleet simple-game-server --replicas=5</code> to return Replicas count back to 5.</p>
+<p>Let&rsquo;s also allocate ourselves a <code>GameServer</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/examples/simple-game-server/gameserverallocation.yaml -o yaml
+</span></span></code></pre></div><p>We should now have four <code>Ready</code> <code>GameServers</code> and one <code>Allocated</code>.</p>
+<p>We can check this by running <code>kubectl get gs</code>.</p>
+<pre tabindex="0"><code>NAME                             STATE       ADDRESS          PORT   NODE       AGE
+simple-game-server-tfqn7-c9tz7   Ready       192.168.39.150   7136   minikube   5m
+simple-game-server-tfqn7-g8fhq   Allocated   192.168.39.150   7148   minikube   5m
+simple-game-server-tfqn7-n0wnl   Ready       192.168.39.150   7453   minikube   5m
+simple-game-server-tfqn7-hiiwp   Ready       192.168.39.150   7228   minikube   5m
+simple-game-server-tfqn7-w8z7b   Ready       192.168.39.150   7226   minikube   5m
+</code></pre><p>In production, we&rsquo;d likely be changing a <code>containers &gt; image</code> configuration to update our <code>Fleet</code>
+to run a new game server process, but to make this example simple, change <code>containerPort</code> from <code>7654</code>
+to <code>6000</code>.</p>
+<p>Run <code>kubectl edit fleet simple-game-server</code>, and make the necessary changes, and then save and exit your editor.</p>
+<p>This will start the deployment of a new set of <code>GameServers</code> running
+with a Container Port of <code>6000</code>.</p>
+
+
+<div class="alert alert-warning" role="alert">
+<h4 class="alert-heading">Warning</h4>
+
+    This will make it such that you can no longer connect to the simple-game-server game server.
+
+</div>
+
+<p>Run <code>kubectl describe gs | grep &quot;Container Port&quot;</code>
+until you can see that there is
+one with a containerPort of <code>7654</code>, which is the <code>Allocated</code> <code>GameServer</code>, and four instances with a containerPort of <code>6000</code> which
+is the new configuration. You can also run <code>kubectl get gs</code> and look at the <strong>Age</strong> column to see that one <code>GameServer</code> is much
+older than the other four.</p>
+<p>You have now deployed a new version of your game!</p>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li>Have a look at the <a href="https://codeblind.ai/docs/reference/gameserverallocation/">GameServerAllocation specification</a>, and see
+how the extra functionality can enable smoke testing, server information communication, and more.</li>
+<li>You can now create a fleet autoscaler to automatically resize your fleet based on the actual usage.
+See <a href="/docs/getting-started/create-fleetautoscaler/">Create a Fleet Autoscaler</a>.</li>
+<li>Have a look at the <a href="https://codeblind.ai/docs/integration-patterns/">GameServer Integration Patterns</a>,
+to give you a set of examples on how all the pieces fit together with your matchmaker and other systems.</li>
+<li>Or if you want to try to use your own GameServer container make sure you have properly integrated the <a href="https://codeblind.ai/docs/guides/client-sdks/">Code Blind SDK</a>.</li>
+<li>If you would like to learn how to programmatically allocate a Game Server from the fleet, see how to <a href="/docs/guides/access-api/">Access Code Blind via the Kubernetes API</a> or alternatively use the <a href="/docs/advanced/allocator-service/">Allocator Service</a>, depending on your needs.</li>
+</ul>
+
+	<style>
+  .feedback--answer {
+    display: inline-block;
+  }
+  .feedback--answer-no {
+    margin-left: 1em;
+  }
+  .feedback--response {
+    display: none;
+    margin-top: 1em;
+  }
+  .feedback--response__visible {
+    display: block;
+  }
+</style>
+<div class="d-print-none">
+<h2 class="feedback--title">Feedback</h2>
+<p class="feedback--question">Was this page helpful?</p>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button>
+<p class="feedback--response feedback--response-yes">
+  Glad to hear it! Please <a href="https://github.com/josephbarnett/codeblind.ai/issues/new">tell us how we can improve</a>.
+</p>
+<p class="feedback--response feedback--response-no">
+  Sorry to hear that. Please <a href="https://github.com/josephbarnett/codeblind.ai/issues/new">tell us how we can improve</a>.
+</p>
+</div>
+<script>
+  const yesButton = document.querySelector('.feedback--answer-yes');
+  const noButton = document.querySelector('.feedback--answer-no');
+  const yesResponse = document.querySelector('.feedback--response-yes');
+  const noResponse = document.querySelector('.feedback--response-no');
+  const disableButtons = () => {
+    yesButton.disabled = true;
+    noButton.disabled = true;
+  };
+  const sendFeedback = (value) => {
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
+  };
+  yesButton.addEventListener('click', () => {
+    yesResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback( 100 );
+  });
+  noButton.addEventListener('click', () => {
+    noResponse.classList.add('feedback--response__visible');
+    disableButtons();
+    sendFeedback(0);
+  });
+</script>
+<br />
+Last modified February 28, 2024: <a data-proofer-ignore href="https://github.com/josephbarnett/codeblind.ai/commit/7818be801205545723514b04709c5bc4b390bea0">initial publish (7818be8)</a>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      <footer class="td-footer row d-print-none">
+  <div class="container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Discord" aria-label="Discord">
+    <a target="_blank" rel="noopener" href="https://join.discord.com/t/codeblind/shared_invite/12345" aria-label="Discord">
+      <i class="fab fa-discord"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="User mailing list" aria-label="User mailing list">
+    <a target="_blank" rel="noopener" href="https://groups.google.com/forum/#!forum/codeblind-discuss" aria-label="User mailing list">
+      <i class="fa fa-envelope"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="X" aria-label="X">
+    <a target="_blank" rel="noopener" href="https://twitter.com/codeblind" aria-label="X">
+      <i class="fab fa-x-twitter"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Community Meetings" aria-label="Community Meetings">
+    <a target="_blank" rel="noopener" href="https://github.com/josephbarnett/" aria-label="Community Meetings">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__right col-6 col-sm-4 order-sm-3">
+        <ul class="td-footer__links-list">
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="GitHub" aria-label="GitHub">
+    <a target="_blank" rel="noopener" href="https://github.com/josephbarnett/" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Resume" aria-label="Resume">
+    <a target="_blank" rel="noopener" href="https://github.com/josephbarnett/" aria-label="Resume">
+      <i class="fab fa-linkedin"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Facebook" aria-label="Facebook">
+    <a target="_blank" rel="noopener" href="https://github.com/josephbarnett/" aria-label="Facebook">
+      <i class="fab fa-facebook"></i>
+    </a>
+  </li>
+  
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="Contact" aria-label="Contact">
+    <a target="_blank" rel="noopener" href="https://github.com/josephbarnett/codeblind.ai" aria-label="Contact">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </li>
+  
+</ul>
+
+      </div><div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
+        <span class="td-footer__copyright">&copy;
+    2024
+    <span class="td-footer__authors">Copyright Code Blind LLC</span></span><span class="td-footer__all_rights_reserved">All Rights Reserved</span><span class="ms-2"><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <script src="/js/main.js"></script>
+<script src='/js/prism.js'></script>
+<script src='/js/tabpane-persist.js'></script>
+<script src=https://codeblind.ai/js/asciinema-player.js></script>
+
+  </body>
+</html>

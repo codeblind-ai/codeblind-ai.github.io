@@ -1,0 +1,219 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> – New Releases</title>
+    <link>https://codeblind.ai/blog/releases/</link>
+    <description>Recent content in New Releases on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://codeblind.ai/blog/releases/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Blog: 1.38.0 - Improved Counters and Lists, Nodepool Upgrades on GKE Terraform, and Pod support for Topology Spread Constraints</title>
+      <link>https://codeblind.ai/blog/2024/01/30/1.38.0-improved-counters-and-lists-nodepool-upgrades-on-gke-terraform-and-pod-support-for-topology-spread-constraints/</link>
+      <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/blog/2024/01/30/1.38.0-improved-counters-and-lists-nodepool-upgrades-on-gke-terraform-and-pod-support-for-topology-spread-constraints/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This is the 1.38.0 release of Code Blind.&lt;/p&gt;
+&lt;p&gt;Key highlights of this release include Nodepool Upgrades on GKE Terraform and the support of Pod Topology Spread Constraints, alongside internal upgrades to Golang, Docker, and Debian. We have also made improvements to the Code Blind documentation, particularly for the Counters and Lists feature.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Improved Counters and Lists:&lt;/strong&gt; New life cycle management examples in the Code Blind documentation are now available for the Counters and Lists feature. Try it out, share your feedback, and if you find any bugs, please file issues and PRs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Nodepool Upgrades on GKE Terraform:&lt;/strong&gt; It’s an important update for managing node pools in Kubernetes clusters. We&amp;rsquo;ve separated node pool definitions from the cluster setup, allowing for easier updates and synchronization between control planes and nodes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Pod Topology Spread Constraints:&lt;/strong&gt; Want to utilize &lt;a href=&#34;https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/&#34;&gt;Pod Topology Spread Constraints&lt;/a&gt; on Code Blind components? Now you can with our new configuration options on our Helm chart.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check the &lt;a href=&#34;https://github.com/googleforgames/agones/tree/release-1.38.0&#34; data-proofer-ignore&gt;README&lt;/a&gt; for details on features, installation and usage.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Breaking changes:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nodepool upgrades on GKE Terraform apply by @markmandel in &lt;a href=&#34;https://github.com/googleforgames/agones/pull/3612&#34;&gt;https://github.com/googleforgames/agones/pull/3612&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Implemented enhancements:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add Feature Template for Issues Created from Code Blind Website by @Kalaiselvi84 in &lt;a href=&#34;https://github.com/googleforgames/agones/pull/3561&#34;&gt;https://github.com/googleforgames/agones/pull/3561&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;controller refresh certificate by @ashutosji in &lt;a href=&#34;https://github.com/googleforgames/agones/pull/3489&#34;&gt;https://github.com/googleforgames/agones/pull/3489&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kubernetes Config Update: Prioritize InClusterConfig function by @Kalaiselvi84 in &lt;a href=&#34;https://github.com/googleforgames/agones/pull/3584&#34;&gt;https://github.com/googleforgames/agones/pull/3584&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Support topologySpreadConstraints by @Kalaiselvi84 in &lt;a href=&#34;https://github.com/googleforgames/agones/pull/3591&#34;&gt;https://github.com/googleforgames/agones/pull/3591&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/googleforgames/agones/blob/release-1.38.0/CHANGELOG.md&#34; data-proofer-ignore&gt;CHANGELOG&lt;/a&gt; for more details on changes.&lt;/p&gt;
+&lt;p&gt;Images available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-controller:1.38.0&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-controller:1.38.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-sdk:1.38.0&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-sdk:1.38.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-ping:1.38.0&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-ping:1.38.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-allocator:1.38.0&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-allocator:1.38.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.6&#34;&gt;us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.11&#34;&gt;us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.16&#34;&gt;us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.16&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/crd-client:0.14&#34;&gt;us-docker.pkg.dev/agones-images/examples/crd-client:0.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.10&#34;&gt;us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.13&#34;&gt;us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.13&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/simple-game-server:0.27&#34;&gt;us-docker.pkg.dev/agones-images/examples/simple-game-server:0.27&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.11&#34;&gt;us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&#34;&gt;us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/xonotic-example:1.7&#34;&gt;us-docker.pkg.dev/agones-images/examples/xonotic-example:1.7&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Helm chart available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://agones.dev/chart/stable/agones-1.38.0.tgz&#34; data-proofer-ignore&gt;
+&lt;code&gt;helm install agones agones/agones --version 1.38.0&lt;/code&gt;&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to add our stable helm repository using &lt;code&gt;helm repo add agones https://agones.dev/chart/stable&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: 1.29.0 - Release Candidate</title>
+      <link>https://codeblind.ai/blog/2023/01/11/1.29.0-release-candidate/</link>
+      <pubDate>Wed, 11 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/blog/2023/01/11/1.29.0-release-candidate/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This is the 1.29.0-rc release of Code Blind.&lt;/p&gt;
+&lt;p&gt;We are bringing a huge release to start 2023!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update Code Blind to support for Kubernetes 1.24.0&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SDKGracefulTermination&lt;/code&gt; feature has now graduated to beta. So by default, the sidecar container will &lt;em&gt;not&lt;/em&gt; shutdown immeadiately on TERM signal, but instead wait for &lt;code&gt;Shutdown&lt;/code&gt; state to occur.&lt;/li&gt;
+&lt;li&gt;A new &lt;code&gt;PodHostname&lt;/code&gt; feature is now available, if you need to able to access a &lt;code&gt;GameServer&lt;/code&gt; &lt;code&gt;Pod&lt;/code&gt; within a cluster by a DNS name.&lt;/li&gt;
+&lt;li&gt;Code Blind release images have all been moved to &lt;a href=&#34;https://cloud.google.com/artifact-registry&#34;&gt;Google Artifact Registry&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Updated dependencies for security fixes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;While we expect no issues, we also updated the gRPC libraries that Code Blind uses, so please make sure to test upgrades before deploying to production.&lt;/p&gt;
+&lt;p&gt;Check the &lt;a href=&#34;https://github.com/googleforgames/agones/tree/release-1.29.0-rc&#34;&gt;README&lt;/a&gt; for details on features, installation and usage.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Breaking changes:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Update Kubernetes to 1.24 &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2867&#34;&gt;#2867&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Migrate from github.com/golang/protobuf to google.golang.org/protobuf &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2786&#34;&gt;#2786&lt;/a&gt; (&lt;a href=&#34;https://github.com/govargo&#34;&gt;govargo&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Implemented enhancements:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Graduate SDKGracefulTermination to beta &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2831&#34;&gt;#2831&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Set the hostName of the Pod to the name of the GameServer &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2704&#34;&gt;#2704&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Update from golang/protobuf to google.golang.org/protobuf &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2462&#34;&gt;#2462&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Release Automation: Add cloud build target for release builds &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2460&#34;&gt;#2460&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Release Automation: Generate version of website to push &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2457&#34;&gt;#2457&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Consider moving agones system images from gcr.io to GCP&amp;rsquo;s artifact registry &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2358&#34;&gt;#2358&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CI builds should publish a multi-arch manifest for the agones-sdk image &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2280&#34;&gt;#2280&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Generate Changelog - Release Automation: Add cloud build target for release builds &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2884&#34;&gt;#2884&lt;/a&gt; (&lt;a href=&#34;https://github.com/mangalpalli&#34;&gt;mangalpalli&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;GameServer Pod: Stable Network ID &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2826&#34;&gt;#2826&lt;/a&gt; (&lt;a href=&#34;https://github.com/markmandel&#34;&gt;markmandel&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Release Automation: Generate version of website to push &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2808&#34;&gt;#2808&lt;/a&gt; (&lt;a href=&#34;https://github.com/mangalpalli&#34;&gt;mangalpalli&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Documentation: &lt;a href=&#34;https://development.agones.dev/&#34;&gt;https://development.agones.dev/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/googleforgames/agones/blob/release-1.29.0-rc/CHANGELOG.md&#34;&gt;CHANGELOG&lt;/a&gt; for more details on changes.&lt;/p&gt;
+&lt;p&gt;Images available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-controller:1.29.0-rc&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-controller:1.29.0-rc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-sdk:1.29.0-rc&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-sdk:1.29.0-rc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-ping:1.29.0-rc&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-ping:1.29.0-rc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/release/agones-allocator:1.29.0-rc&#34;&gt;us-docker.pkg.dev/agones-images/release/agones-allocator:1.29.0-rc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.2&#34;&gt;us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.5&#34;&gt;us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.5&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.15&#34;&gt;us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/crd-client:0.7&#34;&gt;us-docker.pkg.dev/agones-images/examples/crd-client:0.7&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.8&#34;&gt;us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.11&#34;&gt;us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/simple-game-server:0.14&#34;&gt;us-docker.pkg.dev/agones-images/examples/simple-game-server:0.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.6&#34;&gt;us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&#34;&gt;us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/xonotic-example:0.9&#34;&gt;us-docker.pkg.dev/agones-images/examples/xonotic-example:0.9&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Helm chart available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://agones.dev/chart/stable/agones-1.29.0-rc.tgz&#34;&gt;
+&lt;code&gt;helm install agones agones/agones --version 1.29.0-rc&lt;/code&gt;&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to add our stable helm repository using &lt;code&gt;helm repo add agones https://agones.dev/chart/stable&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Blog: 1.28.0 - OpenShift Support, Player Tracking Metrics and GKE Terraform Improvements</title>
+      <link>https://codeblind.ai/blog/2022/12/06/1.28.0-openshift-support-player-tracking-metrics-and-gke-terraform-improvements/</link>
+      <pubDate>Tue, 06 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/blog/2022/12/06/1.28.0-openshift-support-player-tracking-metrics-and-gke-terraform-improvements/</guid>
+      <description>
+        
+        
+        &lt;p&gt;This is the 1.28.0 release of Code Blind.&lt;/p&gt;
+&lt;p&gt;Highlights for this release include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for OpenShift (where &lt;code&gt;OwnerReferencesPermissionEnforcement&lt;/code&gt; is enabled)&lt;/li&gt;
+&lt;li&gt;Metrics for Player Tracking&lt;/li&gt;
+&lt;li&gt;GKE Terraform options for regional clusters and autoscaling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Check the &lt;a href=&#34;https://github.com/googleforgames/agones/tree/release-1.28.0&#34;&gt;README&lt;/a&gt; for details on features, installation and usage.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Implemented enhancements:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Add a FAQ entry describing when you would use Code Blind vs. StatefulSets &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2770&#34;&gt;#2770&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Documentation: Kubernetes and Code Blind supported version matrix &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2237&#34;&gt;#2237&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Immutable replicas field would allow PodDisruptionBudget on selected GameServer Pods &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2806&#34;&gt;#2806&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Update example allocation yaml files to use selectors instead of required &lt;a href=&#34;https://github.com/googleforgames/agones/issues/2771&#34;&gt;#2771&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Only refresh certificates if the fsnotify event is relevant &lt;a href=&#34;https://github.com/googleforgames/agones/issues/1816&#34;&gt;#1816&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Terraform, GKE - add autoscaling Node Pools option &lt;a href=&#34;https://github.com/googleforgames/agones/issues/1467&#34;&gt;#1467&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Terraform, GKE - Option to create a Regional Cluster &lt;a href=&#34;https://github.com/googleforgames/agones/issues/1441&#34;&gt;#1441&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Adding AGONES_SDK_GRPC_HOST to NewSDK &lt;a href=&#34;https://github.com/googleforgames/agones/issues/1183&#34;&gt;#1183&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GameServer: Implement (immutable) scale subresource, add pdb &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2807&#34;&gt;#2807&lt;/a&gt; (&lt;a href=&#34;https://github.com/zmerlynn&#34;&gt;zmerlynn&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Sync Pod host ports back to GameServer in GCP &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2782&#34;&gt;#2782&lt;/a&gt; (&lt;a href=&#34;https://github.com/zmerlynn&#34;&gt;zmerlynn&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Players in-game metric for when PlayerTracking is enabled &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2765&#34;&gt;#2765&lt;/a&gt; (&lt;a href=&#34;https://github.com/estebangarcia&#34;&gt;estebangarcia&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Implemented PodDisruptionBudget on relevant deployments &lt;a href=&#34;https://github.com/googleforgames/agones/pull/2740&#34;&gt;#2740&lt;/a&gt; (&lt;a href=&#34;https://github.com/valentintorikian&#34;&gt;valentintorikian&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See &lt;a href=&#34;https://github.com/googleforgames/agones/blob/release-1.28.0/CHANGELOG.md&#34;&gt;CHANGELOG&lt;/a&gt; for more details on changes.&lt;/p&gt;
+&lt;p&gt;Images available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/agones-images/agones-controller:1.28.0&#34;&gt;gcr.io/agones-images/agones-controller:1.28.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/agones-images/agones-sdk:1.28.0&#34;&gt;gcr.io/agones-images/agones-sdk:1.28.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/agones-images/agones-ping:1.28.0&#34;&gt;gcr.io/agones-images/agones-ping:1.28.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gcr.io/agones-images/agones-allocator:1.28.0&#34;&gt;gcr.io/agones-images/agones-allocator:1.28.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.2&#34;&gt;us-docker.pkg.dev/agones-images/examples/allocation-endpoint-proxy:0.2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.5&#34;&gt;us-docker.pkg.dev/agones-images/examples/autoscaler-webhook:0.5&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.15&#34;&gt;us-docker.pkg.dev/agones-images/examples/cpp-simple-server:0.15&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/crd-client:0.7&#34;&gt;us-docker.pkg.dev/agones-images/examples/crd-client:0.7&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.8&#34;&gt;us-docker.pkg.dev/agones-images/examples/nodejs-simple-server:0.8&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.11&#34;&gt;us-docker.pkg.dev/agones-images/examples/rust-simple-server:0.11&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/simple-game-server:0.14&#34;&gt;us-docker.pkg.dev/agones-images/examples/simple-game-server:0.14&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.6&#34;&gt;us-docker.pkg.dev/agones-images/examples/supertuxkart-example:0.6&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&#34;&gt;us-docker.pkg.dev/agones-images/examples/unity-simple-server:0.3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://us-docker.pkg.dev/agones-images/examples/xonotic-example:0.9&#34;&gt;us-docker.pkg.dev/agones-images/examples/xonotic-example:0.9&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Helm chart available with this release:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://agones.dev/chart/stable/agones-1.28.0.tgz&#34;&gt;
+&lt;code&gt;helm install agones agones/agones --version 1.28.0&lt;/code&gt;&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Make sure to add our stable helm repository using &lt;code&gt;helm repo add agones https://agones.dev/chart/stable&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

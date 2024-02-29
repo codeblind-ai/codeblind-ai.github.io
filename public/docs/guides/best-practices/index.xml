@@ -1,0 +1,84 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> – Best Practices</title>
+    <link>https://codeblind.ai/docs/guides/best-practices/</link>
+    <description>Recent content in Best Practices on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 12 May 2023 00:00:00 +0000</lastBuildDate>
+    
+	  <atom:link href="https://codeblind.ai/docs/guides/best-practices/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Google Kubernetes Engine Best Practices</title>
+      <link>https://codeblind.ai/docs/guides/best-practices/gke/</link>
+      <pubDate>Fri, 12 May 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/guides/best-practices/gke/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;On this page, we&amp;rsquo;ve collected several &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/&#34;&gt;Google Kubernetes Engine (GKE)&lt;/a&gt; best practices.&lt;/p&gt;
+&lt;h2 id=&#34;release-channels&#34;&gt;Release Channels&lt;/h2&gt;
+&lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
+&lt;p&gt;We recommned using &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels&#34;&gt;Release Channels&lt;/a&gt; for all GKE clusters. Using Release Channels has several advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Google automatically manages the version and upgrade cadence for your Kubernetes Control Plane and its nodes.&lt;/li&gt;
+&lt;li&gt;Clusters on a Release Channel are allowed to use the &lt;code&gt;No minor upgrades&lt;/code&gt; and &lt;code&gt;No minor or node upgrades&lt;/code&gt; &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#limitations-maint-exclusions&#34;&gt;scope of maintenance exclusions&lt;/a&gt; - in other words, enrolling a cluster in a Release Channel gives you &lt;em&gt;more control&lt;/em&gt; over node upgrades.&lt;/li&gt;
+&lt;li&gt;Clusters enrolled in &lt;code&gt;rapid&lt;/code&gt; channel have access to the newest Kubernetes version first. Code Blind strives to &lt;a href=&#34;https://codeblind.ai/docs/installation/#agones-and-kubernetes-supported-versions&#34;&gt;support the newest release in &lt;code&gt;rapid&lt;/code&gt; channel&lt;/a&gt; to allow you to test the newest Kubernetes soon after it&amp;rsquo;s available in GKE.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    GKE Autopilot clusters must be on Release Channels.
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;what-channel-should-i-use&#34;&gt;What channel should I use?&lt;/h3&gt;
+&lt;p&gt;We recommend the &lt;code&gt;regular&lt;/code&gt; channel, which offers a balance between stability and freshness. See &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels#what_channel_should_i_use&#34;&gt;this guide&lt;/a&gt; for more discussion.&lt;/p&gt;
+&lt;p&gt;If you need to disallow minor version upgrades for more than 6 months, consider choosing the freshest Kubernetes version possible: Choosing the freshest version on &lt;code&gt;rapid&lt;/code&gt; or &lt;code&gt;regular&lt;/code&gt; will extend the amount of time before your cluster reaches &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/release-schedule#schedule-for-release-channels&#34;&gt;end of life&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;what-versions-are-available-on-a-given-channel&#34;&gt;What versions are available on a given channel?&lt;/h3&gt;
+&lt;p&gt;You can query the versions available across different channels using &lt;code&gt;gcloud&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;gcloud container get-server-config \
+  --region=[COMPUTE_REGION] \
+  --flatten=&amp;#34;channels&amp;#34; \
+  --format=&amp;#34;yaml(channels)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;COMPUTE_REGION&lt;/strong&gt;: the
+&lt;a href=&#34;https://cloud.google.com/compute/docs/regions-zones#available&#34;&gt;Google Cloud region&lt;/a&gt;
+where you will create the cluster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;managing-game-server-disruption-on-gke&#34;&gt;Managing Game Server Disruption on GKE&lt;/h2&gt;
+&lt;p&gt;If your game session length is less than an hour, use the &lt;code&gt;eviction&lt;/code&gt; API to configure your game servers appropriately - see &lt;a href=&#34;https://codeblind.ai/docs/advanced/controlling-disruption/&#34;&gt;Controlling Disruption&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For sessions longer than an hour, there are currently two possible approaches to manage disruption:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;(GKE Standard/Autopilot) &lt;a href=&#34;https://martinfowler.com/bliki/BlueGreenDeployment.html&#34;&gt;Blue/green deployment&lt;/a&gt; at the cluster level: If you are using an automated deployment process, you can:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;create a new, &lt;code&gt;green&lt;/code&gt; cluster within a release channel e.g. every week,&lt;/li&gt;
+&lt;li&gt;use &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#exclusions&#34;&gt;maintenance exclusions&lt;/a&gt; to prevent node upgrades for 30d, and&lt;/li&gt;
+&lt;li&gt;scale the &lt;code&gt;Fleet&lt;/code&gt; on the old, &lt;code&gt;blue&lt;/code&gt; cluster down to 0, and&lt;/li&gt;
+&lt;li&gt;use &lt;a href=&#34;https://codeblind.ai/docs/advanced/multi-cluster-allocation/&#34;&gt;multi-cluster allocation&lt;/a&gt; on Code Blind, which will then direct new allocations to the new &lt;code&gt;green&lt;/code&gt; cluster (since &lt;code&gt;blue&lt;/code&gt; has 0 desired), then&lt;/li&gt;
+&lt;li&gt;delete the old, &lt;code&gt;blue&lt;/code&gt; cluster when the &lt;code&gt;Fleet&lt;/code&gt; successfully scales down.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(GKE Standard only) Use &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/node-pool-upgrade-strategies#blue-green-upgrade-strategy&#34;&gt;node pool blue/green upgrades&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
