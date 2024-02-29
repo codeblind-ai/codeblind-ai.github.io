@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Engineering Blog</title><link>http://localhost:1313/blog/posts/</link><description>Recent content in Engineering Blog on</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Welcome to the new Code Blind Website!</title><link>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</link><pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Engineering Blog</title><link>http://localhost:1313/blog/posts/</link><description>Recent content in Engineering Blog on</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="http://localhost:1313/blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: Imagine</title><link>http://localhost:1313/blog/posts/imagine/</link><pubDate>Fri, 09 Feb 2024 11:00:00 +0000</pubDate><guid>http://localhost:1313/blog/posts/imagine/</guid><description/></item><item><title>Blog: Welcome to the new Code Blind Website!</title><link>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</link><pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</guid><description>
 &lt;p>Welcome to the new Code Blind website!&lt;/p>
 &lt;p>We&amp;rsquo;ve implemented a new website, to enable lots of new functionality that we&amp;rsquo;re hoping to
 take advantage of now and in the future:&lt;/p>
@@ -9,8 +9,7 @@ take advantage of now and in the future:&lt;/p>
 &lt;li>Pretty Pictures! 😊&lt;/li>
 &lt;li>Easy access to older versions of the documentation&lt;/li>
 &lt;/ul>
-&lt;p>Big thanks to &lt;a href="https://gohugo.io">Hugo&lt;/a> for being the static site generator, and the
-&lt;a href="https://github.com/google/docsy">docsy&lt;/a> team for the core documentation theme 👍&lt;/p>
-&lt;p>Please let us know if you have feedback, either by &lt;a href="https://github.com/josephbarnett/codeblind.ai/issues">filing an issue&lt;/a>
-, or &lt;a href="https://github.com/josephbarnett/codeblind.ai/pulls">submitting a pull request&lt;/a> or come chat with us
-on &lt;a href="https://join.slack.com/t/agones/shared_invite/enQtMzE5NTE0NzkyOTk1LWU3ODAyZjdjMjNlYWIxZTAwODkxMGY3YWEyZjNjMjc4YWM1Zjk0OThlMGU2ZmUyMzRlMDljNDJiNmZlMGQ1M2U">Slack&lt;/a>!&lt;/p></description></item></channel></rss>
+&lt;p>Big thanks &lt;a href="https://github.com/googleforgames/agones">Agones&lt;/a> for an inspirational site theme 🙌, to &lt;a href="https://gohugo.io">Hugo&lt;/a> for being an static site generator, the &lt;a href="https://github.com/google/docsy">docsy&lt;/a> team for the core documentation theme support 👍 and of course &lt;a href="https://github.com">github&lt;/a> for providing amazing &lt;a href="https://pages.github.com/">pages&lt;/a> support making it nearly effortless to launch the page 🚀.&lt;/p>
+&lt;p>Please let us know if you have feedback, either by &lt;a href="https://github.com/codeblind-ai/codeblind-ai.github.io/issues">filing an issue&lt;/a>,
+or &lt;a href="https://github.com/codeblind-ai/codeblind-ai.github.io/pulls">submitting a pull request&lt;/a> or come chat with us
+on &lt;a href="https://discord.gg/XCuWVReewp">Discord&lt;/a>!&lt;/p></description></item></channel></rss>
