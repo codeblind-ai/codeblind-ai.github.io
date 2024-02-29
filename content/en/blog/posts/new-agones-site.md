@@ -21,4 +21,4 @@ Big thanks [Agones](https://github.com/googleforgames/agones) for an inspiration
 
 Please let us know if you have feedback, either by [filing an issue](https://github.com/codeblind-ai/codeblind-ai.github.io/issues),
 or [submitting a pull request](https://github.com/codeblind-ai/codeblind-ai.github.io/pulls) or come chat with us
-on [Discord](https://discord.com/invite/WmtCSMNV)! 
+on [Discord](https://discord.gg/XCuWVReewp)! 
