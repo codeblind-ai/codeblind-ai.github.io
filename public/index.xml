@@ -33,15 +33,237 @@ This first release will be an Exciting and Transformative moment. CodeBlind plat
 &lt;dd>wait and see...&lt;/dd>
 &lt;dt>Another feature&lt;/dt>
 &lt;dd>wait and see...&lt;/dd>
-&lt;/dl></description></item><item><title>Blog: Building a Brand</title><link>http://localhost:1313/blog/2024/02/09/building-a-brand/</link><pubDate>Fri, 09 Feb 2024 11:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2024/02/09/building-a-brand/</guid><description>
-&lt;p>When I think about what it means to create a startup, a number of elements come to mind.&lt;/p>
-&lt;p>First is the creative spark which triggers an innovation. This is the moment when you realize that you have a unique idea that could change the world. It&amp;rsquo;s the moment when you see a gap in the market and you know that you have the perfect solution to fill it.&lt;/p>
-&lt;p>Then there&amp;rsquo;s the branding. This is the fun part. It&amp;rsquo;s the moment when you get to create a logo, design your website, and develop your marketing materials. It&amp;rsquo;s the moment when you get to bring your vision to life and show the world what you&amp;rsquo;re all about.&lt;/p>
-&lt;p>Finally, there&amp;rsquo;s the impact. This is the moment when you realize that your product or service is making a difference. It&amp;rsquo;s the moment when you see the positive feedback from your customers and you know that you&amp;rsquo;re on the right track.&lt;/p>
-&lt;details>
-&lt;summary>Details&lt;/summary>
-Something small enough to escape casual notice.
-&lt;/details></description></item><item><title>Blog: Welcome to the new Code Blind Website!</title><link>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</link><pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2019/01/17/welcome-to-the-new-code-blind-website/</guid><description>
+&lt;/dl></description></item><item><title>Blog: Bootstrapping the site</title><link>http://localhost:1313/blog/2024/02/29/bootstrapping-the-site/</link><pubDate>Thu, 29 Feb 2024 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2024/02/29/bootstrapping-the-site/</guid><description>
+&lt;style>
+aside {
+width: 40%;
+padding-left: 0.5rem;
+margin-left: 0.5rem;
+float: right;
+box-shadow: inset 5px 0 5px -5px #29627e;
+font-style: italic;
+color: #29627e;
+}
+aside > p {
+margin: 0.5rem;
+}
+summary {
+font-weight: bold;
+font-size: 1.1em;
+}
+details > summary {
+list-style-type: '✅ ';
+color: #666666;
+}
+details[open] > summary {
+list-style-type: '🟩 ';
+color: #333333;
+}
+table {
+margin-left: 30px;
+}
+&lt;/style>
+&lt;p>&lt;/style>&lt;/p>
+&lt;p>When starting a project, it is critical to have a professional looking site. This is especially true for a startup like &lt;a href="https://codeblind.ai/">CodeBlind&lt;/a>. The site needs to be secure, fast, and easy to maintain.&lt;/p>
+&lt;p>Additionally, until we have funding, we need to keep costs low. This means we need to use free services as much as possible.&lt;/p>
+&lt;blockquote>
+&lt;p>This goal of this post is to configure your &lt;a href="https://v3.vuejs.org/">Vue 3&lt;/a> SPA github project as a &lt;a href="https://pages.github.com/">Github Page&lt;/a> - using a real domain name from &lt;a href="https://www.namecheap.com/">namecheap&lt;/a> - then automating deployment using &lt;a href="https://docs.github.com/en/actions">Github Actions&lt;/a> to build and deploy the site automatically. Let&amp;rsquo;s get started.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;details open>
+&lt;summary>1. Register a Domain&lt;/summary>
+&lt;blockquote>
+&lt;p>I registered a domain on &lt;a href="https://www.namecheap.com/">Namecheap&lt;/a>. There are a number of great domain registrars, but I have been using Namecheap for a while. They have great prices and a good reputation. You can read a comparison of &lt;a href="https://www.forbes.com/advisor/business/namecheap-vs-godaddy/">Namecheap and GoDaddy on Forbes&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;/details>
+&lt;details open>
+&lt;summary>2. Create a Vue 3 SPA&lt;/summary>
+&lt;blockquote>
+&lt;p>I am using using &lt;a href="https://v3.vuejs.org/">Vue 3&lt;/a> and &lt;a href="https://vitejs.dev/">Vite&lt;/a> to create the site. A quick look at the &lt;a href="https://vitejs.dev/guide/#scaffolding-your-first-vite-project">Vite Quick Start&lt;/a> should allow you to generate your site in a few minutes.&lt;/p>
+&lt;/blockquote>
+&lt;/details>
+&lt;h2 id="why-github-pages">Why Github Pages?&lt;/h2>
+&lt;p>&lt;em>Let&amp;rsquo;s start with facts, startups have no money until there is funding.&lt;/em> Before then, we need to setup a site that is free to host and easy to maintain. It also supports custom domains, which is a must for a professional site. And we need to be able to automate the build and deployment process, so we can focus on the product.&lt;/p>
+&lt;h3 id="1-setting-up-github-pages">1. Setting up Github Pages&lt;/h3>
+&lt;p>The first step to publishing an SPA is to create a new repository on Github. Assuming you already have one, we next need to enable Github Pages for the repository.&lt;/p>
+&lt;details open>
+&lt;summary>1.1 Ensure your repository is &lt;code>public&lt;/code>&lt;/summary>
+&lt;p>GitHub Pages is designed to host your personal, organization, or project pages from a GitHub repository. Thus validate the repository is public.&lt;/p>
+&lt;p>By making the site public we achieve two things:&lt;/p>
+&lt;ol>
+&lt;li>We avoid the cost of a subscription.&lt;/li>
+&lt;li>We contribute to the open source community, which is a good thing. Note, for SPA is generally is trivial to reverse engineer the code so there is little risk in making the code public IMHO. The real value of the site is the data and the services it provides.&lt;/li>
+&lt;/ol>
+&lt;p>If not already public, click the &lt;code>Change visibility&lt;/code> button at the bottom of the General Settings.&lt;/p>
+&lt;/details>
+&lt;details open>
+&lt;summary>1.2 Ensure your repository name is correct&lt;/summary>
+For the site to be hosted on Github Pages, the repository name must be in the format `username.github.io` where `username` is your Github username or organization name.
+&lt;/details>
+&lt;details open>
+&lt;summary>1.3 Update Build and deployment setting&lt;/summary>
+&lt;p>In the &lt;code>Pages&lt;/code> section of the repository settings, ensure the &lt;code>Source&lt;/code> is set to &lt;code>Github Actions&lt;/code> in the Build and deploy section.&lt;/p>
+&lt;img src="./spa-hosting/setting-build-and-deploy.png" alt="Setting the build and deploy options" style="width: 70%; display: block; margin-left: auto; margin-right: auto;">
+&lt;br/>
+&lt;p>The remainder of the configuration can remain the same for now.&lt;/p>
+&lt;/details>
+&lt;h3 id="2-configuring-github-actions">2. Configuring Github Actions&lt;/h3>
+&lt;details open>
+&lt;summary>Create your Github Actions Workflow&lt;/summary>
+&lt;p>Github Actions is a powerful tool that allows you to automate your software development workflows. We will use it to build and deploy our site to Github Pages.&lt;/p>
+&lt;p>To get started, create a new file in the &lt;code>.github/workflows&lt;/code> directory of your repository. You can name the file anything you like, but I will use &lt;code>deploy.yml&lt;/code> for this example.&lt;/p>
+&lt;blockquote>
+&lt;p>Depending on the framework you are using, you may need to configure the build and deployment process for github actions. There are a number of &lt;a href="https://github.com/actions/starter-workflows/tree/main/pages">templates&lt;/a> available.&lt;/p>
+&lt;/blockquote>
+&lt;p>We are using &lt;a href="https://v3.vuejs.org/">Vue 3&lt;/a> and &lt;a href="https://vitejs.dev/">Vite&lt;/a> so we will use the following workflow:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Simple workflow for deploying static content to GitHub Pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Deploy static content to Pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">on&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Runs on pushes targeting the default branch&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">push&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">branches&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;main&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Allows you to run this workflow manually from the Actions tab&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">workflow_dispatch&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">permissions&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">contents&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">read&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">pages&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">write&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">id-token&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">write&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Allow one concurrent deployment&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">concurrency&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">group&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;pages&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cancel-in-progress&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">jobs&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Single deploy job since we&amp;#39;re just deploying&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">deploy&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">environment&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">github-pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">url&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">${{ steps.deployment.outputs.page_url }}&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">runs-on&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ubuntu-latest&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">steps&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Checkout&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uses&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">actions/checkout@v4&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Set up Node&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uses&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">actions/setup-node@v3&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">with&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">node-version&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">18&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cache&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;npm&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Install dependencies&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">run&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">npm install&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Build&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">run&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">npm run build&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Setup Pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uses&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">actions/configure-pages@v3&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Upload artifact&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uses&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">actions/upload-pages-artifact@v2&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">with&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Upload dist repository&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;./dist&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">name&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Deploy to GitHub Pages&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">id&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">deployment&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">uses&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">actions/deploy-pages@v2&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Note that I am deploying directly from the &lt;code>main&lt;/code> branch. I believe in ship early and ship often. 🚀&lt;/p>
+&lt;p>This is a personal choice and you may want to deploy from a &lt;code>release&lt;/code> branch or &lt;code>tag&lt;/code>. In a later post, I will cover setting up the PR and &lt;code>post-deploy&lt;/code> testing pipeline to ensure we can build confidence in the changes before deploying to production.&lt;/p>
+&lt;/blockquote>
+&lt;p>One final step is visit your site and ensure it is working. You can do this by visiting &lt;code>https://username.github.io&lt;/code> where &lt;code>username&lt;/code> is your Github username or organization name.&lt;/p>
+&lt;blockquote>
+&lt;p>Click on the actions tab to see the progress of the deployment. If there are any issues, you can click on the failed job to see the logs and debug the issue.&lt;/p>
+&lt;p>Another really great side effect of this is that we don&amp;rsquo;t have to buy a domain certificate. Github Pages is served over HTTPS by default. &lt;em>This is a huge win.&lt;/em> 🎉&lt;/p>
+&lt;/blockquote>
+&lt;/details>
+&lt;h3 id="3-customizing-your-domain">3. Customizing your Domain&lt;/h3>
+&lt;p>Now that everything is working, we want to setup our custom domain to our branded domain.&lt;/p>
+&lt;p>This work will happen in two parts, one phase on &lt;a href="https://www.namecheap.com/">Namecheap&lt;/a> and the other on Github.&lt;/p>
+&lt;h4 id="31-setting-up-dns-on-namecheap">3.1 Setting up DNS on Namecheap&lt;/h4>
+&lt;details open>
+&lt;summary>Setup the DNS on Namecheap.&lt;/summary>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>&lt;a href="https://www.namecheap.com/myaccount/login.aspx">Sign in&lt;/a> to your Namecheap account.&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Select Domain List from the left sidebar and click on the Manage button next to your domain name:&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;img src="../../assets/images/blogs/spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+&lt;ol start="3">
+&lt;li>&lt;strong>Navigate to the Advanced DNS tab and click on the Add New Record button:&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;img src="../../assets/images/blogs/spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+&lt;ol start="4">
+&lt;li>&lt;strong>Add the following records to your domain:&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;tr>
+&lt;th>Type&lt;/th>
+&lt;th>Host&lt;/th>
+&lt;th>Value&lt;/th>
+&lt;th>TTL&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;tr>
+&lt;td>A&lt;/td>
+&lt;td>@&lt;/td>
+&lt;td>185.199.108.153&lt;/td>
+&lt;td>Automatic&lt;/td>
+&lt;td>Github IP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>A&lt;/td>
+&lt;td>@&lt;/td>
+&lt;td>185.199.109.153&lt;/td>
+&lt;td>Automatic&lt;/td>
+&lt;td>Github IP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>A&lt;/td>
+&lt;td>@&lt;/td>
+&lt;td>185.199.110.153&lt;/td>
+&lt;td>Automatic&lt;/td>
+&lt;td>Github IP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>A&lt;/td>
+&lt;td>@&lt;/td>
+&lt;td>185.199.111.153&lt;/td>
+&lt;td>Automatic&lt;/td>
+&lt;td>Github IP&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>CNAME&lt;/td>
+&lt;td>www&lt;/td>
+&lt;td>&lt;code>username&lt;/code>.github.io&lt;/td>
+&lt;td>Automatic&lt;/td>
+&lt;td>Replace &lt;code>username&lt;/code> with your actual GitHub account username&lt;/td>
+&lt;/table>
+&lt;blockquote>
+&lt;p>&lt;em>&lt;strong>Note 1:&lt;/strong>&lt;/em> delete the other records that are there by default. We only need the records above for now. 🗑️&lt;/p>
+&lt;p>&lt;em>&lt;strong>Note 2:&lt;/strong>&lt;/em> you may have to wait for DNS to update. It can take up to 30 minutes - so now is a great time to brew a cup of tea. ☕&lt;/p>
+&lt;/blockquote>
+&lt;/details>
+&lt;h4 id="32-defining-the-custom-domain-on-github">3.2 Defining the Custom Domain on Github&lt;/h4>
+&lt;details open>
+&lt;summary>Configure the custom domain on Github&lt;/summary>
+&lt;p>Now that the DNS is setup, we need to tell Github to use the custom domain.&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Navigate to the repository settings and scroll down to the &lt;code>Github Pages&lt;/code> section.&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Add your custom domain to the &lt;code>Custom domain&lt;/code> input.&lt;/strong> This should be in the form of &lt;code>yourdomain.com&lt;/code> or &lt;code>www.yourdomain.com&lt;/code> depending on your preference.&lt;/li>
+&lt;li>&lt;strong>Click &lt;code>Save&lt;/code> to save the changes.&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>At this point Github will validate the domain and if everything is setup correctly, your site will be available at your custom domain.&lt;/p>
+&lt;p>There is a small context text area that will show you the status of the domain validation. If there are any issues, may want to look back at your Namecheap DNS configuration.&lt;/p>
+&lt;p>&lt;strong>That&amp;rsquo;s it! It should now be live and visible at your custom domain.&lt;/strong> 🎉&lt;/p>
+&lt;/details>
+&lt;h3 id="summary">Summary&lt;/h3>
+&lt;p>In this post, we have setup a site for our startup. We have used free services to keep costs low and automated the deployment process to ensure we can focus on the product.&lt;/p>
+&lt;p>In the next post, we will look at how we might link two sites under the same domain to add allow us to have different projects, one for the landing page and docs - providing SEO support, and one for our application which we deployed above! Until then, be excellent to each other, and have great day! 🚀&lt;/p>
+&lt;!-- Links --></description></item><item><title>Blog: Welcome to the new Code Blind Website!</title><link>http://localhost:1313/blog/2024/02/27/welcome-to-the-new-code-blind-website/</link><pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2024/02/27/welcome-to-the-new-code-blind-website/</guid><description>
 &lt;p>Welcome to the new Code Blind website!&lt;/p>
 &lt;p>We&amp;rsquo;ve implemented a new website, to enable lots of new functionality that we&amp;rsquo;re hoping to
 take advantage of now and in the future:&lt;/p>

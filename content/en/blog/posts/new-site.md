@@ -1,7 +1,7 @@
 ---
 title: "Welcome to the new Code Blind Website!"
 linkTitle: "New Code Blind Website!"
-date: 2019-01-17
+date: 2024-02-27
 description: >
   A brand new site! Isn't it pretty?
 ---
