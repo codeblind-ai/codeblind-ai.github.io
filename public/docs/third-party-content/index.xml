@@ -1,169 +1,93 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title> – Third Party Content</title>
-    <link>https://codeblind.ai/docs/third-party-content/</link>
-    <description>Recent content in Third Party Content on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Thu, 03 Jan 2019 08:37:22 +0000</lastBuildDate>
-    
-	  <atom:link href="https://codeblind.ai/docs/third-party-content/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Third Party Videos and Presentations</title>
-      <link>https://codeblind.ai/docs/third-party-content/videos-and-presentations/</link>
-      <pubDate>Thu, 03 Jan 2019 08:37:35 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/third-party-content/videos-and-presentations/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;presentations&#34;&gt;Presentations&lt;/h2&gt;
-&lt;h3 id=&#34;large-scale-multiplayer-gaming-on-kubernetes-cloud-next-19&#34;&gt;Large-Scale Multiplayer Gaming on Kubernetes (Cloud Next &amp;lsquo;19)&lt;/h3&gt;
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/Imf_urBB7SI&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h3 id=&#34;code-blind-scaling-multiplayer-game-servers-with-open-source-gdc-2019&#34;&gt;Code Blind: Scaling Multiplayer Game Servers with Open Source (GDC 2019)&lt;/h3&gt;
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/XD1nuASFY3k&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h3 id=&#34;intro-to-code-blind-scaling-multiplayer-game-servers-with-kubernetes-kubecon-2018&#34;&gt;Intro to Code Blind: Scaling Multiplayer Game Servers with Kubernetes (Kubecon, 2018)&lt;/h3&gt;
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/Q4RZSHTeKCY&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h3 id=&#34;google-cloud-next-18-london-carl-dionne-development-director-at-ubisoft-montreal&#34;&gt;Google Cloud Next &amp;lsquo;18 London: Carl Dionne, Development Director at Ubisoft Montreal&lt;/h3&gt;
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/5n-JlLA7bIc?start=835&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h3 id=&#34;code-blind-scaling-multiplayer-dedicated-game-servers-with-kubernetes-cloud-next-18&#34;&gt;Code Blind: Scaling Multiplayer Dedicated Game Servers with Kubernetes (Cloud Next &amp;lsquo;18)&lt;/h3&gt;
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/CLNpkjolxYA&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;h2 id=&#34;screencasts&#34;&gt;Screencasts&lt;/h2&gt;
-&lt;h3 id=&#34;code-blind-how-do-i-docker-and-kubernetes-part-1--part-2&#34;&gt;Code Blind: How Do I Docker and Kubernetes? (Part 1 &amp;amp; Part 2)&lt;/h3&gt;
-&lt;p&gt;&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/i4_zaztK6mE&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-
-&lt;iframe width=&#34;640&#34; height=&#34;360&#34; class=&#34;p-2&#34; src=&#34;https://www.youtube.com/embed/ZZXLDnmO1TM&#34;
-        frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Third Party Examples</title>
-      <link>https://codeblind.ai/docs/third-party-content/examples/</link>
-      <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/third-party-content/examples/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;integrations-with-other-projects&#34;&gt;Integrations with other projects&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/agones-discover-openmatch&#34;&gt;Octops/Code Blind x Open Match&lt;/a&gt; - How to implement a matchmaking
-system using Code Blind and Open Match&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;minetest&#34;&gt;Minetest&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.minetest.net/&#34;&gt;Minetest&lt;/a&gt; is a free and open-source sandbox video game available for Linux, FreeBSD,
-Microsoft Windows, MacOS, and Android. Minetest game play is very similar to that of Minecraft. Players explore a blocky 3D world, discover and extract raw materials, craft tools and items, and build structures and landscapes.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/paulhkim80/agones-example-minetest&#34;&gt;Minetest server for Code Blind&lt;/a&gt; is an example of the Minetest
-server hosted on Kubernetes using Code Blind. It wraps the Minetest server with a &lt;a href=&#34;https://golang.org&#34;&gt;Go&lt;/a&gt; binary, and introspects stdout to provide the event hooks for the SDK integration. The wrapper is from &lt;a href=&#34;https://github.com/googleforgames/agones/blob/main/examples/xonotic/main.go&#34;&gt;Xonotic Example&lt;/a&gt; with a few changes to look for the Minetest ready output message.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You will need to download the Minetest client separately to play.&lt;/p&gt;
-&lt;h2 id=&#34;quilkin&#34;&gt;Quilkin&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/googleforgames/quilkin&#34;&gt;Quilkin&lt;/a&gt; is a non-transparent UDP proxy specifically designed for use with large scale multiplayer dedicated game server deployments, to ensure security, access control, telemetry data, metrics and more.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/googleforgames/quilkin/tree/main/examples&#34;&gt;Quilkin with Code Blind&lt;/a&gt; is an example of running &lt;a href=&#34;https://xonotic.org/&#34;&gt;Xonotic&lt;/a&gt; with Quilkin on an Code Blind cluster, utilising either &lt;a href=&#34;https://github.com/googleforgames/quilkin/tree/main/examples/agones-xonotic-sidecar&#34;&gt;the sidecar integration pattern&lt;/a&gt; or via the the &lt;a href=&#34;https://github.com/googleforgames/quilkin/tree/main/examples/agones-xonotic-xds&#34;&gt;Quilkin xDS Code Blind provider&lt;/a&gt; with a TokenRouter to provide routing and access control to the allocated GameServer instance.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You will need to download the Xonotic client to interact with the demo.&lt;/p&gt;
-&lt;h2 id=&#34;shulker&#34;&gt;Shulker&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/jeremylvln/Shulker&#34;&gt;Shulker&lt;/a&gt; is a Kubernetes operator for managing complex and dynamic Minecraft
-infrastructure at scale, including game servers and proxies.&lt;/li&gt;
-&lt;li&gt;It builds on top Code Blind &lt;code&gt;GameServer&lt;/code&gt; and &lt;code&gt;Fleet&lt;/code&gt; primitives to provide simplified abstractions specifically tailored
-to orchestrating Minecraft workloads.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Shulker requires you to have a genuine Minecraft account. You&amp;rsquo;ll need to &lt;a href=&#34;https://www.minecraft.net/en-us/article/how-create-minecraft-account&#34; data-proofer-ignore&gt;purchase the game&lt;/a&gt;
-to test the &amp;ldquo;Getting Started&amp;rdquo; example.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Third Party Podcasts</title>
-      <link>https://codeblind.ai/docs/third-party-content/podcasts/</link>
-      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/third-party-content/podcasts/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;2019&#34;&gt;2019&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Nov 6 - [Google Cloud Platform Podcast: Supersolid with Kami May]
-(&lt;a href=&#34;https://gcppodcast.com/post/episode-202-supersolid-with-kami-may/&#34;&gt;https://gcppodcast.com/post/episode-202-supersolid-with-kami-may/&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;2018&#34;&gt;2018&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Oct 23 - [Kubernetes Podcast: Code Blind, with Cyril Tovena and Mark Mandel]
-(&lt;a href=&#34;https://kubernetespodcast.com/episode/026-agones/&#34;&gt;https://kubernetespodcast.com/episode/026-agones/&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;Aug 15 - [Google Cloud Platform Podcast: Code Blind with Mark Mandel and Cyril Tovena]
-(&lt;a href=&#34;https://gcppodcast.com/post/episode-142-agones-with-mark-mandel-and-cyril-tovena/&#34;&gt;https://gcppodcast.com/post/episode-142-agones-with-mark-mandel-and-cyril-tovena/&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Third Party Libraries and Tools</title>
-      <link>https://codeblind.ai/docs/third-party-content/libraries-tools/</link>
-      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/third-party-content/libraries-tools/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;client-sdks&#34;&gt;Client SDKs&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Cubxity/AgonesKt&#34;&gt;Cubxity/AgonesKt&lt;/a&gt; - Code Blind Client SDK for &lt;strong&gt;Kotlin&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/AndreMicheletti/godot-agones-sdk&#34;&gt;AndreMicheletti/godot-agones-sdk&lt;/a&gt; - Code Blind Client SDK for &lt;strong&gt;Godot Engine&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/infumia/agones4j&#34;&gt;Infumia/agones4j&lt;/a&gt; - Code Blind Client SDK for &lt;strong&gt;Java&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;messaging&#34;&gt;Messaging&lt;/h2&gt;
-&lt;p&gt;Libraries or applications that implement messaging systems.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/agones-event-broadcaster&#34;&gt;Octops/Code Blind Event Broadcaster&lt;/a&gt; - Broadcast Code Blind events to the external world&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/agones-broadcaster-http&#34;&gt;Octops/Code Blind Broadcaster HTTP&lt;/a&gt; - Expose Code Blind GameServers information via HTTP&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/agones-relay-http&#34;&gt;Octops/Code Blind Relay HTTP&lt;/a&gt; - Publish Code Blind GameServers and Fleets details to HTTP endpoints&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;controllers&#34;&gt;Controllers&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/gameserver-ingress-controller&#34;&gt;Octops/Game Server Ingress Controller&lt;/a&gt; - Automatic Ingress configuration for Game Servers managed by Code Blind&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/octops-image-syncer&#34;&gt;Octops/Image Syncer&lt;/a&gt; - Watch Fleets and pre-pull images of game servers on every node running in the cluster&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/Octops/octops-fleet-gc&#34;&gt;Octops/Fleet Garbage Collector&lt;/a&gt; - Delete Fleets based on its TTL&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;allocation&#34;&gt;Allocation&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/FairwindsOps/agones-allocator-client&#34;&gt;agones-allocator-client&lt;/a&gt; - A client for testing allocation servers.
-Made by &lt;a href=&#34;https://fairwinds.com&#34;&gt;Fairwinds&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/aws-samples/multi-cluster-allocation-demo-for-agones-on-eks&#34;&gt;Multi-cluster allocation demo&lt;/a&gt; - A demo project for multi-cluster allocation on Amazon EKS with Terraform templates.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;development-tools&#34;&gt;Development Tools&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/comerford/minikube-agones-cluster&#34;&gt;Minikube Code Blind Cluster&lt;/a&gt; - Automates the creation of a complete Kubernetes/Code Blind Cluster locally, using Xonotic as a sample gameserver. Intended to provide a local environment for developers which approximates a production Code Blind deployment.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Third Party Content</title><link>http://localhost:1313/docs/third-party-content/</link><description>Recent content in Third Party Content on</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 03 Jan 2019 08:37:22 +0000</lastBuildDate><atom:link href="http://localhost:1313/docs/third-party-content/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Third Party Videos and Presentations</title><link>http://localhost:1313/docs/third-party-content/videos-and-presentations/</link><pubDate>Thu, 03 Jan 2019 08:37:35 +0000</pubDate><guid>http://localhost:1313/docs/third-party-content/videos-and-presentations/</guid><description>
+&lt;h2 id="presentations">Presentations&lt;/h2>
+&lt;h3 id="large-scale-multiplayer-gaming-on-kubernetes-cloud-next-19">Large-Scale Multiplayer Gaming on Kubernetes (Cloud Next &amp;lsquo;19)&lt;/h3>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/Imf_urBB7SI"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;h3 id="code-blind-scaling-multiplayer-game-servers-with-open-source-gdc-2019">Code Blind: Scaling Multiplayer Game Servers with Open Source (GDC 2019)&lt;/h3>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/XD1nuASFY3k"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;h3 id="intro-to-code-blind-scaling-multiplayer-game-servers-with-kubernetes-kubecon-2018">Intro to Code Blind: Scaling Multiplayer Game Servers with Kubernetes (Kubecon, 2018)&lt;/h3>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/Q4RZSHTeKCY"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;h3 id="google-cloud-next-18-london-carl-dionne-development-director-at-ubisoft-montreal">Google Cloud Next &amp;lsquo;18 London: Carl Dionne, Development Director at Ubisoft Montreal&lt;/h3>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/5n-JlLA7bIc?start=835"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;h3 id="code-blind-scaling-multiplayer-dedicated-game-servers-with-kubernetes-cloud-next-18">Code Blind: Scaling Multiplayer Dedicated Game Servers with Kubernetes (Cloud Next &amp;lsquo;18)&lt;/h3>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/CLNpkjolxYA"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;h2 id="screencasts">Screencasts&lt;/h2>
+&lt;h3 id="code-blind-how-do-i-docker-and-kubernetes-part-1--part-2">Code Blind: How Do I Docker and Kubernetes? (Part 1 &amp;amp; Part 2)&lt;/h3>
+&lt;p>&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/i4_zaztK6mE"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;iframe width="640" height="360" class="p-2" src="https://www.youtube.com/embed/ZZXLDnmO1TM"
+frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>
+&lt;/p></description></item><item><title>Docs: Third Party Examples</title><link>http://localhost:1313/docs/third-party-content/examples/</link><pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/third-party-content/examples/</guid><description>
+&lt;h2 id="integrations-with-other-projects">Integrations with other projects&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/Octops/agones-discover-openmatch">Octops/Code Blind x Open Match&lt;/a> - How to implement a matchmaking
+system using Code Blind and Open Match&lt;/li>
+&lt;/ul>
+&lt;h2 id="minetest">Minetest&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.minetest.net/">Minetest&lt;/a> is a free and open-source sandbox video game available for Linux, FreeBSD,
+Microsoft Windows, MacOS, and Android. Minetest game play is very similar to that of Minecraft. Players explore a blocky 3D world, discover and extract raw materials, craft tools and items, and build structures and landscapes.&lt;/li>
+&lt;li>&lt;a href="https://github.com/paulhkim80/agones-example-minetest">Minetest server for Code Blind&lt;/a> is an example of the Minetest
+server hosted on Kubernetes using Code Blind. It wraps the Minetest server with a &lt;a href="https://golang.org">Go&lt;/a> binary, and introspects stdout to provide the event hooks for the SDK integration. The wrapper is from &lt;a href="https://github.com/googleforgames/agones/blob/main/examples/xonotic/main.go">Xonotic Example&lt;/a> with a few changes to look for the Minetest ready output message.&lt;/li>
+&lt;/ul>
+&lt;p>You will need to download the Minetest client separately to play.&lt;/p>
+&lt;h2 id="quilkin">Quilkin&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/googleforgames/quilkin">Quilkin&lt;/a> is a non-transparent UDP proxy specifically designed for use with large scale multiplayer dedicated game server deployments, to ensure security, access control, telemetry data, metrics and more.&lt;/li>
+&lt;li>&lt;a href="https://github.com/googleforgames/quilkin/tree/main/examples">Quilkin with Code Blind&lt;/a> is an example of running &lt;a href="https://xonotic.org/">Xonotic&lt;/a> with Quilkin on an Code Blind cluster, utilising either &lt;a href="https://github.com/googleforgames/quilkin/tree/main/examples/agones-xonotic-sidecar">the sidecar integration pattern&lt;/a> or via the the &lt;a href="https://github.com/googleforgames/quilkin/tree/main/examples/agones-xonotic-xds">Quilkin xDS Code Blind provider&lt;/a> with a TokenRouter to provide routing and access control to the allocated GameServer instance.&lt;/li>
+&lt;/ul>
+&lt;p>You will need to download the Xonotic client to interact with the demo.&lt;/p>
+&lt;h2 id="shulker">Shulker&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/jeremylvln/Shulker">Shulker&lt;/a> is a Kubernetes operator for managing complex and dynamic Minecraft
+infrastructure at scale, including game servers and proxies.&lt;/li>
+&lt;li>It builds on top Code Blind &lt;code>GameServer&lt;/code> and &lt;code>Fleet&lt;/code> primitives to provide simplified abstractions specifically tailored
+to orchestrating Minecraft workloads.&lt;/li>
+&lt;/ul>
+&lt;p>Shulker requires you to have a genuine Minecraft account. You&amp;rsquo;ll need to &lt;a href="https://www.minecraft.net/en-us/article/how-create-minecraft-account" data-proofer-ignore>purchase the game&lt;/a>
+to test the &amp;ldquo;Getting Started&amp;rdquo; example.&lt;/p></description></item><item><title>Docs: Third Party Podcasts</title><link>http://localhost:1313/docs/third-party-content/podcasts/</link><pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/third-party-content/podcasts/</guid><description>
+&lt;h2 id="2019">2019&lt;/h2>
+&lt;ul>
+&lt;li>Nov 6 - [Google Cloud Platform Podcast: Supersolid with Kami May]
+(&lt;a href="https://gcppodcast.com/post/episode-202-supersolid-with-kami-may/">https://gcppodcast.com/post/episode-202-supersolid-with-kami-may/&lt;/a>)&lt;/li>
+&lt;/ul>
+&lt;h2 id="2018">2018&lt;/h2>
+&lt;ul>
+&lt;li>Oct 23 - [Kubernetes Podcast: Code Blind, with Cyril Tovena and Mark Mandel]
+(&lt;a href="https://kubernetespodcast.com/episode/026-agones/">https://kubernetespodcast.com/episode/026-agones/&lt;/a>)&lt;/li>
+&lt;li>Aug 15 - [Google Cloud Platform Podcast: Code Blind with Mark Mandel and Cyril Tovena]
+(&lt;a href="https://gcppodcast.com/post/episode-142-agones-with-mark-mandel-and-cyril-tovena/">https://gcppodcast.com/post/episode-142-agones-with-mark-mandel-and-cyril-tovena/&lt;/a>)&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Third Party Libraries and Tools</title><link>http://localhost:1313/docs/third-party-content/libraries-tools/</link><pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/third-party-content/libraries-tools/</guid><description>
+&lt;h2 id="client-sdks">Client SDKs&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/Cubxity/AgonesKt">Cubxity/AgonesKt&lt;/a> - Code Blind Client SDK for &lt;strong>Kotlin&lt;/strong>&lt;/li>
+&lt;li>&lt;a href="https://github.com/AndreMicheletti/godot-agones-sdk">AndreMicheletti/godot-agones-sdk&lt;/a> - Code Blind Client SDK for &lt;strong>Godot Engine&lt;/strong>&lt;/li>
+&lt;li>&lt;a href="https://github.com/infumia/agones4j">Infumia/agones4j&lt;/a> - Code Blind Client SDK for &lt;strong>Java&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;h2 id="messaging">Messaging&lt;/h2>
+&lt;p>Libraries or applications that implement messaging systems.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/Octops/agones-event-broadcaster">Octops/Code Blind Event Broadcaster&lt;/a> - Broadcast Code Blind events to the external world&lt;/li>
+&lt;li>&lt;a href="https://github.com/Octops/agones-broadcaster-http">Octops/Code Blind Broadcaster HTTP&lt;/a> - Expose Code Blind GameServers information via HTTP&lt;/li>
+&lt;li>&lt;a href="https://github.com/Octops/agones-relay-http">Octops/Code Blind Relay HTTP&lt;/a> - Publish Code Blind GameServers and Fleets details to HTTP endpoints&lt;/li>
+&lt;/ul>
+&lt;h2 id="controllers">Controllers&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/Octops/gameserver-ingress-controller">Octops/Game Server Ingress Controller&lt;/a> - Automatic Ingress configuration for Game Servers managed by Code Blind&lt;/li>
+&lt;li>&lt;a href="https://github.com/Octops/octops-image-syncer">Octops/Image Syncer&lt;/a> - Watch Fleets and pre-pull images of game servers on every node running in the cluster&lt;/li>
+&lt;li>&lt;a href="https://github.com/Octops/octops-fleet-gc">Octops/Fleet Garbage Collector&lt;/a> - Delete Fleets based on its TTL&lt;/li>
+&lt;/ul>
+&lt;h2 id="allocation">Allocation&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/FairwindsOps/agones-allocator-client">agones-allocator-client&lt;/a> - A client for testing allocation servers.
+Made by &lt;a href="https://fairwinds.com">Fairwinds&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/aws-samples/multi-cluster-allocation-demo-for-agones-on-eks">Multi-cluster allocation demo&lt;/a> - A demo project for multi-cluster allocation on Amazon EKS with Terraform templates.&lt;/li>
+&lt;/ul>
+&lt;h2 id="development-tools">Development Tools&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/comerford/minikube-agones-cluster">Minikube Code Blind Cluster&lt;/a> - Automates the creation of a complete Kubernetes/Code Blind Cluster locally, using Xonotic as a sample gameserver. Intended to provide a local environment for developers which approximates a production Code Blind deployment.&lt;/li>
+&lt;/ul></description></item></channel></rss>

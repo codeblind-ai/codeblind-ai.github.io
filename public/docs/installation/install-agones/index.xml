@@ -1,1384 +1,1312 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title> – Install Code Blind</title>
-    <link>https://codeblind.ai/docs/installation/install-agones/</link>
-    <description>Recent content in Install Code Blind on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	  <atom:link href="https://codeblind.ai/docs/installation/install-agones/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Install Code Blind using YAML</title>
-      <link>https://codeblind.ai/docs/installation/install-agones/yaml/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/installation/install-agones/yaml/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;installing-code-blind&#34;&gt;Installing Code Blind&lt;/h2&gt;
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-
-    &lt;p&gt;Installing Code Blind with the &lt;code&gt;install.yaml&lt;/code&gt; file will use pre-generated, well known TLS
-certificates stored in this repository for securing Kubernetes webhooks communication.&lt;/p&gt;
-&lt;p&gt;For production workloads, we &lt;strong&gt;strongly&lt;/strong&gt; recommend using the
-&lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/helm/&#34;&gt;helm installation&lt;/a&gt; which allows you to generate
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Install Code Blind</title><link>http://localhost:1313/docs/installation/install-agones/</link><description>Recent content in Install Code Blind on</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="http://localhost:1313/docs/installation/install-agones/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Install Code Blind using YAML</title><link>http://localhost:1313/docs/installation/install-agones/yaml/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/installation/install-agones/yaml/</guid><description>
+&lt;h2 id="installing-code-blind">Installing Code Blind&lt;/h2>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+&lt;p>Installing Code Blind with the &lt;code>install.yaml&lt;/code> file will use pre-generated, well known TLS
+certificates stored in this repository for securing Kubernetes webhooks communication.&lt;/p>
+&lt;p>For production workloads, we &lt;strong>strongly&lt;/strong> recommend using the
+&lt;a href="http://localhost:1313/docs/installation/install-agones/helm/">helm installation&lt;/a> which allows you to generate
 new, unique certificates or provide your own certificates. Alternatively,
-you can use &lt;code&gt;helm template&lt;/code&gt; as described &lt;a href=&#34;https://codeblind.ai/#customizing-your-install&#34;&gt;below&lt;/a&gt;
-to generate a custom yaml installation file with unique certificates.&lt;/p&gt;
-
-
-&lt;/div&gt;
-
-&lt;p&gt;Installing Code Blind using the pre-generated &lt;code&gt;install.yaml&lt;/code&gt; file is the quickest,
-simplest way to get Code Blind up and running in your Kubernetes cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create namespace agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl apply --server-side -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/install/yaml/install.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can also find the &lt;code&gt;install.yaml&lt;/code&gt; in the latest &lt;code&gt;agones-install&lt;/code&gt; zip from the &lt;a href=&#34;https://github.com/googleforgames/agones/releases&#34;&gt;releases&lt;/a&gt; archive.&lt;/p&gt;
-&lt;h3 id=&#34;customizing-your-install&#34;&gt;Customizing your install&lt;/h3&gt;
-&lt;p&gt;To change the &lt;a href=&#34;https://agones.dev/docs/installation/install-agones/helm/#configuration&#34;&gt;configurable parameters&lt;/a&gt;
-in the &lt;code&gt;install.yaml&lt;/code&gt; file, you can use &lt;code&gt;helm template&lt;/code&gt; to generate a custom file locally
-without needing to use helm to install Code Blind into your cluster.&lt;/p&gt;
-&lt;p&gt;The following example sets the &lt;code&gt;featureGates&lt;/code&gt; and &lt;code&gt;generateTLS&lt;/code&gt; helm parameters
-and creates a customized &lt;code&gt;install-custom.yaml&lt;/code&gt; file (note that the &lt;code&gt;pull&lt;/code&gt;
-command was introduced in Helm version 3):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm pull --untar https://agones.dev/chart/stable/agones-1.38.0.tgz &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;cd&lt;/span&gt; agones &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;helm template agones-manual --namespace agones-system  . &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set agones.controller.generateTLS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set agones.allocator.generateTLS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set agones.allocator.generateClientTLS&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set agones.crds.cleanupOnDelete&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set agones.featureGates&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;PlayerTracking=true&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  &amp;gt; install-custom.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;uninstalling-code-blind&#34;&gt;Uninstalling Code Blind&lt;/h2&gt;
-&lt;p&gt;To uninstall/delete the &lt;code&gt;Code Blind&lt;/code&gt; deployment and delete &lt;code&gt;agones-system&lt;/code&gt; namespace:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete fleets --all --all-namespaces
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete gameservers --all --all-namespaces
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/install/yaml/install.yaml
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl delete namespace agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Note: It may take a couple of minutes until all resources described in &lt;code&gt;install.yaml&lt;/code&gt; file are deleted.&lt;/p&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://codeblind.ai/docs/installation/confirm/&#34;&gt;Confirm Code Blind is up and running&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Install Code Blind using Helm</title>
-      <link>https://codeblind.ai/docs/installation/install-agones/helm/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/installation/install-agones/helm/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://helm.sh/&#34;&gt;Helm&lt;/a&gt; package manager 3.2.3+&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://codeblind.ai/docs/installation/#usage-requirements&#34;&gt;Supported Kubernetes Cluster&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;helm-3&#34;&gt;Helm 3&lt;/h2&gt;
-&lt;h3 id=&#34;installing-the-chart&#34;&gt;Installing the Chart&lt;/h3&gt;
-&lt;p&gt;To install the chart with the release name &lt;code&gt;my-release&lt;/code&gt; using our stable helm repository:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo add agones https://agones.dev/chart/stable
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm repo update
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install my-release --namespace agones-system --create-namespace agones/agones
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;em&gt;We recommend installing Code Blind in its own namespaces, such as &lt;code&gt;agones-system&lt;/code&gt; as shown above.
-If you want to use a different namespace, you can use the helm &lt;code&gt;--namespace&lt;/code&gt; parameter to specify.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;When running in production, Code Blind should be scheduled on a dedicated pool of nodes, distinct from where Game Servers are scheduled for better isolation and resiliency. By default Code Blind prefers to be scheduled on nodes labeled with &lt;code&gt;agones.dev/agones-system=true&lt;/code&gt; and tolerates node taint &lt;code&gt;agones.dev/agones-system=true:NoExecute&lt;/code&gt;. If no dedicated nodes are available, Code Blind will
+you can use &lt;code>helm template&lt;/code> as described &lt;a href="http://localhost:1313/#customizing-your-install">below&lt;/a>
+to generate a custom yaml installation file with unique certificates.&lt;/p>
+&lt;/div>
+&lt;p>Installing Code Blind using the pre-generated &lt;code>install.yaml&lt;/code> file is the quickest,
+simplest way to get Code Blind up and running in your Kubernetes cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace agones-system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl apply --server-side -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/install/yaml/install.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You can also find the &lt;code>install.yaml&lt;/code> in the latest &lt;code>agones-install&lt;/code> zip from the &lt;a href="https://github.com/googleforgames/agones/releases">releases&lt;/a> archive.&lt;/p>
+&lt;h3 id="customizing-your-install">Customizing your install&lt;/h3>
+&lt;p>To change the &lt;a href="https://agones.dev/docs/installation/install-agones/helm/#configuration">configurable parameters&lt;/a>
+in the &lt;code>install.yaml&lt;/code> file, you can use &lt;code>helm template&lt;/code> to generate a custom file locally
+without needing to use helm to install Code Blind into your cluster.&lt;/p>
+&lt;p>The following example sets the &lt;code>featureGates&lt;/code> and &lt;code>generateTLS&lt;/code> helm parameters
+and creates a customized &lt;code>install-custom.yaml&lt;/code> file (note that the &lt;code>pull&lt;/code>
+command was introduced in Helm version 3):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm pull --untar https://agones.dev/chart/stable/agones-1.38.0.tgz &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span>&lt;span style="color:#204a87">cd&lt;/span> agones &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span>helm template agones-manual --namespace agones-system . &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set agones.controller.generateTLS&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set agones.allocator.generateTLS&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set agones.allocator.generateClientTLS&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set agones.crds.cleanupOnDelete&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#204a87">false&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set agones.featureGates&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;PlayerTracking=true&amp;#34;&lt;/span> &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> &amp;gt; install-custom.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="uninstalling-code-blind">Uninstalling Code Blind&lt;/h2>
+&lt;p>To uninstall/delete the &lt;code>Code Blind&lt;/code> deployment and delete &lt;code>agones-system&lt;/code> namespace:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl delete fleets --all --all-namespaces
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl delete gameservers --all --all-namespaces
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl delete -f https://raw.githubusercontent.com/googleforgames/agones/release-1.38.0/install/yaml/install.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl delete namespace agones-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Note: It may take a couple of minutes until all resources described in &lt;code>install.yaml&lt;/code> file are deleted.&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://localhost:1313/docs/installation/confirm/">Confirm Code Blind is up and running&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Install Code Blind using Helm</title><link>http://localhost:1313/docs/installation/install-agones/helm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/installation/install-agones/helm/</guid><description>
+&lt;h2 id="prerequisites">Prerequisites&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://helm.sh/">Helm&lt;/a> package manager 3.2.3+&lt;/li>
+&lt;li>&lt;a href="http://localhost:1313/docs/installation/#usage-requirements">Supported Kubernetes Cluster&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="helm-3">Helm 3&lt;/h2>
+&lt;h3 id="installing-the-chart">Installing the Chart&lt;/h3>
+&lt;p>To install the chart with the release name &lt;code>my-release&lt;/code> using our stable helm repository:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm repo add agones https://agones.dev/chart/stable
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install my-release --namespace agones-system --create-namespace agones/agones
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;em>We recommend installing Code Blind in its own namespaces, such as &lt;code>agones-system&lt;/code> as shown above.
+If you want to use a different namespace, you can use the helm &lt;code>--namespace&lt;/code> parameter to specify.&lt;/em>&lt;/p>
+&lt;p>When running in production, Code Blind should be scheduled on a dedicated pool of nodes, distinct from where Game Servers are scheduled for better isolation and resiliency. By default Code Blind prefers to be scheduled on nodes labeled with &lt;code>agones.dev/agones-system=true&lt;/code> and tolerates node taint &lt;code>agones.dev/agones-system=true:NoExecute&lt;/code>. If no dedicated nodes are available, Code Blind will
 run on regular nodes, but that&amp;rsquo;s not recommended for production use. For instructions on setting up a dedicated node
-pool for Code Blind, see the &lt;a href=&#34;https://codeblind.ai/docs/installation/&#34;&gt;Code Blind installation instructions&lt;/a&gt; for your preferred environment.&lt;/p&gt;
-&lt;p&gt;The command deploys Code Blind on the Kubernetes cluster with the default configuration. The &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/helm/#configuration&#34;&gt;configuration&lt;/a&gt; section lists the parameters that can be configured during installation.&lt;/p&gt;
-
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Tip&lt;/h4&gt;
-
-    List all releases using &lt;code&gt;helm list --all-namespaces&lt;/code&gt;
-
-&lt;/div&gt;
-
-&lt;h3 id=&#34;namespaces&#34;&gt;Namespaces&lt;/h3&gt;
-&lt;p&gt;By default Code Blind is configured to work with game servers deployed in the &lt;code&gt;default&lt;/code&gt; namespace. If you are planning to use another namespace you can configure Code Blind via the parameter &lt;code&gt;gameservers.namespaces&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example to use &lt;code&gt;default&lt;/code&gt; &lt;strong&gt;and&lt;/strong&gt; &lt;code&gt;xbox&lt;/code&gt; namespaces:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create namespace xbox
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install my-release agones/agones --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;gameservers.namespaces={default,xbox}&amp;#34;&lt;/span&gt; --namespace agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    You need to create your namespaces before installing Code Blind.
-
-&lt;/div&gt;
-
-&lt;p&gt;If you want to add a new namespace afterward upgrade your release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl create namespace ps4
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm upgrade my-release agones/agones --reuse-values --set &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;gameservers.namespaces={default,xbox,ps4}&amp;#34;&lt;/span&gt; --namespace agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;uninstalling-the-chart&#34;&gt;Uninstalling the Chart&lt;/h3&gt;
-&lt;p&gt;To uninstall/delete the &lt;code&gt;my-release&lt;/code&gt; deployment:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm uninstall my-release --namespace&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;rbac&#34;&gt;RBAC&lt;/h2&gt;
-&lt;p&gt;By default, &lt;code&gt;agones.rbacEnabled&lt;/code&gt; is set to true. This enables RBAC support in Code Blind and must be true if RBAC is enabled in your cluster.&lt;/p&gt;
-&lt;p&gt;The chart will take care of creating the required service accounts and roles for Code Blind.&lt;/p&gt;
-&lt;p&gt;If you have RBAC disabled, or to put it another way, ABAC enabled, you should set this value to &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
-&lt;p&gt;The following tables lists the configurable parameters of the Code Blind chart and their default values.&lt;/p&gt;
-&lt;h3 id=&#34;general&#34;&gt;General&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.featureGates&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A URL query encoded string of Flags to enable/disable e.g. &lt;code&gt;Example=true&amp;amp;OtherThing=false&lt;/code&gt;. Any value accepted by &lt;a href=&#34;https://golang.org/pkg/strconv/#ParseBool&#34;&gt;strconv.ParseBool(string)&lt;/a&gt; can be used as a boolean value&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.rbacEnabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Creates RBAC resources. Must be set for any cluster configured with RBAC&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.registerWebhooks&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Registers the webhooks used for the admission controller&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.registerApiService&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Registers the apiservice(s) used for the Kubernetes API extension&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.registerServiceAccounts&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Attempts to create service accounts for the controllers&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.createPriorityClass&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Attempts to create priority classes for the controllers&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.priorityClassName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Name of the priority classes to create&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-system&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.requireDedicatedNodes&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Forces Code Blind system components to be scheduled on dedicated nodes, only applies to the GKE Standard without node auto-provisioning&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;custom-resource-definitions&#34;&gt;Custom Resource Definitions&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.crds.install&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Install the CRDs with this chart. Useful to disable if you want to subchart (since crd-install hook is broken), so you can copy the CRDs into your own chart.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.crds.cleanupOnDelete&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Run the pre-delete hook to delete all GameServers and their backing Pods when deleting the helm chart, so that all CRDs can be removed on chart deletion&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.crds.cleanupJobTTL&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of seconds for Kubernetes to delete the associated Job and Pods of the pre-delete hook after it completes, regardless if the Job is successful or not. Set to &lt;code&gt;0&lt;/code&gt; to disable cleaning up the Job or the associated Pods.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;60&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;metrics&#34;&gt;Metrics&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.prometheusServiceDiscovery&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Adds annotations for Prometheus ServiceDiscovery (and also Strackdriver)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.prometheusEnabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Enables controller metrics on port &lt;code&gt;8080&lt;/code&gt; and path &lt;code&gt;/metrics&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.stackdriverEnabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Enables Stackdriver exporter of controller metrics&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.stackdriverProjectID&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;This overrides the default gcp project id for use with stackdriver&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.stackdriverLabels&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A set of default labels to add to all stackdriver metrics generated in form of key value pair (&lt;code&gt;key=value,key2=value2&lt;/code&gt;). By default metadata are automatically added using Kubernetes API and GCP metadata enpoint.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.metrics.serviceMonitor.interval&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Default scraping interval for ServiceMonitor&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;30s&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;service-accounts&#34;&gt;Service Accounts&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.controller.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Service account name for the controller&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-controller&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.controller.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind controller service account&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.sdk.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Service account name for the sdk&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-sdk&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.sdk.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A map of namespaces to maps of &lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind SDK service account for the specified namespaces&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.allocator.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Service account name for the allocator&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-allocator&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.serviceaccount.allocator.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind allocator service account&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;container-images&#34;&gt;Container Images&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.registry&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Global image registry for all the Code Blind system images&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;us-docker.pkg.dev/agones-images/release&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.tag&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Global image tag for all images&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1.38.0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.controller.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image name for the controller&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-controller&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.controller.pullPolicy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image pull policy for the controller&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;IfNotPresent&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.controller.pullSecret&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image pull secret for the controller, allocator, sdk and ping image. Should be created both in &lt;code&gt;agones-system&lt;/code&gt; and &lt;code&gt;default&lt;/code&gt; namespaces&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image name for the sdk&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-sdk&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.tag&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image tag for the sdk&lt;/td&gt;
-&lt;td&gt;value of &lt;code&gt;agones.image.tag&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.cpuRequest&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/&#34;&gt;cpu request&lt;/a&gt; for sdk server container&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;30m&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.cpuLimit&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/&#34;&gt;cpu limit&lt;/a&gt; for the sdk server container&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0&lt;/code&gt; (none)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.memoryRequest&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/&#34;&gt;memory request&lt;/a&gt; for sdk server container&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0&lt;/code&gt; (none)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.memoryLimit&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/&#34;&gt;memory limit&lt;/a&gt; for the sdk server container&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0&lt;/code&gt; (none)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.sdk.alwaysPull&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Tells if the sdk image should always be pulled&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.ping.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image name for the ping service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-ping&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.ping.tag&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image tag for the ping service&lt;/td&gt;
-&lt;td&gt;value of &lt;code&gt;agones.image.tag&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.ping.pullPolicy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image pull policy for the ping service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;IfNotPresent&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.extensions.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image name for extensions&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-extensions&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.image.extensions.pullPolicy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Image pull policy for extensions&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;IfNotPresent&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;code-blind-controller&#34;&gt;Code Blind Controller&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.replicas&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of replicas to run in the &lt;code&gt;agones-controller&lt;/code&gt; deployment.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.pdb.minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code&gt;maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.pdb.maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code&gt;minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.http.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Port to use for liveness probe service and metrics&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8080&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.healthCheck.initialDelaySeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Initial delay before performing the first probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.healthCheck.periodSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Seconds between every liveness probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.healthCheck.failureThreshold&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of times before giving up (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.healthCheck.timeoutSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of seconds after which the probe times out (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.resources&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Controller &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/&#34;&gt;resource requests/limit&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.generateTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to true to generate TLS certificates or false to provide your own certificates&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.tlsCert&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS certificate provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.tlsKey&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS private key provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.nodeSelector&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Controller &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector&#34;&gt;node labels&lt;/a&gt; for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.tolerations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Controller &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/&#34;&gt;toleration&lt;/a&gt; labels for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.affinity&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Controller &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity&#34;&gt;affinity&lt;/a&gt; settings for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind controller pods&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.numWorkers&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of workers to spin per resource type&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;100&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.apiServerQPS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum sustained queries per second that controller should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;400&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.apiServerQPSBurst&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum burst queries per second that controller should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.logLevel&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Code Blind Controller Log level. Log only entries with that severity and above&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;info&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.persistentLogs&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Store Code Blind controller logs in a temporary volume attached to a container for debugging&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.persistentLogsSizeLimitMB&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum total size of all Code Blind container logs in MB&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;10000&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.disableSecret&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code&gt;{agones.releaseName}-cert&lt;/code&gt; secrets before installation.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.customCertSecretPath&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Remap cert-manager path to server.crt and server.key&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.allocationApiService.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind apiregistration&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.allocationApiService.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.validatingWebhook.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind validating webhook&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.validatingWebhook.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.mutatingWebhook.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind mutating webhook&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.mutatingWebhook.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.allocationBatchWaitTime&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Wait time between each allocation batch when performing allocations in controller mode&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500ms&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.controller.topologySpreadConstraints&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;ping-service&#34;&gt;Ping Service&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.install&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Whether to install the &lt;a href=&#34;https://codeblind.ai/docs/guides/ping-service/&#34;&gt;ping service&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.replicas&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of replicas to run in the deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.expose&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Expose the http ping service via a Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.response&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The string response returned from the http service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;ok&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port to expose on the service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;80&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.serviceType&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/&#34;&gt;Service Type&lt;/a&gt; of the HTTP Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;LoadBalancer&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.nodePort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Static node port to use for HTTP ping service. (Only applies when &lt;code&gt;agones.ping.http.serviceType&lt;/code&gt; is &lt;code&gt;NodePort&lt;/code&gt;.)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.loadBalancerIP&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer IP&lt;/a&gt; of the HTTP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.loadBalancerSourceRanges&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer SourceRanges&lt;/a&gt; of the HTTP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.http.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind ping http service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.expose&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Expose the udp ping service via a Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.rateLimit&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of UDP packets the ping service handles per instance, per second, per sender&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;20&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port to expose on the service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;80&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.serviceType&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/&#34;&gt;Service Type&lt;/a&gt; of the UDP Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;LoadBalancer&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.nodePort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Static node port to use for UDP ping service. (Only applies when &lt;code&gt;agones.ping.udp.serviceType&lt;/code&gt; is &lt;code&gt;NodePort&lt;/code&gt;.)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.loadBalancerIP&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer IP&lt;/a&gt; of the UDP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.loadBalancerSourceRanges&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer SourceRanges&lt;/a&gt; of the UDP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.udp.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind ping udp service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.healthCheck.initialDelaySeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Initial delay before performing the first probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.healthCheck.periodSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Seconds between every liveness probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.healthCheck.failureThreshold&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of times before giving up (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.healthCheck.timeoutSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of seconds after which the probe times out (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.resources&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ping pods &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/&#34;&gt;resource requests/limit&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.nodeSelector&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ping &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector&#34;&gt;node labels&lt;/a&gt; for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.tolerations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ping &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/&#34;&gt;toleration&lt;/a&gt; labels for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.affinity&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ping &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity&#34;&gt;affinity&lt;/a&gt; settings for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind ping pods&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.updateStrategy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy&#34;&gt;strategy&lt;/a&gt; to apply to the allocator deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.pdb.enabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to &lt;code&gt;true&lt;/code&gt; to enable the creation of a &lt;a href=&#34;https://kubernetes.io/docs/tasks/run-application/configure-pdb/&#34;&gt;PodDisruptionBudget&lt;/a&gt; for the ping deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.pdb.minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code&gt;maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.pdb.maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code&gt;minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.ping.topologySpreadConstraints&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;allocator-service&#34;&gt;Allocator Service&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.apiServerQPS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum sustained queries per second that an allocator should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;400&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.apiServerQPSBurst&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum burst queries per second that an allocator should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.remoteAllocationTimeout&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Remote allocation call timeout.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;10s&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.totalRemoteAllocationTimeout&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Total remote allocation timeout including retries.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;30s&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.logLevel&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Code Blind Allocator Log level. Log only entries with that severity and above&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;info&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.install&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Whether to install the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.replicas&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of replicas to run in the deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Service name for the allocator&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-allocator&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.serviceType&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/&#34;&gt;Service Type&lt;/a&gt; of the HTTP Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;LoadBalancer&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.clusterIP&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#type-clusterip&#34;&gt;Cluster IP&lt;/a&gt; of the Code Blind allocator. If you want &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#headless-services&#34;&gt;Headless Service&lt;/a&gt; for Code Blind Allocator, you can set &lt;code&gt;None&lt;/code&gt; to clusterIP.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.loadBalancerIP&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer IP&lt;/a&gt; of the Code Blind allocator load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.loadBalancerSourceRanges&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer&#34;&gt;Load Balancer SourceRanges&lt;/a&gt; of the Code Blind allocator load balancer. Only works if the Kubernetes provider supports this option.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind allocator service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.enabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If true the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt; will respond to &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-rest&#34;&gt;REST requests&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.appProtocol&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;code&gt;appProtocol&lt;/code&gt; to set on the Service for the http allocation port. If left blank, no value is set.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port that is exposed externally by the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt; for &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-rest&#34;&gt;REST requests&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;443&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.portName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The name of exposed port&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;http&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.targetPort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port that is used by the allocator pod to listen for &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-rest&#34;&gt;REST requests&lt;/a&gt;. Note that the allocator server cannot bind to low numbered ports.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8443&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.http.nodePort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If the ServiceType is set to &amp;ldquo;NodePort&amp;rdquo;,  this is the NodePort that the allocator http service is exposed on.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;30000-32767&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.enabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If true the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt; will respond to &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-grpc&#34;&gt;gRPC requests&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port that is exposed externally by the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt; for &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-grpc&#34;&gt;gRPC requests&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;443&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.portName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The name of exposed port&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.appProtocol&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;code&gt;appProtocol&lt;/code&gt; to set on the Service for the gRPC allocation port. If left blank, no value is set.&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.nodePort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;If the ServiceType is set to &amp;ldquo;NodePort&amp;rdquo;,  this is the NodePort that the allocator gRPC service is exposed on.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;30000-32767&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.service.grpc.targetPort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port that is used by the allocator pod to listen for &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/#using-grpc&#34;&gt;gRPC requests&lt;/a&gt;. Note that the allocator server cannot bind to low numbered ports.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8443&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.generateClientTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to true to generate client TLS certificates or false to provide certificates in &lt;code&gt;certs/allocator/allocator-client.default/*&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.generateTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to true to generate TLS certificates or false to provide your own certificates&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.disableMTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Turns off client cert authentication for incoming connections to the allocator.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.disableTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Turns off TLS security for incoming connections to the allocator.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.disableSecretCreation&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code&gt;allocator-tls&lt;/code&gt;, &lt;code&gt;allocator-tls-ca&lt;/code&gt;, and &lt;code&gt;allocator-client-ca&lt;/code&gt; secrets before installation.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.tlsCert&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS certificate provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.tlsKey&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS private key provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.clientCAs&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;A map of secret key names to allowed client CA certificates provided as strings&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.tolerations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Allocator &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/&#34;&gt;toleration&lt;/a&gt; labels for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.affinity&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Allocator &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity&#34;&gt;affinity&lt;/a&gt; settings for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind allocator pods&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.resources&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Allocator pods &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/&#34;&gt;resource requests/limit&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.labels&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/&#34;&gt;Labels&lt;/a&gt; Added to the Code Blind Allocator pods&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.readiness.initialDelaySeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Initial delay before performing the first probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.readiness.periodSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Seconds between every liveness probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.readiness.failureThreshold&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of times before giving up (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.nodeSelector&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Allocator &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector&#34;&gt;node labels&lt;/a&gt; for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.serviceMetrics.name&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Second Service name for the allocator&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;agones-allocator-metrics-service&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.serviceMetrics.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind allocator second Service&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.serviceMetrics.http.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The port that is exposed within cluster by the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;allocator service&lt;/a&gt; for http requests&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8080&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.serviceMetrics.http.portName&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The name of exposed port&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;http&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.allocationBatchWaitTime&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Wait time between each allocation batch when performing allocations in allocator mode&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500ms&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.updateStrategy&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy&#34;&gt;strategy&lt;/a&gt; to apply to the ping deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.pdb.enabled&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to &lt;code&gt;true&lt;/code&gt; to enable the creation of a &lt;a href=&#34;https://kubernetes.io/docs/tasks/run-application/configure-pdb/&#34;&gt;PodDisruptionBudget&lt;/a&gt; for the allocator deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.pdb.minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code&gt;maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.pdb.maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage. Mutually Exclusive with &lt;code&gt;minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.allocator.topologySpreadConstraints&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;extensions&#34;&gt;Extensions&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.http.port&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Port to use for liveness probe service and metrics&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8080&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.healthCheck.initialDelaySeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Initial delay before performing the first probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.healthCheck.periodSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Seconds between every liveness probe (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.healthCheck.failureThreshold&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of times before giving up (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;3&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.healthCheck.timeoutSeconds&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of seconds after which the probe times out (in seconds)&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.resources&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Extensions &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/&#34;&gt;resource requests/limit&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.generateTLS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Set to true to generate TLS certificates or false to provide your own certificates&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.tlsCert&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS certificate provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.tlsKey&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Custom TLS private key provided as a string&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.nodeSelector&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Extensions &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector&#34;&gt;node labels&lt;/a&gt; for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.tolerations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Extensions &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/&#34;&gt;toleration&lt;/a&gt; labels for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.affinity&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Extensions &lt;a href=&#34;https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity&#34;&gt;affinity&lt;/a&gt; settings for pod assignment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind extensions pods&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.numWorkers&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Number of workers to spin per resource type&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;100&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.apiServerQPS&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum sustained queries per second that extensions should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;400&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.apiServerQPSBurst&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum burst queries per second that extensions should be making against API Server&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.logLevel&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Code Blind Extensions Log level. Log only entries with that severity and above&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;info&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.persistentLogs&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Store Code Blind extensions logs in a temporary volume attached to a container for debugging&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;true&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.persistentLogsSizeLimitMB&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum total size of all Code Blind container logs in MB&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;10000&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.disableSecret&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code&gt;{agones.releaseName}-cert&lt;/code&gt; secrets before installation.&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.customCertSecretPath&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Remap cert-manager path to server.crt and server.key&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.allocationApiService.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind apiregistration&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.allocationApiService.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.validatingWebhook.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind validating webhook&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.validatingWebhook.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.mutatingWebhook.annotations&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&#34;https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/&#34;&gt;Annotations&lt;/a&gt; added to the Code Blind mutating webhook&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.mutatingWebhook.disableCaBundle&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable ca-bundle so it can be injected by cert-manager&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.allocationBatchWaitTime&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Wait time between each allocation batch when performing allocations in controller mode&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;500ms&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.pdb.minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with maxUnavailable&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;1&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.pdb.maxUnavailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code&gt;minAvailable&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;``&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.replicas&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;The number of replicas to run in the deployment&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;2&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;agones.extensions.topologySpreadConstraints&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;{}&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;gameservers&#34;&gt;GameServers&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;gameservers.namespaces&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;a list of namespaces you are planning to use to deploy game servers&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;[&amp;quot;default&amp;quot;]&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;gameservers.minPort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Minimum port to use for dynamic port allocation&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;7000&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;gameservers.maxPort&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Maximum port to use for dynamic port allocation&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;8000&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;gameservers.podPreserveUnknownFields&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Disable &lt;a href=&#34;https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#field-pruning&#34;&gt;field pruning&lt;/a&gt; and schema validation on the Pod template for a &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserver/&#34;&gt;GameServer&lt;/a&gt; definition&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;helm-installation&#34;&gt;Helm Installation&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Parameter&lt;/th&gt;
-&lt;th&gt;Description&lt;/th&gt;
-&lt;th&gt;Default&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;code&gt;helm.installTests&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;Add an ability to run &lt;code&gt;helm test agones&lt;/code&gt; to verify the installation&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;false&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;Specify each parameter using the &lt;code&gt;--set key=value[,key=value]&lt;/code&gt; argument to &lt;code&gt;helm install&lt;/code&gt;. For example,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install my-release --namespace agones-system &lt;span style=&#34;color:#4e9a06&#34;&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --set gameservers.minPort&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;1000,gameservers.maxPort&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;5000&lt;/span&gt; agones
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above command will deploy Code Blind controllers to &lt;code&gt;agones-system&lt;/code&gt; namespace. Additionally Code Blind will use a dynamic GameServers&amp;rsquo; port allocation range of 1000-5000.&lt;/p&gt;
-&lt;p&gt;Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install my-release --namespace agones-system -f values.yaml agones/agones
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Tip&lt;/h4&gt;
-
-    You can use the default
-&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;values.yaml&lt;/a&gt;
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;helm-test&#34;&gt;Helm test&lt;/h2&gt;
-&lt;p&gt;This test would create a &lt;code&gt;GameServer&lt;/code&gt; resource and delete it afterwards.&lt;/p&gt;
-
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Tip&lt;/h4&gt;
-
-    In order to use &lt;code&gt;helm test&lt;/code&gt; command described in this section you need to set &lt;code&gt;helm.installTests&lt;/code&gt; helm parameter to &lt;code&gt;true&lt;/code&gt;.
-
-&lt;/div&gt;
-
-&lt;p&gt;Check the Code Blind installation by running the following command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm &lt;span style=&#34;color:#204a87&#34;&gt;test&lt;/span&gt; my-release -n agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should see a successful output similar to this :&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NAME: my-release
+pool for Code Blind, see the &lt;a href="http://localhost:1313/docs/installation/">Code Blind installation instructions&lt;/a> for your preferred environment.&lt;/p>
+&lt;p>The command deploys Code Blind on the Kubernetes cluster with the default configuration. The &lt;a href="http://localhost:1313/docs/installation/install-agones/helm/#configuration">configuration&lt;/a> section lists the parameters that can be configured during installation.&lt;/p>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Tip&lt;/h4>
+List all releases using &lt;code>helm list --all-namespaces&lt;/code>
+&lt;/div>
+&lt;h3 id="namespaces">Namespaces&lt;/h3>
+&lt;p>By default Code Blind is configured to work with game servers deployed in the &lt;code>default&lt;/code> namespace. If you are planning to use another namespace you can configure Code Blind via the parameter &lt;code>gameservers.namespaces&lt;/code>.&lt;/p>
+&lt;p>For example to use &lt;code>default&lt;/code> &lt;strong>and&lt;/strong> &lt;code>xbox&lt;/code> namespaces:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace xbox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm install my-release agones/agones --set &lt;span style="color:#4e9a06">&amp;#34;gameservers.namespaces={default,xbox}&amp;#34;&lt;/span> --namespace agones-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+You need to create your namespaces before installing Code Blind.
+&lt;/div>
+&lt;p>If you want to add a new namespace afterward upgrade your release:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace ps4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm upgrade my-release agones/agones --reuse-values --set &lt;span style="color:#4e9a06">&amp;#34;gameservers.namespaces={default,xbox,ps4}&amp;#34;&lt;/span> --namespace agones-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uninstalling-the-chart">Uninstalling the Chart&lt;/h3>
+&lt;p>To uninstall/delete the &lt;code>my-release&lt;/code> deployment:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm uninstall my-release --namespace&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>agones-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="rbac">RBAC&lt;/h2>
+&lt;p>By default, &lt;code>agones.rbacEnabled&lt;/code> is set to true. This enables RBAC support in Code Blind and must be true if RBAC is enabled in your cluster.&lt;/p>
+&lt;p>The chart will take care of creating the required service accounts and roles for Code Blind.&lt;/p>
+&lt;p>If you have RBAC disabled, or to put it another way, ABAC enabled, you should set this value to &lt;code>false&lt;/code>.&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;p>The following tables lists the configurable parameters of the Code Blind chart and their default values.&lt;/p>
+&lt;h3 id="general">General&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.featureGates&lt;/code>&lt;/td>
+&lt;td>A URL query encoded string of Flags to enable/disable e.g. &lt;code>Example=true&amp;amp;OtherThing=false&lt;/code>. Any value accepted by &lt;a href="https://golang.org/pkg/strconv/#ParseBool">strconv.ParseBool(string)&lt;/a> can be used as a boolean value&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.rbacEnabled&lt;/code>&lt;/td>
+&lt;td>Creates RBAC resources. Must be set for any cluster configured with RBAC&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.registerWebhooks&lt;/code>&lt;/td>
+&lt;td>Registers the webhooks used for the admission controller&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.registerApiService&lt;/code>&lt;/td>
+&lt;td>Registers the apiservice(s) used for the Kubernetes API extension&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.registerServiceAccounts&lt;/code>&lt;/td>
+&lt;td>Attempts to create service accounts for the controllers&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.createPriorityClass&lt;/code>&lt;/td>
+&lt;td>Attempts to create priority classes for the controllers&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.priorityClassName&lt;/code>&lt;/td>
+&lt;td>Name of the priority classes to create&lt;/td>
+&lt;td>&lt;code>agones-system&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.requireDedicatedNodes&lt;/code>&lt;/td>
+&lt;td>Forces Code Blind system components to be scheduled on dedicated nodes, only applies to the GKE Standard without node auto-provisioning&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="custom-resource-definitions">Custom Resource Definitions&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.crds.install&lt;/code>&lt;/td>
+&lt;td>Install the CRDs with this chart. Useful to disable if you want to subchart (since crd-install hook is broken), so you can copy the CRDs into your own chart.&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.crds.cleanupOnDelete&lt;/code>&lt;/td>
+&lt;td>Run the pre-delete hook to delete all GameServers and their backing Pods when deleting the helm chart, so that all CRDs can be removed on chart deletion&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.crds.cleanupJobTTL&lt;/code>&lt;/td>
+&lt;td>The number of seconds for Kubernetes to delete the associated Job and Pods of the pre-delete hook after it completes, regardless if the Job is successful or not. Set to &lt;code>0&lt;/code> to disable cleaning up the Job or the associated Pods.&lt;/td>
+&lt;td>&lt;code>60&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="metrics">Metrics&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.prometheusServiceDiscovery&lt;/code>&lt;/td>
+&lt;td>Adds annotations for Prometheus ServiceDiscovery (and also Strackdriver)&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.prometheusEnabled&lt;/code>&lt;/td>
+&lt;td>Enables controller metrics on port &lt;code>8080&lt;/code> and path &lt;code>/metrics&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.stackdriverEnabled&lt;/code>&lt;/td>
+&lt;td>Enables Stackdriver exporter of controller metrics&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.stackdriverProjectID&lt;/code>&lt;/td>
+&lt;td>This overrides the default gcp project id for use with stackdriver&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.stackdriverLabels&lt;/code>&lt;/td>
+&lt;td>A set of default labels to add to all stackdriver metrics generated in form of key value pair (&lt;code>key=value,key2=value2&lt;/code>). By default metadata are automatically added using Kubernetes API and GCP metadata enpoint.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.metrics.serviceMonitor.interval&lt;/code>&lt;/td>
+&lt;td>Default scraping interval for ServiceMonitor&lt;/td>
+&lt;td>&lt;code>30s&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="service-accounts">Service Accounts&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.controller.name&lt;/code>&lt;/td>
+&lt;td>Service account name for the controller&lt;/td>
+&lt;td>&lt;code>agones-controller&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.controller.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind controller service account&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.sdk.name&lt;/code>&lt;/td>
+&lt;td>Service account name for the sdk&lt;/td>
+&lt;td>&lt;code>agones-sdk&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.sdk.annotations&lt;/code>&lt;/td>
+&lt;td>A map of namespaces to maps of &lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind SDK service account for the specified namespaces&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.allocator.name&lt;/code>&lt;/td>
+&lt;td>Service account name for the allocator&lt;/td>
+&lt;td>&lt;code>agones-allocator&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.serviceaccount.allocator.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind allocator service account&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="container-images">Container Images&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.image.registry&lt;/code>&lt;/td>
+&lt;td>Global image registry for all the Code Blind system images&lt;/td>
+&lt;td>&lt;code>us-docker.pkg.dev/agones-images/release&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.tag&lt;/code>&lt;/td>
+&lt;td>Global image tag for all images&lt;/td>
+&lt;td>&lt;code>1.38.0&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.controller.name&lt;/code>&lt;/td>
+&lt;td>Image name for the controller&lt;/td>
+&lt;td>&lt;code>agones-controller&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.controller.pullPolicy&lt;/code>&lt;/td>
+&lt;td>Image pull policy for the controller&lt;/td>
+&lt;td>&lt;code>IfNotPresent&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.controller.pullSecret&lt;/code>&lt;/td>
+&lt;td>Image pull secret for the controller, allocator, sdk and ping image. Should be created both in &lt;code>agones-system&lt;/code> and &lt;code>default&lt;/code> namespaces&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.name&lt;/code>&lt;/td>
+&lt;td>Image name for the sdk&lt;/td>
+&lt;td>&lt;code>agones-sdk&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.tag&lt;/code>&lt;/td>
+&lt;td>Image tag for the sdk&lt;/td>
+&lt;td>value of &lt;code>agones.image.tag&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.cpuRequest&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/">cpu request&lt;/a> for sdk server container&lt;/td>
+&lt;td>&lt;code>30m&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.cpuLimit&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/cpu-constraint-namespace/">cpu limit&lt;/a> for the sdk server container&lt;/td>
+&lt;td>&lt;code>0&lt;/code> (none)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.memoryRequest&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/">memory request&lt;/a> for sdk server container&lt;/td>
+&lt;td>&lt;code>0&lt;/code> (none)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.memoryLimit&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-constraint-namespace/">memory limit&lt;/a> for the sdk server container&lt;/td>
+&lt;td>&lt;code>0&lt;/code> (none)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.sdk.alwaysPull&lt;/code>&lt;/td>
+&lt;td>Tells if the sdk image should always be pulled&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.ping.name&lt;/code>&lt;/td>
+&lt;td>Image name for the ping service&lt;/td>
+&lt;td>&lt;code>agones-ping&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.ping.tag&lt;/code>&lt;/td>
+&lt;td>Image tag for the ping service&lt;/td>
+&lt;td>value of &lt;code>agones.image.tag&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.ping.pullPolicy&lt;/code>&lt;/td>
+&lt;td>Image pull policy for the ping service&lt;/td>
+&lt;td>&lt;code>IfNotPresent&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.extensions.name&lt;/code>&lt;/td>
+&lt;td>Image name for extensions&lt;/td>
+&lt;td>&lt;code>agones-extensions&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.image.extensions.pullPolicy&lt;/code>&lt;/td>
+&lt;td>Image pull policy for extensions&lt;/td>
+&lt;td>&lt;code>IfNotPresent&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="code-blind-controller">Code Blind Controller&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.replicas&lt;/code>&lt;/td>
+&lt;td>The number of replicas to run in the &lt;code>agones-controller&lt;/code> deployment.&lt;/td>
+&lt;td>&lt;code>2&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.pdb.minAvailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code>maxUnavailable&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.pdb.maxUnavailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code>minAvailable&lt;/code>&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.http.port&lt;/code>&lt;/td>
+&lt;td>Port to use for liveness probe service and metrics&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.healthCheck.initialDelaySeconds&lt;/code>&lt;/td>
+&lt;td>Initial delay before performing the first probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.healthCheck.periodSeconds&lt;/code>&lt;/td>
+&lt;td>Seconds between every liveness probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.healthCheck.failureThreshold&lt;/code>&lt;/td>
+&lt;td>Number of times before giving up (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.healthCheck.timeoutSeconds&lt;/code>&lt;/td>
+&lt;td>Number of seconds after which the probe times out (in seconds)&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.resources&lt;/code>&lt;/td>
+&lt;td>Controller &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource requests/limit&lt;/a>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.generateTLS&lt;/code>&lt;/td>
+&lt;td>Set to true to generate TLS certificates or false to provide your own certificates&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.tlsCert&lt;/code>&lt;/td>
+&lt;td>Custom TLS certificate provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.tlsKey&lt;/code>&lt;/td>
+&lt;td>Custom TLS private key provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.nodeSelector&lt;/code>&lt;/td>
+&lt;td>Controller &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">node labels&lt;/a> for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.tolerations&lt;/code>&lt;/td>
+&lt;td>Controller &lt;a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">toleration&lt;/a> labels for pod assignment&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.affinity&lt;/code>&lt;/td>
+&lt;td>Controller &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity">affinity&lt;/a> settings for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind controller pods&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.numWorkers&lt;/code>&lt;/td>
+&lt;td>Number of workers to spin per resource type&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.apiServerQPS&lt;/code>&lt;/td>
+&lt;td>Maximum sustained queries per second that controller should be making against API Server&lt;/td>
+&lt;td>&lt;code>400&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.apiServerQPSBurst&lt;/code>&lt;/td>
+&lt;td>Maximum burst queries per second that controller should be making against API Server&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.logLevel&lt;/code>&lt;/td>
+&lt;td>Code Blind Controller Log level. Log only entries with that severity and above&lt;/td>
+&lt;td>&lt;code>info&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.persistentLogs&lt;/code>&lt;/td>
+&lt;td>Store Code Blind controller logs in a temporary volume attached to a container for debugging&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.persistentLogsSizeLimitMB&lt;/code>&lt;/td>
+&lt;td>Maximum total size of all Code Blind container logs in MB&lt;/td>
+&lt;td>&lt;code>10000&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.disableSecret&lt;/code>&lt;/td>
+&lt;td>Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code>{agones.releaseName}-cert&lt;/code> secrets before installation.&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.customCertSecretPath&lt;/code>&lt;/td>
+&lt;td>Remap cert-manager path to server.crt and server.key&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.allocationApiService.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind apiregistration&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.allocationApiService.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.validatingWebhook.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind validating webhook&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.validatingWebhook.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.mutatingWebhook.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind mutating webhook&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.mutatingWebhook.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.allocationBatchWaitTime&lt;/code>&lt;/td>
+&lt;td>Wait time between each allocation batch when performing allocations in controller mode&lt;/td>
+&lt;td>&lt;code>500ms&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.controller.topologySpreadConstraints&lt;/code>&lt;/td>
+&lt;td>Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="ping-service">Ping Service&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.install&lt;/code>&lt;/td>
+&lt;td>Whether to install the &lt;a href="http://localhost:1313/docs/guides/ping-service/">ping service&lt;/a>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.replicas&lt;/code>&lt;/td>
+&lt;td>The number of replicas to run in the deployment&lt;/td>
+&lt;td>&lt;code>2&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.expose&lt;/code>&lt;/td>
+&lt;td>Expose the http ping service via a Service&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.response&lt;/code>&lt;/td>
+&lt;td>The string response returned from the http service&lt;/td>
+&lt;td>&lt;code>ok&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.port&lt;/code>&lt;/td>
+&lt;td>The port to expose on the service&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.serviceType&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Type&lt;/a> of the HTTP Service&lt;/td>
+&lt;td>&lt;code>LoadBalancer&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.nodePort&lt;/code>&lt;/td>
+&lt;td>Static node port to use for HTTP ping service. (Only applies when &lt;code>agones.ping.http.serviceType&lt;/code> is &lt;code>NodePort&lt;/code>.)&lt;/td>
+&lt;td>&lt;code>0&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.loadBalancerIP&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer IP&lt;/a> of the HTTP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.loadBalancerSourceRanges&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer SourceRanges&lt;/a> of the HTTP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.http.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind ping http service&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.expose&lt;/code>&lt;/td>
+&lt;td>Expose the udp ping service via a Service&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.rateLimit&lt;/code>&lt;/td>
+&lt;td>Number of UDP packets the ping service handles per instance, per second, per sender&lt;/td>
+&lt;td>&lt;code>20&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.port&lt;/code>&lt;/td>
+&lt;td>The port to expose on the service&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.serviceType&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Type&lt;/a> of the UDP Service&lt;/td>
+&lt;td>&lt;code>LoadBalancer&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.nodePort&lt;/code>&lt;/td>
+&lt;td>Static node port to use for UDP ping service. (Only applies when &lt;code>agones.ping.udp.serviceType&lt;/code> is &lt;code>NodePort&lt;/code>.)&lt;/td>
+&lt;td>&lt;code>0&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.loadBalancerIP&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer IP&lt;/a> of the UDP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.loadBalancerSourceRanges&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer SourceRanges&lt;/a> of the UDP Service load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.udp.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind ping udp service&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.healthCheck.initialDelaySeconds&lt;/code>&lt;/td>
+&lt;td>Initial delay before performing the first probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.healthCheck.periodSeconds&lt;/code>&lt;/td>
+&lt;td>Seconds between every liveness probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.healthCheck.failureThreshold&lt;/code>&lt;/td>
+&lt;td>Number of times before giving up (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.healthCheck.timeoutSeconds&lt;/code>&lt;/td>
+&lt;td>Number of seconds after which the probe times out (in seconds)&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.resources&lt;/code>&lt;/td>
+&lt;td>Ping pods &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource requests/limit&lt;/a>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.nodeSelector&lt;/code>&lt;/td>
+&lt;td>Ping &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">node labels&lt;/a> for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.tolerations&lt;/code>&lt;/td>
+&lt;td>Ping &lt;a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">toleration&lt;/a> labels for pod assignment&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.affinity&lt;/code>&lt;/td>
+&lt;td>Ping &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity">affinity&lt;/a> settings for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind ping pods&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.updateStrategy&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy">strategy&lt;/a> to apply to the allocator deployment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.pdb.enabled&lt;/code>&lt;/td>
+&lt;td>Set to &lt;code>true&lt;/code> to enable the creation of a &lt;a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">PodDisruptionBudget&lt;/a> for the ping deployment&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.pdb.minAvailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code>maxUnavailable&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.pdb.maxUnavailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code>minAvailable&lt;/code>&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.ping.topologySpreadConstraints&lt;/code>&lt;/td>
+&lt;td>Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="allocator-service">Allocator Service&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.apiServerQPS&lt;/code>&lt;/td>
+&lt;td>Maximum sustained queries per second that an allocator should be making against API Server&lt;/td>
+&lt;td>&lt;code>400&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.apiServerQPSBurst&lt;/code>&lt;/td>
+&lt;td>Maximum burst queries per second that an allocator should be making against API Server&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.remoteAllocationTimeout&lt;/code>&lt;/td>
+&lt;td>Remote allocation call timeout.&lt;/td>
+&lt;td>&lt;code>10s&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.totalRemoteAllocationTimeout&lt;/code>&lt;/td>
+&lt;td>Total remote allocation timeout including retries.&lt;/td>
+&lt;td>&lt;code>30s&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.logLevel&lt;/code>&lt;/td>
+&lt;td>Code Blind Allocator Log level. Log only entries with that severity and above&lt;/td>
+&lt;td>&lt;code>info&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.install&lt;/code>&lt;/td>
+&lt;td>Whether to install the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.replicas&lt;/code>&lt;/td>
+&lt;td>The number of replicas to run in the deployment&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.name&lt;/code>&lt;/td>
+&lt;td>Service name for the allocator&lt;/td>
+&lt;td>&lt;code>agones-allocator&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.serviceType&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/">Service Type&lt;/a> of the HTTP Service&lt;/td>
+&lt;td>&lt;code>LoadBalancer&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.clusterIP&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#type-clusterip">Cluster IP&lt;/a> of the Code Blind allocator. If you want &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#headless-services">Headless Service&lt;/a> for Code Blind Allocator, you can set &lt;code>None&lt;/code> to clusterIP.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.loadBalancerIP&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer IP&lt;/a> of the Code Blind allocator load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.loadBalancerSourceRanges&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer">Load Balancer SourceRanges&lt;/a> of the Code Blind allocator load balancer. Only works if the Kubernetes provider supports this option.&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind allocator service&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.enabled&lt;/code>&lt;/td>
+&lt;td>If true the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a> will respond to &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-rest">REST requests&lt;/a>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.appProtocol&lt;/code>&lt;/td>
+&lt;td>The &lt;code>appProtocol&lt;/code> to set on the Service for the http allocation port. If left blank, no value is set.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.port&lt;/code>&lt;/td>
+&lt;td>The port that is exposed externally by the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a> for &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-rest">REST requests&lt;/a>&lt;/td>
+&lt;td>&lt;code>443&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.portName&lt;/code>&lt;/td>
+&lt;td>The name of exposed port&lt;/td>
+&lt;td>&lt;code>http&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.targetPort&lt;/code>&lt;/td>
+&lt;td>The port that is used by the allocator pod to listen for &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-rest">REST requests&lt;/a>. Note that the allocator server cannot bind to low numbered ports.&lt;/td>
+&lt;td>&lt;code>8443&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.http.nodePort&lt;/code>&lt;/td>
+&lt;td>If the ServiceType is set to &amp;ldquo;NodePort&amp;rdquo;, this is the NodePort that the allocator http service is exposed on.&lt;/td>
+&lt;td>&lt;code>30000-32767&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.enabled&lt;/code>&lt;/td>
+&lt;td>If true the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a> will respond to &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-grpc">gRPC requests&lt;/a>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.port&lt;/code>&lt;/td>
+&lt;td>The port that is exposed externally by the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a> for &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-grpc">gRPC requests&lt;/a>&lt;/td>
+&lt;td>&lt;code>443&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.portName&lt;/code>&lt;/td>
+&lt;td>The name of exposed port&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.appProtocol&lt;/code>&lt;/td>
+&lt;td>The &lt;code>appProtocol&lt;/code> to set on the Service for the gRPC allocation port. If left blank, no value is set.&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.nodePort&lt;/code>&lt;/td>
+&lt;td>If the ServiceType is set to &amp;ldquo;NodePort&amp;rdquo;, this is the NodePort that the allocator gRPC service is exposed on.&lt;/td>
+&lt;td>&lt;code>30000-32767&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.service.grpc.targetPort&lt;/code>&lt;/td>
+&lt;td>The port that is used by the allocator pod to listen for &lt;a href="http://localhost:1313/docs/advanced/allocator-service/#using-grpc">gRPC requests&lt;/a>. Note that the allocator server cannot bind to low numbered ports.&lt;/td>
+&lt;td>&lt;code>8443&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.generateClientTLS&lt;/code>&lt;/td>
+&lt;td>Set to true to generate client TLS certificates or false to provide certificates in &lt;code>certs/allocator/allocator-client.default/*&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.generateTLS&lt;/code>&lt;/td>
+&lt;td>Set to true to generate TLS certificates or false to provide your own certificates&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.disableMTLS&lt;/code>&lt;/td>
+&lt;td>Turns off client cert authentication for incoming connections to the allocator.&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.disableTLS&lt;/code>&lt;/td>
+&lt;td>Turns off TLS security for incoming connections to the allocator.&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.disableSecretCreation&lt;/code>&lt;/td>
+&lt;td>Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code>allocator-tls&lt;/code>, &lt;code>allocator-tls-ca&lt;/code>, and &lt;code>allocator-client-ca&lt;/code> secrets before installation.&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.tlsCert&lt;/code>&lt;/td>
+&lt;td>Custom TLS certificate provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.tlsKey&lt;/code>&lt;/td>
+&lt;td>Custom TLS private key provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.clientCAs&lt;/code>&lt;/td>
+&lt;td>A map of secret key names to allowed client CA certificates provided as strings&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.tolerations&lt;/code>&lt;/td>
+&lt;td>Allocator &lt;a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">toleration&lt;/a> labels for pod assignment&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.affinity&lt;/code>&lt;/td>
+&lt;td>Allocator &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity">affinity&lt;/a> settings for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind allocator pods&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.resources&lt;/code>&lt;/td>
+&lt;td>Allocator pods &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource requests/limit&lt;/a>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.labels&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/">Labels&lt;/a> Added to the Code Blind Allocator pods&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.readiness.initialDelaySeconds&lt;/code>&lt;/td>
+&lt;td>Initial delay before performing the first probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.readiness.periodSeconds&lt;/code>&lt;/td>
+&lt;td>Seconds between every liveness probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.readiness.failureThreshold&lt;/code>&lt;/td>
+&lt;td>Number of times before giving up (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.nodeSelector&lt;/code>&lt;/td>
+&lt;td>Allocator &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">node labels&lt;/a> for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.serviceMetrics.name&lt;/code>&lt;/td>
+&lt;td>Second Service name for the allocator&lt;/td>
+&lt;td>&lt;code>agones-allocator-metrics-service&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.serviceMetrics.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind allocator second Service&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.serviceMetrics.http.port&lt;/code>&lt;/td>
+&lt;td>The port that is exposed within cluster by the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">allocator service&lt;/a> for http requests&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.serviceMetrics.http.portName&lt;/code>&lt;/td>
+&lt;td>The name of exposed port&lt;/td>
+&lt;td>&lt;code>http&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.allocationBatchWaitTime&lt;/code>&lt;/td>
+&lt;td>Wait time between each allocation batch when performing allocations in allocator mode&lt;/td>
+&lt;td>&lt;code>500ms&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.updateStrategy&lt;/code>&lt;/td>
+&lt;td>The &lt;a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy">strategy&lt;/a> to apply to the ping deployment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.pdb.enabled&lt;/code>&lt;/td>
+&lt;td>Set to &lt;code>true&lt;/code> to enable the creation of a &lt;a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">PodDisruptionBudget&lt;/a> for the allocator deployment&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.pdb.minAvailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with &lt;code>maxUnavailable&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.pdb.maxUnavailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage. Mutually Exclusive with &lt;code>minAvailable&lt;/code>&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.allocator.topologySpreadConstraints&lt;/code>&lt;/td>
+&lt;td>Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="extensions">Extensions&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.http.port&lt;/code>&lt;/td>
+&lt;td>Port to use for liveness probe service and metrics&lt;/td>
+&lt;td>&lt;code>8080&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.healthCheck.initialDelaySeconds&lt;/code>&lt;/td>
+&lt;td>Initial delay before performing the first probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.healthCheck.periodSeconds&lt;/code>&lt;/td>
+&lt;td>Seconds between every liveness probe (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.healthCheck.failureThreshold&lt;/code>&lt;/td>
+&lt;td>Number of times before giving up (in seconds)&lt;/td>
+&lt;td>&lt;code>3&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.healthCheck.timeoutSeconds&lt;/code>&lt;/td>
+&lt;td>Number of seconds after which the probe times out (in seconds)&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.resources&lt;/code>&lt;/td>
+&lt;td>Extensions &lt;a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/">resource requests/limit&lt;/a>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.generateTLS&lt;/code>&lt;/td>
+&lt;td>Set to true to generate TLS certificates or false to provide your own certificates&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.tlsCert&lt;/code>&lt;/td>
+&lt;td>Custom TLS certificate provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.tlsKey&lt;/code>&lt;/td>
+&lt;td>Custom TLS private key provided as a string&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.nodeSelector&lt;/code>&lt;/td>
+&lt;td>Extensions &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector">node labels&lt;/a> for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.tolerations&lt;/code>&lt;/td>
+&lt;td>Extensions &lt;a href="https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/">toleration&lt;/a> labels for pod assignment&lt;/td>
+&lt;td>&lt;code>[]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.affinity&lt;/code>&lt;/td>
+&lt;td>Extensions &lt;a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity">affinity&lt;/a> settings for pod assignment&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind extensions pods&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.numWorkers&lt;/code>&lt;/td>
+&lt;td>Number of workers to spin per resource type&lt;/td>
+&lt;td>&lt;code>100&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.apiServerQPS&lt;/code>&lt;/td>
+&lt;td>Maximum sustained queries per second that extensions should be making against API Server&lt;/td>
+&lt;td>&lt;code>400&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.apiServerQPSBurst&lt;/code>&lt;/td>
+&lt;td>Maximum burst queries per second that extensions should be making against API Server&lt;/td>
+&lt;td>&lt;code>500&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.logLevel&lt;/code>&lt;/td>
+&lt;td>Code Blind Extensions Log level. Log only entries with that severity and above&lt;/td>
+&lt;td>&lt;code>info&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.persistentLogs&lt;/code>&lt;/td>
+&lt;td>Store Code Blind extensions logs in a temporary volume attached to a container for debugging&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.persistentLogsSizeLimitMB&lt;/code>&lt;/td>
+&lt;td>Maximum total size of all Code Blind container logs in MB&lt;/td>
+&lt;td>&lt;code>10000&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.disableSecret&lt;/code>&lt;/td>
+&lt;td>Disables the creation of any allocator secrets. If true, you MUST provide the &lt;code>{agones.releaseName}-cert&lt;/code> secrets before installation.&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.customCertSecretPath&lt;/code>&lt;/td>
+&lt;td>Remap cert-manager path to server.crt and server.key&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.allocationApiService.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind apiregistration&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.allocationApiService.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.validatingWebhook.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind validating webhook&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.validatingWebhook.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.mutatingWebhook.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/">Annotations&lt;/a> added to the Code Blind mutating webhook&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.mutatingWebhook.disableCaBundle&lt;/code>&lt;/td>
+&lt;td>Disable ca-bundle so it can be injected by cert-manager&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.allocationBatchWaitTime&lt;/code>&lt;/td>
+&lt;td>Wait time between each allocation batch when performing allocations in controller mode&lt;/td>
+&lt;td>&lt;code>500ms&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.pdb.minAvailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that must still be available after the eviction, even in the absence of the evicted pod. Can be either an absolute number or a percentage. Mutually Exclusive with maxUnavailable&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.pdb.maxUnavailable&lt;/code>&lt;/td>
+&lt;td>Description of the number of pods from that set that can be unavailable after the eviction. It can be either an absolute number or a percentage Mutually Exclusive with &lt;code>minAvailable&lt;/code>&lt;/td>
+&lt;td>``&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.replicas&lt;/code>&lt;/td>
+&lt;td>The number of replicas to run in the deployment&lt;/td>
+&lt;td>&lt;code>2&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>agones.extensions.topologySpreadConstraints&lt;/code>&lt;/td>
+&lt;td>Ensures better resource utilization and high availability by evenly distributing Pods in the agones-system namespace&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="gameservers">GameServers&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gameservers.namespaces&lt;/code>&lt;/td>
+&lt;td>a list of namespaces you are planning to use to deploy game servers&lt;/td>
+&lt;td>&lt;code>[&amp;quot;default&amp;quot;]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gameservers.minPort&lt;/code>&lt;/td>
+&lt;td>Minimum port to use for dynamic port allocation&lt;/td>
+&lt;td>&lt;code>7000&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gameservers.maxPort&lt;/code>&lt;/td>
+&lt;td>Maximum port to use for dynamic port allocation&lt;/td>
+&lt;td>&lt;code>8000&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gameservers.podPreserveUnknownFields&lt;/code>&lt;/td>
+&lt;td>Disable &lt;a href="https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#field-pruning">field pruning&lt;/a> and schema validation on the Pod template for a &lt;a href="http://localhost:1313/docs/reference/gameserver/">GameServer&lt;/a> definition&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="helm-installation">Helm Installation&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Parameter&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>helm.installTests&lt;/code>&lt;/td>
+&lt;td>Add an ability to run &lt;code>helm test agones&lt;/code> to verify the installation&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Specify each parameter using the &lt;code>--set key=value[,key=value]&lt;/code> argument to &lt;code>helm install&lt;/code>. For example,&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install my-release --namespace agones-system &lt;span style="color:#4e9a06">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">&lt;/span> --set gameservers.minPort&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>1000,gameservers.maxPort&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">5000&lt;/span> agones
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The above command will deploy Code Blind controllers to &lt;code>agones-system&lt;/code> namespace. Additionally Code Blind will use a dynamic GameServers&amp;rsquo; port allocation range of 1000-5000.&lt;/p>
+&lt;p>Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install my-release --namespace agones-system -f values.yaml agones/agones
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Tip&lt;/h4>
+You can use the default
+&lt;a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>values.yaml&lt;/a>
+&lt;/div>
+&lt;h2 id="helm-test">Helm test&lt;/h2>
+&lt;p>This test would create a &lt;code>GameServer&lt;/code> resource and delete it afterwards.&lt;/p>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Tip&lt;/h4>
+In order to use &lt;code>helm test&lt;/code> command described in this section you need to set &lt;code>helm.installTests&lt;/code> helm parameter to &lt;code>true&lt;/code>.
+&lt;/div>
+&lt;p>Check the Code Blind installation by running the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm &lt;span style="color:#204a87">test&lt;/span> my-release -n agones-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You should see a successful output similar to this :&lt;/p>
+&lt;pre tabindex="0">&lt;code>NAME: my-release
 LAST DEPLOYED: Wed Mar 29 06:13:23 2023
 NAMESPACE: agones-system
 STATUS: deployed
 REVISION: 4
-TEST SUITE:     my-release-test
-Last Started:   Wed Mar 29 06:17:52 2023
+TEST SUITE: my-release-test
+Last Started: Wed Mar 29 06:17:52 2023
 Last Completed: Wed Mar 29 06:18:10 2023
-Phase:          Succeeded
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;controller-tls-certificates&#34;&gt;Controller TLS Certificates&lt;/h2&gt;
-&lt;p&gt;By default agones chart generates tls certificates used by the admission controller, while this is handy, it requires the agones controller to restart on each &lt;code&gt;helm upgrade&lt;/code&gt; command.&lt;/p&gt;
-&lt;h3 id=&#34;manual&#34;&gt;Manual&lt;/h3&gt;
-&lt;p&gt;For most use cases the controller would have required a restart anyway (eg: controller image updated). However if you really need to avoid restarts we suggest that you turn off tls automatic generation (&lt;code&gt;agones.controller.generateTLS&lt;/code&gt; to &lt;code&gt;false&lt;/code&gt;) and provide your own certificates (&lt;code&gt;certs/server.crt&lt;/code&gt;,&lt;code&gt;certs/server.key&lt;/code&gt;).&lt;/p&gt;
-
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Tip&lt;/h4&gt;
-
-    You can use our script located at
-&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;cert.sh&lt;/a&gt; to generate them.
-
-&lt;/div&gt;
-
-&lt;h3 id=&#34;cert-manager&#34;&gt;Cert-Manager&lt;/h3&gt;
-&lt;p&gt;Another approach is to use &lt;a href=&#34;https://cert-manager.io/&#34;&gt;cert-manager.io&lt;/a&gt; solution for cluster level certificate management.&lt;/p&gt;
-&lt;p&gt;In order to use the cert-manager solution, first &lt;a href=&#34;https://cert-manager.io/docs/installation/kubernetes/&#34;&gt;install cert-manager&lt;/a&gt; on the cluster.
-Then, &lt;a href=&#34;https://cert-manager.io/docs/configuration/&#34;&gt;configure&lt;/a&gt; an &lt;code&gt;Issuer&lt;/code&gt;/&lt;code&gt;ClusterIssuer&lt;/code&gt; resource and
-last &lt;a href=&#34;https://cert-manager.io/docs/usage/certificate/&#34;&gt;configure&lt;/a&gt; a &lt;code&gt;Certificate&lt;/code&gt; resource to manage controller &lt;code&gt;Secret&lt;/code&gt;.
-Make sure to configure the &lt;code&gt;Certificate&lt;/code&gt; based on your system&amp;rsquo;s requirements, including the validity &lt;code&gt;duration&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Here is an example of using a self-signed &lt;code&gt;ClusterIssuer&lt;/code&gt; for configuring controller &lt;code&gt;Secret&lt;/code&gt; where secret name is &lt;code&gt;my-release-cert&lt;/code&gt; or &lt;code&gt;{{ template &amp;quot;agones.fullname&amp;quot; . }}-cert&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;#!/bin/bash
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Create a self-signed ClusterIssuer&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF | kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: cert-manager.io/v1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: ClusterIssuer
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: selfsigned
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  selfSigned: {}
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Create a Certificate with IP for the my-release-cert )&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cat &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;lt;&amp;lt;EOF | kubectl apply -f -
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;apiVersion: cert-manager.io/v1
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;kind: Certificate
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;metadata:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  name: my-release-agones-cert
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  namespace: agones-system
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;spec:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  dnsNames:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    - agones-controller-service.agones-system.svc
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  secretName: my-release-agones-cert
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;  issuerRef:
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    name: selfsigned
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;    kind: ClusterIssuer
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;EOF&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After the certificates are generated, we will want to &lt;a href=&#34;https://cert-manager.io/docs/concepts/ca-injector/&#34;&gt;inject caBundle&lt;/a&gt; into the controller and extensions webhook and disable the controller and extensions secret creation through the following values.yaml file.:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;controller&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;customCertSecretPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls.key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server.key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allocationApiService&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;validatingWebhook&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mutatingWebhook&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;extensions&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableSecret&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;customCertSecretPath&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;ca.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server.crt&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;tls.key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;server.key&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;allocationApiService&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;validatingWebhook&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;mutatingWebhook&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;annotations&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;cert-manager.io/inject-ca-from&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-system/my-release-agones-cert&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;disableCaBundle&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After copying the above yaml into a &lt;code&gt;values.yaml&lt;/code&gt; file, use below command to install Code Blind:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;helm install my-release --namespace agones-system --create-namespace --values values.yaml agones/agones
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reserved-allocator-load-balancer-ip&#34;&gt;Reserved Allocator Load Balancer IP&lt;/h2&gt;
-&lt;p&gt;In order to reuse the existing load balancer IP on upgrade or install the &lt;code&gt;agones-allocator&lt;/code&gt; service as a &lt;code&gt;LoadBalancer&lt;/code&gt; using a reserved static IP, a user can specify the load balancer&amp;rsquo;s IP with the &lt;code&gt;agones.allocator.http.loadBalancerIP&lt;/code&gt; helm configuration parameter value. By setting the &lt;code&gt;loadBalancerIP&lt;/code&gt; value:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;The &lt;code&gt;LoadBalancer&lt;/code&gt; is created with the specified IP, if supported by the cloud provider.&lt;/li&gt;
-&lt;li&gt;A self-signed server TLS certificate is generated for the IP, used by the &lt;code&gt;agones-allocator&lt;/code&gt; service.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://codeblind.ai/docs/installation/confirm/&#34;&gt;Confirm Code Blind is up and running&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+Phase: Succeeded
+&lt;/code>&lt;/pre>&lt;h2 id="controller-tls-certificates">Controller TLS Certificates&lt;/h2>
+&lt;p>By default agones chart generates tls certificates used by the admission controller, while this is handy, it requires the agones controller to restart on each &lt;code>helm upgrade&lt;/code> command.&lt;/p>
+&lt;h3 id="manual">Manual&lt;/h3>
+&lt;p>For most use cases the controller would have required a restart anyway (eg: controller image updated). However if you really need to avoid restarts we suggest that you turn off tls automatic generation (&lt;code>agones.controller.generateTLS&lt;/code> to &lt;code>false&lt;/code>) and provide your own certificates (&lt;code>certs/server.crt&lt;/code>,&lt;code>certs/server.key&lt;/code>).&lt;/p>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Tip&lt;/h4>
+You can use our script located at
+&lt;a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>cert.sh&lt;/a> to generate them.
+&lt;/div>
+&lt;h3 id="cert-manager">Cert-Manager&lt;/h3>
+&lt;p>Another approach is to use &lt;a href="https://cert-manager.io/">cert-manager.io&lt;/a> solution for cluster level certificate management.&lt;/p>
+&lt;p>In order to use the cert-manager solution, first &lt;a href="https://cert-manager.io/docs/installation/kubernetes/">install cert-manager&lt;/a> on the cluster.
+Then, &lt;a href="https://cert-manager.io/docs/configuration/">configure&lt;/a> an &lt;code>Issuer&lt;/code>/&lt;code>ClusterIssuer&lt;/code> resource and
+last &lt;a href="https://cert-manager.io/docs/usage/certificate/">configure&lt;/a> a &lt;code>Certificate&lt;/code> resource to manage controller &lt;code>Secret&lt;/code>.
+Make sure to configure the &lt;code>Certificate&lt;/code> based on your system&amp;rsquo;s requirements, including the validity &lt;code>duration&lt;/code>.&lt;/p>
+&lt;p>Here is an example of using a self-signed &lt;code>ClusterIssuer&lt;/code> for configuring controller &lt;code>Secret&lt;/code> where secret name is &lt;code>my-release-cert&lt;/code> or &lt;code>{{ template &amp;quot;agones.fullname&amp;quot; . }}-cert&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic">&lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Create a self-signed ClusterIssuer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#4e9a06">&amp;lt;&amp;lt;EOF | kubectl apply -f -
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">apiVersion: cert-manager.io/v1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">kind: ClusterIssuer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">metadata:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> name: selfsigned
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">spec:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> selfSigned: {}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#8f5902;font-style:italic"># Create a Certificate with IP for the my-release-cert )&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>cat &lt;span style="color:#4e9a06">&amp;lt;&amp;lt;EOF | kubectl apply -f -
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">apiVersion: cert-manager.io/v1
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">kind: Certificate
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">metadata:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> name: my-release-agones-cert
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> namespace: agones-system
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">spec:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> dnsNames:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> - agones-controller-service.agones-system.svc
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> secretName: my-release-agones-cert
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> issuerRef:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> name: selfsigned
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06"> kind: ClusterIssuer
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#4e9a06">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After the certificates are generated, we will want to &lt;a href="https://cert-manager.io/docs/concepts/ca-injector/">inject caBundle&lt;/a> into the controller and extensions webhook and disable the controller and extensions secret creation through the following values.yaml file.:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">agones&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">controller&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableSecret&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">customCertSecretPath&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ca.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ca.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">tls.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">tls.key&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server.key&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">allocationApiService&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">validatingWebhook&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">mutatingWebhook&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">extensions&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableSecret&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">customCertSecretPath&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ca.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">ca.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">tls.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server.crt&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">key&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">tls.key&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">path&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">server.key&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">allocationApiService&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">validatingWebhook&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">mutatingWebhook&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">annotations&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">cert-manager.io/inject-ca-from&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">agones-system/my-release-agones-cert&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">disableCaBundle&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">true&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After copying the above yaml into a &lt;code>values.yaml&lt;/code> file, use below command to install Code Blind:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install my-release --namespace agones-system --create-namespace --values values.yaml agones/agones
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reserved-allocator-load-balancer-ip">Reserved Allocator Load Balancer IP&lt;/h2>
+&lt;p>In order to reuse the existing load balancer IP on upgrade or install the &lt;code>agones-allocator&lt;/code> service as a &lt;code>LoadBalancer&lt;/code> using a reserved static IP, a user can specify the load balancer&amp;rsquo;s IP with the &lt;code>agones.allocator.http.loadBalancerIP&lt;/code> helm configuration parameter value. By setting the &lt;code>loadBalancerIP&lt;/code> value:&lt;/p>
+&lt;ol>
+&lt;li>The &lt;code>LoadBalancer&lt;/code> is created with the specified IP, if supported by the cloud provider.&lt;/li>
+&lt;li>A self-signed server TLS certificate is generated for the IP, used by the &lt;code>agones-allocator&lt;/code> service.&lt;/li>
+&lt;/ol>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://localhost:1313/docs/installation/confirm/">Confirm Code Blind is up and running&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

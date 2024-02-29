@@ -1,9 +1,6 @@
 # Code Blind Landing, SEO and Documentation Site
 
-
-Built upon [Docsy](https://docsy.dev/docs) and [Hugo](https://gohugo.io/documentation/) for technical documentation, and SEO - providing easy site navigation, and structure. 
-
-This allows deploying in github pages, and other static site hosting services for fast delivery while, allowing for easy updates and maintenance.
+This is the source code for the Code Blind landing, SEO and documentation site. It is built using the [Docsy](https://www.docsy.dev/) theme for [Hugo](https://gohugo.io/).
 
 ### Getting Started
 

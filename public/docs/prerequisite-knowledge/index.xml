@@ -1,18 +1,1 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title> – Prerequisite Knowledge</title>
-    <link>https://codeblind.ai/docs/prerequisite-knowledge/</link>
-    <description>Recent content in Prerequisite Knowledge on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	  <atom:link href="https://codeblind.ai/docs/prerequisite-knowledge/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-  </channel>
-</rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Prerequisite Knowledge</title><link>http://localhost:1313/docs/prerequisite-knowledge/</link><description>Recent content in Prerequisite Knowledge on</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="http://localhost:1313/docs/prerequisite-knowledge/index.xml" rel="self" type="application/rss+xml"/></channel></rss>

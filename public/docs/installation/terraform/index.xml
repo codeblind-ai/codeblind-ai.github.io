@@ -1,266 +1,197 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title> – Deploy Kubernetes cluster and install Code Blind using Terraform</title>
-    <link>https://codeblind.ai/docs/installation/terraform/</link>
-    <description>Recent content in Deploy Kubernetes cluster and install Code Blind using Terraform on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    
-	  <atom:link href="https://codeblind.ai/docs/installation/terraform/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Installing Code Blind on Google Kubernetes Engine using Terraform</title>
-      <link>https://codeblind.ai/docs/installation/terraform/gke/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/installation/terraform/gke/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
-&lt;p&gt;Take the following steps to enable the Kubernetes Engine API:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Visit the &lt;a href=&#34;https://console.cloud.google.com/kubernetes/list&#34;&gt;Kubernetes Engine&lt;/a&gt; page in the Google Cloud Platform Console.&lt;/li&gt;
-&lt;li&gt;Create or select a project.&lt;/li&gt;
-&lt;li&gt;Wait for the API and related services to be enabled. This can take several minutes.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://support.google.com/cloud/answer/6293499#enable-billing&#34;&gt;Enable billing&lt;/a&gt; for your project.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;If you are not an existing GCP user, you may be able to enroll for a $300 US &lt;a href=&#34;https://cloud.google.com/free/&#34;&gt;Free Trial&lt;/a&gt; credit.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;choosing-a-shell&#34;&gt;Choosing a shell&lt;/h3&gt;
-&lt;p&gt;To complete this quickstart, we can use either &lt;a href=&#34;https://cloud.google.com/shell/&#34;&gt;Google Cloud Shell&lt;/a&gt; or a local shell.&lt;/p&gt;
-&lt;p&gt;Google Cloud Shell is a shell environment for managing resources hosted on Google Cloud Platform (GCP). Cloud Shell comes preinstalled with the &lt;a href=&#34;https://cloud.google.com/sdk/gcloud/&#34;&gt;gcloud&lt;/a&gt; and &lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/&#34;&gt;kubectl&lt;/a&gt; command-line tools. &lt;code&gt;gcloud&lt;/code&gt; provides the primary command-line interface for GCP, and &lt;code&gt;kubectl&lt;/code&gt; provides the command-line interface for running commands against Kubernetes clusters.&lt;/p&gt;
-&lt;p&gt;If you prefer using your local shell, you must install the gcloud and kubectl command-line tools in your environment.&lt;/p&gt;
-&lt;h4 id=&#34;cloud-shell&#34;&gt;Cloud shell&lt;/h4&gt;
-&lt;p&gt;To launch Cloud Shell, perform the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Go to &lt;a href=&#34;https://console.cloud.google.com/home/dashboard&#34;&gt;Google Cloud Platform Console&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;From the top-right corner of the console, click the
-&lt;strong&gt;Activate Google Cloud Shell&lt;/strong&gt; button: &lt;img alt=&#34;cloud shell&#34; src=&#34;../../../../images/cloud-shell.png&#34;&gt;&lt;/li&gt;
-&lt;li&gt;A Cloud Shell session opens inside a frame at the bottom of the console. Use this shell to run &lt;code&gt;gcloud&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt; commands.&lt;/li&gt;
-&lt;li&gt;Set a compute zone in your geographical region with the following command. The compute zone will be something like &lt;code&gt;us-west1-a&lt;/code&gt;. A full list can be found &lt;a href=&#34;https://cloud.google.com/compute/docs/regions-zones/#available&#34;&gt;here&lt;/a&gt;.
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud config &lt;span style=&#34;color:#204a87&#34;&gt;set&lt;/span&gt; compute/zone &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;COMPUTE_ZONE&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;local-shell&#34;&gt;Local shell&lt;/h4&gt;
-&lt;p&gt;To install &lt;code&gt;gcloud&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt;, perform the following steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://cloud.google.com/sdk/docs/quickstarts&#34;&gt;Install the Google Cloud SDK&lt;/a&gt;, which includes the &lt;code&gt;gcloud&lt;/code&gt; command-line tool.&lt;/li&gt;
-&lt;li&gt;Initialize some default configuration by running the following command.
-&lt;ul&gt;
-&lt;li&gt;When asked &lt;code&gt;Do you want to configure a default Compute Region and Zone? (Y/n)?&lt;/code&gt;, enter &lt;code&gt;Y&lt;/code&gt; and choose a zone in your geographical region of choice.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;Install the &lt;code&gt;kubectl&lt;/code&gt; command-line tool by running the following command:
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud components install kubectl
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
-&lt;p&gt;An example configuration can be found here:
-
-&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;Terraform configuration with Code Blind submodule&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Copy this file into a local directory where you will execute the terraform commands.&lt;/p&gt;
-&lt;p&gt;The GKE cluster created from the example configuration will contain 3 Node Pools:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;default&amp;quot;&lt;/code&gt; node pool with &lt;code&gt;&amp;quot;game-server&amp;quot;&lt;/code&gt; tag, containing 4 nodes.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;agones-system&amp;quot;&lt;/code&gt; node pool for Code Blind Controller.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;quot;agones-metrics&amp;quot;&lt;/code&gt; for monitoring and metrics collecting purpose.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Configurable parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;project - your Google Cloud Project ID (required)&lt;/li&gt;
-&lt;li&gt;name - the name of the GKE cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href=&#34;https://agones.dev/chart/stable&#34;&gt;Helm repository&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;machine_type - machine type for hosting game servers (default is &amp;ldquo;e2-standard-4&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;enable_image_streaming - whether or not to enable image streaming for the &lt;code&gt;&amp;quot;default&amp;quot;&lt;/code&gt; node pool (default is true)&lt;/li&gt;
-&lt;li&gt;zone - (Deprecated, use location) the name of the &lt;a href=&#34;https://cloud.google.com/compute/docs/regions-zones&#34;&gt;zone&lt;/a&gt; you want your cluster to be
-created in (default is &amp;ldquo;us-west1-c&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;network - the name of the VPC network you want your cluster and firewall rules to be connected to (default is &amp;ldquo;default&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;subnetwork - the name of the subnetwork in which the cluster&amp;rsquo;s instances are launched. (required when using non default network)&lt;/li&gt;
-&lt;li&gt;log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code&gt;[&amp;quot;default&amp;quot;]&lt;/code&gt;). For example &lt;code&gt;[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li&gt;
-&lt;li&gt;location - the name of the &lt;a href=&#34;https://cloud.google.com/compute/docs/regions-zones&#34;&gt;location&lt;/a&gt; you want your cluster  to be created in (default is &amp;ldquo;us-west1-c&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;autoscale - whether you want to enable autoscale for the gameserver nodepool (default is false)&lt;/li&gt;
-&lt;li&gt;min_node_count - the minimum number of nodes for a nodepool when autoscale is enabled (default is &amp;ldquo;1&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;max_node_count - the maximum number of nodes for a nodepool when autoscale is enabled (default is &amp;ldquo;5&amp;rdquo;)&lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-
-    &lt;p&gt;On the lines that read &lt;code&gt;source = &amp;quot;git::https://github.com/googleforgames/agones.git//install/terraform/modules/gke/?ref=main&amp;quot;&lt;/code&gt;
-make sure to change &lt;code&gt;?ref=main&lt;/code&gt; to match your targeted Code Blind release, as Terraform modules can change between
-releases.&lt;/p&gt;
-&lt;p&gt;For example, if you are targeting release-1.38.0, then you will want to have
-&lt;code&gt;source = &amp;quot;git::https://github.com/googleforgames/agones.git//install/terraform/modules/gke/?ref=release-1.38.0&amp;quot;&lt;/code&gt;
-as your source.&lt;/p&gt;
-
-
-&lt;/div&gt;
-
-&lt;h3 id=&#34;creating-the-cluster&#34;&gt;Creating the cluster&lt;/h3&gt;
-&lt;p&gt;In the directory where you created &lt;code&gt;module.tf&lt;/code&gt;, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This will cause terraform to clone the Code Blind repository and use the &lt;code&gt;./install/terraform&lt;/code&gt; folder as the starting point of
-the Code Blind submodule, which contains all necessary Terraform configuration files.&lt;/p&gt;
-&lt;p&gt;Next, make sure that you can authenticate using gcloud:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud auth application-default login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;option-1-creating-the-cluster-in-the-default-vpc&#34;&gt;Option 1: Creating the cluster in the default VPC&lt;/h4&gt;
-&lt;p&gt;To create your GKE cluster in the default VPC just specify the project variable.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform apply -var &lt;span style=&#34;color:#000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;option-2-creating-the-cluster-in-a-custom-vpc&#34;&gt;Option 2: Creating the cluster in a custom VPC&lt;/h4&gt;
-&lt;p&gt;To create the cluster in a custom VPC you must specify the project, network and subnetwork variables.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform apply -var &lt;span style=&#34;color:#000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span&gt; -var &lt;span style=&#34;color:#000&#34;&gt;network&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;YOUR_NETWORK_NAME&amp;gt;&amp;#34;&lt;/span&gt; -var &lt;span style=&#34;color:#000&#34;&gt;subnetwork&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;YOUR_SUBNETWORK_NAME&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To verify that the cluster was created successfully, set up your kubectl credentials:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container clusters get-credentials --zone us-west1-c agones-terraform-example
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Then check that you have access to the Kubernetes cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get nodes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You should have 6 nodes in &lt;code&gt;Ready&lt;/code&gt; state.&lt;/p&gt;
-&lt;h3 id=&#34;uninstall-the-code-blind-and-delete-gke-cluster&#34;&gt;Uninstall the Code Blind and delete GKE cluster&lt;/h3&gt;
-&lt;p&gt;To delete all resources provisioned by Terraform:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform destroy -var &lt;span style=&#34;color:#000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://codeblind.ai/docs/installation/confirm/&#34;&gt;Confirm Code Blind is up and running&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Installing Code Blind on AWS Elastic Kubernetes Service using Terraform</title>
-      <link>https://codeblind.ai/docs/installation/terraform/eks/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/installation/terraform/eks/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
-&lt;p&gt;You can use Terraform to provision your Amazon EKS (Elastic Kubernetes Service) cluster and install Code Blind on it using the Helm Terraform provider.&lt;/p&gt;
-&lt;p&gt;An example of the EKS submodule config file can be found here:
-
-&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;Terraform configuration with Code Blind submodule&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Copy this file into a separate folder.&lt;/p&gt;
-&lt;p&gt;Configure your AWS CLI tool &lt;a href=&#34;https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html&#34;&gt;CLI configure&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws configure
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Initialise your terraform:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;creating-cluster&#34;&gt;Creating Cluster&lt;/h3&gt;
-&lt;p&gt;By editing &lt;code&gt;modules.tf&lt;/code&gt; you can change the parameters that you need to. For instance, the - &lt;code&gt;machine_type&lt;/code&gt; variable.&lt;/p&gt;
-&lt;p&gt;Configurable parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;cluster_name - the name of the EKS cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href=&#34;https://agones.dev/chart/stable&#34;&gt;Helm repository&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;machine_type - EC2 instance type for hosting game servers (default is &amp;ldquo;t2.large&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;region - the location of the cluster (default is &amp;ldquo;us-west-2&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code&gt;[&amp;quot;default&amp;quot;]&lt;/code&gt;). For example &lt;code&gt;[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Now you can create an EKS cluster and deploy Code Blind on EKS:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform apply &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;-var &lt;span style=&#34;color:#000&#34;&gt;agones_version&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;1.38.0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;After deploying the cluster with Code Blind, you can get or update your kubeconfig by using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws eks --region us-west-2 update-kubeconfig --name agones-cluster
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;With the following output:&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Added new context arn:aws:eks:us-west-2:601646756426:cluster/agones-cluster to /Users/user/.kube/config
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Switch &lt;code&gt;kubectl&lt;/code&gt; context to the recently created one:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl config use-context arn:aws:eks:us-west-2:601646756426:cluster/agones-cluster
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check that you are authenticated against the recently created Kubernetes cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get nodes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;uninstall-the-code-blind-and-delete-eks-cluster&#34;&gt;Uninstall the Code Blind and delete EKS cluster&lt;/h3&gt;
-&lt;p&gt;Run the following commands to delete all Terraform provisioned resources:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform destroy -target module.helm_agones.helm_release.agones -auto-approve &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sleep &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;60&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform destroy
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    There is an issue with the AWS Terraform provider:
-&lt;a href=&#34;https://github.com/terraform-providers/terraform-provider-aws/issues/9101&#34;&gt;https://github.com/terraform-providers/terraform-provider-aws/issues/9101&lt;/a&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Deploy Kubernetes cluster and install Code Blind using Terraform</title><link>http://localhost:1313/docs/installation/terraform/</link><description>Recent content in Deploy Kubernetes cluster and install Code Blind using Terraform on</description><generator>Hugo -- gohugo.io</generator><language>en</language><atom:link href="http://localhost:1313/docs/installation/terraform/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Installing Code Blind on Google Kubernetes Engine using Terraform</title><link>http://localhost:1313/docs/installation/terraform/gke/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/installation/terraform/gke/</guid><description>
+&lt;h2 id="before-you-begin">Before you begin&lt;/h2>
+&lt;p>Take the following steps to enable the Kubernetes Engine API:&lt;/p>
+&lt;ol>
+&lt;li>Visit the &lt;a href="https://console.cloud.google.com/kubernetes/list">Kubernetes Engine&lt;/a> page in the Google Cloud Platform Console.&lt;/li>
+&lt;li>Create or select a project.&lt;/li>
+&lt;li>Wait for the API and related services to be enabled. This can take several minutes.&lt;/li>
+&lt;li>&lt;a href="https://support.google.com/cloud/answer/6293499#enable-billing">Enable billing&lt;/a> for your project.&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>If you are not an existing GCP user, you may be able to enroll for a $300 US &lt;a href="https://cloud.google.com/free/">Free Trial&lt;/a> credit.&lt;/li>
+&lt;/ul>
+&lt;h3 id="choosing-a-shell">Choosing a shell&lt;/h3>
+&lt;p>To complete this quickstart, we can use either &lt;a href="https://cloud.google.com/shell/">Google Cloud Shell&lt;/a> or a local shell.&lt;/p>
+&lt;p>Google Cloud Shell is a shell environment for managing resources hosted on Google Cloud Platform (GCP). Cloud Shell comes preinstalled with the &lt;a href="https://cloud.google.com/sdk/gcloud/">gcloud&lt;/a> and &lt;a href="https://kubernetes.io/docs/reference/kubectl/">kubectl&lt;/a> command-line tools. &lt;code>gcloud&lt;/code> provides the primary command-line interface for GCP, and &lt;code>kubectl&lt;/code> provides the command-line interface for running commands against Kubernetes clusters.&lt;/p>
+&lt;p>If you prefer using your local shell, you must install the gcloud and kubectl command-line tools in your environment.&lt;/p>
+&lt;h4 id="cloud-shell">Cloud shell&lt;/h4>
+&lt;p>To launch Cloud Shell, perform the following steps:&lt;/p>
+&lt;ol>
+&lt;li>Go to &lt;a href="https://console.cloud.google.com/home/dashboard">Google Cloud Platform Console&lt;/a>&lt;/li>
+&lt;li>From the top-right corner of the console, click the
+&lt;strong>Activate Google Cloud Shell&lt;/strong> button: &lt;img alt="cloud shell" src="../../../../images/cloud-shell.png">&lt;/li>
+&lt;li>A Cloud Shell session opens inside a frame at the bottom of the console. Use this shell to run &lt;code>gcloud&lt;/code> and &lt;code>kubectl&lt;/code> commands.&lt;/li>
+&lt;li>Set a compute zone in your geographical region with the following command. The compute zone will be something like &lt;code>us-west1-a&lt;/code>. A full list can be found &lt;a href="https://cloud.google.com/compute/docs/regions-zones/#available">here&lt;/a>.
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcloud config &lt;span style="color:#204a87">set&lt;/span> compute/zone &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>COMPUTE_ZONE&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h4 id="local-shell">Local shell&lt;/h4>
+&lt;p>To install &lt;code>gcloud&lt;/code> and &lt;code>kubectl&lt;/code>, perform the following steps:&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://cloud.google.com/sdk/docs/quickstarts">Install the Google Cloud SDK&lt;/a>, which includes the &lt;code>gcloud&lt;/code> command-line tool.&lt;/li>
+&lt;li>Initialize some default configuration by running the following command.
+&lt;ul>
+&lt;li>When asked &lt;code>Do you want to configure a default Compute Region and Zone? (Y/n)?&lt;/code>, enter &lt;code>Y&lt;/code> and choose a zone in your geographical region of choice.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcloud init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>Install the &lt;code>kubectl&lt;/code> command-line tool by running the following command:
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcloud components install kubectl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>An example configuration can be found here:
+&lt;a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>Terraform configuration with Code Blind submodule&lt;/a>.&lt;/p>
+&lt;p>Copy this file into a local directory where you will execute the terraform commands.&lt;/p>
+&lt;p>The GKE cluster created from the example configuration will contain 3 Node Pools:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>&amp;quot;default&amp;quot;&lt;/code> node pool with &lt;code>&amp;quot;game-server&amp;quot;&lt;/code> tag, containing 4 nodes.&lt;/li>
+&lt;li>&lt;code>&amp;quot;agones-system&amp;quot;&lt;/code> node pool for Code Blind Controller.&lt;/li>
+&lt;li>&lt;code>&amp;quot;agones-metrics&amp;quot;&lt;/code> for monitoring and metrics collecting purpose.&lt;/li>
+&lt;/ul>
+&lt;p>Configurable parameters:&lt;/p>
+&lt;ul>
+&lt;li>project - your Google Cloud Project ID (required)&lt;/li>
+&lt;li>name - the name of the GKE cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li>
+&lt;li>agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href="https://agones.dev/chart/stable">Helm repository&lt;/a>)&lt;/li>
+&lt;li>machine_type - machine type for hosting game servers (default is &amp;ldquo;e2-standard-4&amp;rdquo;)&lt;/li>
+&lt;li>node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li>
+&lt;li>enable_image_streaming - whether or not to enable image streaming for the &lt;code>&amp;quot;default&amp;quot;&lt;/code> node pool (default is true)&lt;/li>
+&lt;li>zone - (Deprecated, use location) the name of the &lt;a href="https://cloud.google.com/compute/docs/regions-zones">zone&lt;/a> you want your cluster to be
+created in (default is &amp;ldquo;us-west1-c&amp;rdquo;)&lt;/li>
+&lt;li>network - the name of the VPC network you want your cluster and firewall rules to be connected to (default is &amp;ldquo;default&amp;rdquo;)&lt;/li>
+&lt;li>subnetwork - the name of the subnetwork in which the cluster&amp;rsquo;s instances are launched. (required when using non default network)&lt;/li>
+&lt;li>log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li>
+&lt;li>feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li>
+&lt;li>gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code>[&amp;quot;default&amp;quot;]&lt;/code>). For example &lt;code>[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code>&lt;/li>
+&lt;li>force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li>
+&lt;li>location - the name of the &lt;a href="https://cloud.google.com/compute/docs/regions-zones">location&lt;/a> you want your cluster to be created in (default is &amp;ldquo;us-west1-c&amp;rdquo;)&lt;/li>
+&lt;li>autoscale - whether you want to enable autoscale for the gameserver nodepool (default is false)&lt;/li>
+&lt;li>min_node_count - the minimum number of nodes for a nodepool when autoscale is enabled (default is &amp;ldquo;1&amp;rdquo;)&lt;/li>
+&lt;li>max_node_count - the maximum number of nodes for a nodepool when autoscale is enabled (default is &amp;ldquo;5&amp;rdquo;)&lt;/li>
+&lt;/ul>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+&lt;p>On the lines that read &lt;code>source = &amp;quot;git::https://github.com/googleforgames/agones.git//install/terraform/modules/gke/?ref=main&amp;quot;&lt;/code>
+make sure to change &lt;code>?ref=main&lt;/code> to match your targeted Code Blind release, as Terraform modules can change between
+releases.&lt;/p>
+&lt;p>For example, if you are targeting release-1.38.0, then you will want to have
+&lt;code>source = &amp;quot;git::https://github.com/googleforgames/agones.git//install/terraform/modules/gke/?ref=release-1.38.0&amp;quot;&lt;/code>
+as your source.&lt;/p>
+&lt;/div>
+&lt;h3 id="creating-the-cluster">Creating the cluster&lt;/h3>
+&lt;p>In the directory where you created &lt;code>module.tf&lt;/code>, run:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>This will cause terraform to clone the Code Blind repository and use the &lt;code>./install/terraform&lt;/code> folder as the starting point of
+the Code Blind submodule, which contains all necessary Terraform configuration files.&lt;/p>
+&lt;p>Next, make sure that you can authenticate using gcloud:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcloud auth application-default login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="option-1-creating-the-cluster-in-the-default-vpc">Option 1: Creating the cluster in the default VPC&lt;/h4>
+&lt;p>To create your GKE cluster in the default VPC just specify the project variable.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform apply -var &lt;span style="color:#000">project&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="option-2-creating-the-cluster-in-a-custom-vpc">Option 2: Creating the cluster in a custom VPC&lt;/h4>
+&lt;p>To create the cluster in a custom VPC you must specify the project, network and subnetwork variables.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform apply -var &lt;span style="color:#000">project&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span> -var &lt;span style="color:#000">network&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;YOUR_NETWORK_NAME&amp;gt;&amp;#34;&lt;/span> -var &lt;span style="color:#000">subnetwork&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;YOUR_SUBNETWORK_NAME&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>To verify that the cluster was created successfully, set up your kubectl credentials:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>gcloud container clusters get-credentials --zone us-west1-c agones-terraform-example
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Then check that you have access to the Kubernetes cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>You should have 6 nodes in &lt;code>Ready&lt;/code> state.&lt;/p>
+&lt;h3 id="uninstall-the-code-blind-and-delete-gke-cluster">Uninstall the Code Blind and delete GKE cluster&lt;/h3>
+&lt;p>To delete all resources provisioned by Terraform:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform destroy -var &lt;span style="color:#000">project&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;YOUR_GCP_ProjectID&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://localhost:1313/docs/installation/confirm/">Confirm Code Blind is up and running&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Installing Code Blind on AWS Elastic Kubernetes Service using Terraform</title><link>http://localhost:1313/docs/installation/terraform/eks/</link><pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/installation/terraform/eks/</guid><description>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>You can use Terraform to provision your Amazon EKS (Elastic Kubernetes Service) cluster and install Code Blind on it using the Helm Terraform provider.&lt;/p>
+&lt;p>An example of the EKS submodule config file can be found here:
+&lt;a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>Terraform configuration with Code Blind submodule&lt;/a>&lt;/p>
+&lt;p>Copy this file into a separate folder.&lt;/p>
+&lt;p>Configure your AWS CLI tool &lt;a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">CLI configure&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>aws configure
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Initialise your terraform:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="creating-cluster">Creating Cluster&lt;/h3>
+&lt;p>By editing &lt;code>modules.tf&lt;/code> you can change the parameters that you need to. For instance, the - &lt;code>machine_type&lt;/code> variable.&lt;/p>
+&lt;p>Configurable parameters:&lt;/p>
+&lt;ul>
+&lt;li>cluster_name - the name of the EKS cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li>
+&lt;li>agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href="https://agones.dev/chart/stable">Helm repository&lt;/a>)&lt;/li>
+&lt;li>machine_type - EC2 instance type for hosting game servers (default is &amp;ldquo;t2.large&amp;rdquo;)&lt;/li>
+&lt;li>region - the location of the cluster (default is &amp;ldquo;us-west-2&amp;rdquo;)&lt;/li>
+&lt;li>node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li>
+&lt;li>log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li>
+&lt;li>feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li>
+&lt;li>gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code>[&amp;quot;default&amp;quot;]&lt;/code>). For example &lt;code>[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code>&lt;/li>
+&lt;li>force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li>
+&lt;/ul>
+&lt;p>Now you can create an EKS cluster and deploy Code Blind on EKS:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform apply &lt;span style="color:#ce5c00;font-weight:bold">[&lt;/span>-var &lt;span style="color:#000">agones_version&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;1.38.0&amp;#34;&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>After deploying the cluster with Code Blind, you can get or update your kubeconfig by using:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>aws eks --region us-west-2 update-kubeconfig --name agones-cluster
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With the following output:&lt;/p>
+&lt;pre tabindex="0">&lt;code>Added new context arn:aws:eks:us-west-2:601646756426:cluster/agones-cluster to /Users/user/.kube/config
+&lt;/code>&lt;/pre>&lt;p>Switch &lt;code>kubectl&lt;/code> context to the recently created one:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl config use-context arn:aws:eks:us-west-2:601646756426:cluster/agones-cluster
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Check that you are authenticated against the recently created Kubernetes cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uninstall-the-code-blind-and-delete-eks-cluster">Uninstall the Code Blind and delete EKS cluster&lt;/h3>
+&lt;p>Run the following commands to delete all Terraform provisioned resources:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform destroy -target module.helm_agones.helm_release.agones -auto-approve &lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&amp;amp;&lt;/span> sleep &lt;span style="color:#0000cf;font-weight:bold">60&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>terraform destroy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+There is an issue with the AWS Terraform provider:
+&lt;a href="https://github.com/terraform-providers/terraform-provider-aws/issues/9101">https://github.com/terraform-providers/terraform-provider-aws/issues/9101&lt;/a>
 Due to this issue you should remove helm release first (as stated above),
-otherwise &lt;code&gt;terraform destroy&lt;/code&gt; will timeout and never succeed.
+otherwise &lt;code>terraform destroy&lt;/code> will timeout and never succeed.
 Remove all created resources manually in that case, namely: 3 Auto Scaling groups, EKS cluster, and a VPC with all dependent resources.
-
-&lt;/div&gt;
-
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Installing Code Blind on Azure Kubernetes Service using Terraform</title>
-      <link>https://codeblind.ai/docs/installation/terraform/aks/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/installation/terraform/aks/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
-&lt;p&gt;Install &lt;code&gt;az&lt;/code&gt; utility by following &lt;a href=&#34;https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&#34;&gt;these instructions&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The example of AKS submodule configuration could be found here:
-
-&lt;a href=&#34;https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/&#34; target=&#34;_blank&#34; data-proofer-ignore&gt;Terraform configuration with Code Blind submodule&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Copy &lt;code&gt;module.tf&lt;/code&gt; file into a separate folder.&lt;/p&gt;
-&lt;p&gt;Log in to Azure CLI:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az login
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Configure your terraform:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Create a service principal and configure its access to Azure resources:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az ad sp create-for-rbac
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now you can deploy your cluster (use values from the above command output):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform apply -var &lt;span style=&#34;color:#000&#34;&gt;client_id&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;appId&amp;gt;&amp;#34;&lt;/span&gt; -var &lt;span style=&#34;color:#000&#34;&gt;client_secret&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;&amp;lt;password&amp;gt;&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Once you created all resources on AKS you can get the credentials so that you can use &lt;code&gt;kubectl&lt;/code&gt; to configure your cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az aks get-credentials --resource-group agonesRG --name test-cluster
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check that you have access to the Kubernetes cluster:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;kubectl get nodes
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Configurable parameters:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;cluster_name - the name of the AKS cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href=&#34;https://agones.dev/chart/stable&#34;&gt;Helm repository&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;machine_type - node machine type for hosting game servers (default is &amp;ldquo;Standard_D2_v2&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;disk_size - disk size of the node&lt;/li&gt;
-&lt;li&gt;region - the location of the cluster&lt;/li&gt;
-&lt;li&gt;node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li&gt;
-&lt;li&gt;gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code&gt;[&amp;quot;default&amp;quot;]&lt;/code&gt;). For example &lt;code&gt;[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;uninstall-the-code-blind-and-delete-aks-cluster&#34;&gt;Uninstall the Code Blind and delete AKS cluster&lt;/h2&gt;
-&lt;p&gt;Run next command to delete all Terraform provisioned resources:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;terraform destroy
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
-&lt;p&gt;Details on how you can authenticate your AKS terraform provider using official &lt;a href=&#34;https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret&#34;&gt;instructions&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://codeblind.ai/docs/installation/confirm/&#34;&gt;Confirm Code Blind is up and running&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;/div></description></item><item><title>Docs: Installing Code Blind on Azure Kubernetes Service using Terraform</title><link>http://localhost:1313/docs/installation/terraform/aks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/installation/terraform/aks/</guid><description>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;p>Install &lt;code>az&lt;/code> utility by following &lt;a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest">these instructions&lt;/a>.&lt;/p>
+&lt;p>The example of AKS submodule configuration could be found here:
+&lt;a href="https://github.com/josephbarnett/codeblind.ai/blob/release-1.38.0/" target="_blank" data-proofer-ignore>Terraform configuration with Code Blind submodule&lt;/a>&lt;/p>
+&lt;p>Copy &lt;code>module.tf&lt;/code> file into a separate folder.&lt;/p>
+&lt;p>Log in to Azure CLI:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>az login
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configure your terraform:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Create a service principal and configure its access to Azure resources:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>az ad sp create-for-rbac
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Now you can deploy your cluster (use values from the above command output):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform apply -var &lt;span style="color:#000">client_id&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;appId&amp;gt;&amp;#34;&lt;/span> -var &lt;span style="color:#000">client_secret&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>&lt;span style="color:#4e9a06">&amp;#34;&amp;lt;password&amp;gt;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Once you created all resources on AKS you can get the credentials so that you can use &lt;code>kubectl&lt;/code> to configure your cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>az aks get-credentials --resource-group agonesRG --name test-cluster
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Check that you have access to the Kubernetes cluster:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Configurable parameters:&lt;/p>
+&lt;ul>
+&lt;li>log_level - possible values: Fatal, Error, Warn, Info, Debug (default is &amp;ldquo;info&amp;rdquo;)&lt;/li>
+&lt;li>cluster_name - the name of the AKS cluster (default is &amp;ldquo;agones-terraform-example&amp;rdquo;)&lt;/li>
+&lt;li>agones_version - the version of agones to install (an empty string, which is the default, is the latest version from the &lt;a href="https://agones.dev/chart/stable">Helm repository&lt;/a>)&lt;/li>
+&lt;li>machine_type - node machine type for hosting game servers (default is &amp;ldquo;Standard_D2_v2&amp;rdquo;)&lt;/li>
+&lt;li>disk_size - disk size of the node&lt;/li>
+&lt;li>region - the location of the cluster&lt;/li>
+&lt;li>node_count - count of game server nodes for the default node pool (default is &amp;ldquo;4&amp;rdquo;)&lt;/li>
+&lt;li>feature_gates - a list of alpha and beta version features to enable. For example, &amp;ldquo;PlayerTracking=true&amp;amp;ContainerPortAllocation=true&amp;rdquo;&lt;/li>
+&lt;li>gameserver_minPort - the lower bound of the port range which gameservers will listen on (default is &amp;ldquo;7000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_maxPort - the upper bound of the port range which gameservers will listen on (default is &amp;ldquo;8000&amp;rdquo;)&lt;/li>
+&lt;li>gameserver_namespaces - a list of namespaces which will be used to run gameservers (default is &lt;code>[&amp;quot;default&amp;quot;]&lt;/code>). For example &lt;code>[&amp;quot;default&amp;quot;, &amp;quot;xbox-gameservers&amp;quot;, &amp;quot;mobile-gameservers&amp;quot;]&lt;/code>&lt;/li>
+&lt;li>force_update - whether or not to force the replacement/update of resource (default is true, false may be required to prevent immutability errors when updating the configuration)&lt;/li>
+&lt;/ul>
+&lt;h2 id="uninstall-the-code-blind-and-delete-aks-cluster">Uninstall the Code Blind and delete AKS cluster&lt;/h2>
+&lt;p>Run next command to delete all Terraform provisioned resources:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>terraform destroy
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;p>Details on how you can authenticate your AKS terraform provider using official &lt;a href="https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/service_principal_client_secret">instructions&lt;/a>.&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://localhost:1313/docs/installation/confirm/">Confirm Code Blind is up and running&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

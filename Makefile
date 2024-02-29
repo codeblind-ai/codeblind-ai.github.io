@@ -19,7 +19,7 @@ serve: ## starts the development server
 
 clean: ## removes all build artifacts
 	@npm run clean
-	@rm -rf node_modules public resources .hugo_build.lock package-lock.json
+	@rm -rf node_modules resources .hugo_build.lock package-lock.json
 .PHONY: clean
 tools:
 .PHONY: tools
