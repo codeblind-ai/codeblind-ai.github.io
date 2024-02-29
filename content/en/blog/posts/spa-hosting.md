@@ -197,13 +197,13 @@ This work will happen in two parts, one phase on [Namecheap][namecheap] and the 
   
   2. **Select Domain List from the left sidebar and click on the Manage button next to your domain name:**
   
-  <img src="../../assets/images/blogs/spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+  <img src="./spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
   
   3. **Navigate to the Advanced DNS tab and click on the Add New Record button:**
   
-  <img src="../../assets/images/blogs/spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+  <img src="./spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
   
-  4. **Add the following records to your domain:**
+  1. **Add the following records to your domain:**
 
   <table>
     <tr>
