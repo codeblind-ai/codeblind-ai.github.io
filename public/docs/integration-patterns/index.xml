@@ -1,323 +1,207 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title> – Common Integration Patterns</title>
-    <link>https://codeblind.ai/docs/integration-patterns/</link>
-    <description>Recent content in Common Integration Patterns on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate>
-    
-	  <atom:link href="https://codeblind.ai/docs/integration-patterns/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-      
-        
-      
-    
-    
-    <item>
-      <title>Docs: Matchmaker requests a GameServer from a Fleet</title>
-      <link>https://codeblind.ai/docs/integration-patterns/allocation-from-fleet/</link>
-      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/allocation-from-fleet/</guid>
-      <description>
-        
-        
-        &lt;p&gt;&lt;img alt=&#34;Allocated Lifecycle Sequence Diagram&#34; src=&#34;../../../diagrams/gameserver-lifecycle.puml.png&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;sample-gameserverallocation&#34;&gt;Sample &lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;Since Code Blind will automatically add the label &lt;code&gt;agones.dev/fleet&lt;/code&gt; to a &lt;code&gt;GameServer&lt;/code&gt; of a given &lt;code&gt;Fleet&lt;/code&gt;, we can use that
-label selector to target a specific &lt;code&gt;Fleet&lt;/code&gt; by name. In this instance, we are targeting the &lt;code&gt;Fleet&lt;/code&gt; &lt;code&gt;xonotic&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GameServerAllocation&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;required&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;xonotic&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Read the various specification references.
-&lt;ul&gt;
-&lt;li&gt;Review the &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserver/&#34;&gt;GameServer&lt;/a&gt; spec.&lt;/li&gt;
-&lt;li&gt;Review the &lt;a href=&#34;https://codeblind.ai/docs/reference/fleet/&#34;&gt;Fleet&lt;/a&gt; spec.&lt;/li&gt;
-&lt;li&gt;Review the &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserverallocation/&#34;&gt;GameServerAllocation&lt;/a&gt; spec.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Review the specifics of &lt;a href=&#34;https://codeblind.ai/docs/guides/health-checking/&#34;&gt;Health Checking&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;See all the commands the &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/&#34;&gt;Client SDK&lt;/a&gt; provides - we only show a few here!&lt;/li&gt;
-&lt;li&gt;Check out the &lt;a href=&#34;https://codeblind.ai/docs/advanced/allocator-service/&#34;&gt;Allocator Service&lt;/a&gt; as a richer alternative to &lt;code&gt;GameServerAllocation&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;If you aren&amp;rsquo;t familiar with the term &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pod&lt;/a&gt;, this should provide a reference.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Matchmaker requires game server process registration</title>
-      <link>https://codeblind.ai/docs/integration-patterns/matchmaker-registration/</link>
-      <pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/matchmaker-registration/</guid>
-      <description>
-        
-        
-        &lt;p&gt;In this scenario, the &lt;code&gt;GameServer&lt;/code&gt; process will need to self Allocate when informed by the matchmaker that players
-are being sent to them.&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;Reserved Lifecycle Sequence Diagram&#34; src=&#34;../../../diagrams/gameserver-reserved.puml.png&#34;&gt;&lt;/p&gt;
-
-
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-
-    This does relinquish control over how &lt;code&gt;GameServers&lt;/code&gt; are packed across the cluster to the external matchmaker. It is likely
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>– Common Integration Patterns</title><link>http://localhost:1313/docs/integration-patterns/</link><description>Recent content in Common Integration Patterns on</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 27 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/docs/integration-patterns/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Matchmaker requests a GameServer from a Fleet</title><link>http://localhost:1313/docs/integration-patterns/allocation-from-fleet/</link><pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/allocation-from-fleet/</guid><description>
+&lt;p>&lt;img alt="Allocated Lifecycle Sequence Diagram" src="../../../diagrams/gameserver-lifecycle.puml.png">&lt;/p>
+&lt;h2 id="sample-gameserverallocation">Sample &lt;code>GameServerAllocation&lt;/code>&lt;/h2>
+&lt;p>Since Code Blind will automatically add the label &lt;code>agones.dev/fleet&lt;/code> to a &lt;code>GameServer&lt;/code> of a given &lt;code>Fleet&lt;/code>, we can use that
+label selector to target a specific &lt;code>Fleet&lt;/code> by name. In this instance, we are targeting the &lt;code>Fleet&lt;/code> &lt;code>xonotic&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">GameServerAllocation&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">xonotic&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="next-steps">Next Steps:&lt;/h2>
+&lt;ul>
+&lt;li>Read the various specification references.
+&lt;ul>
+&lt;li>Review the &lt;a href="http://localhost:1313/docs/reference/gameserver/">GameServer&lt;/a> spec.&lt;/li>
+&lt;li>Review the &lt;a href="http://localhost:1313/docs/reference/fleet/">Fleet&lt;/a> spec.&lt;/li>
+&lt;li>Review the &lt;a href="http://localhost:1313/docs/reference/gameserverallocation/">GameServerAllocation&lt;/a> spec.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Review the specifics of &lt;a href="http://localhost:1313/docs/guides/health-checking/">Health Checking&lt;/a>.&lt;/li>
+&lt;li>See all the commands the &lt;a href="http://localhost:1313/docs/guides/client-sdks/">Client SDK&lt;/a> provides - we only show a few here!&lt;/li>
+&lt;li>Check out the &lt;a href="http://localhost:1313/docs/advanced/allocator-service/">Allocator Service&lt;/a> as a richer alternative to &lt;code>GameServerAllocation&lt;/code>.&lt;/li>
+&lt;li>If you aren&amp;rsquo;t familiar with the term &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod&lt;/a>, this should provide a reference.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Matchmaker requires game server process registration</title><link>http://localhost:1313/docs/integration-patterns/matchmaker-registration/</link><pubDate>Tue, 27 Jul 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/matchmaker-registration/</guid><description>
+&lt;p>In this scenario, the &lt;code>GameServer&lt;/code> process will need to self Allocate when informed by the matchmaker that players
+are being sent to them.&lt;/p>
+&lt;p>&lt;img alt="Reserved Lifecycle Sequence Diagram" src="../../../diagrams/gameserver-reserved.puml.png">&lt;/p>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+This does relinquish control over how &lt;code>GameServers&lt;/code> are packed across the cluster to the external matchmaker. It is likely
 it will not do as good a job at packing and scaling as Code Blind.
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Read the various references, including the
-&lt;a href=&#34;https://codeblind.ai/docs/reference/gameserver/&#34;&gt;GameServer&lt;/a&gt; and &lt;a href=&#34;https://codeblind.ai/docs/reference/fleet/&#34;&gt;Fleet&lt;/a&gt;
-reference materials.&lt;/li&gt;
-&lt;li&gt;Review the specifics of &lt;a href=&#34;https://codeblind.ai/docs/guides/health-checking/&#34;&gt;Health Checking&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;See all the commands the &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/&#34;&gt;Client SDK&lt;/a&gt; provides - we only show a
-few here!&lt;/li&gt;
-&lt;li&gt;If you aren&amp;rsquo;t familiar with the term &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pod&lt;/a&gt;, this should
-provide a reference.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Canary Testing a new Fleet</title>
-      <link>https://codeblind.ai/docs/integration-patterns/canary-testing/</link>
-      <pubDate>Tue, 27 Jul 2021 23:49:14 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/canary-testing/</guid>
-      <description>
-        
-        
-        &lt;p&gt;To &lt;a href=&#34;https://martinfowler.com/bliki/CanaryRelease.html&#34;&gt;canary release/test&lt;/a&gt; a new &lt;code&gt;Fleet&lt;/code&gt;,
-we can run a small, fixed size &lt;code&gt;Fleet&lt;/code&gt; of the new version of our GameServer, while also running the current stable
-production version.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Allocations&lt;/code&gt; can then &lt;code&gt;prefer&lt;/code&gt; to come from the canary &lt;code&gt;Fleet&lt;/code&gt;, but if all &lt;code&gt;GameServers&lt;/code&gt; are already allocated from the
-canary &lt;code&gt;Fleet&lt;/code&gt;, players will be allocated to the current stable Fleets.&lt;/p&gt;
-&lt;p&gt;Over time, if the monitoring of those playing on the canary &lt;code&gt;Fleet&lt;/code&gt; is working as expected, the size of the canary
-&lt;code&gt;Fleet&lt;/code&gt; can be grown until you feel confident in its stability.&lt;/p&gt;
-&lt;p&gt;Once confidence has been achieved, the configuration for stable &lt;code&gt;Fleet&lt;/code&gt; can be updated to match the canary (usually
-triggering a &lt;a href=&#34;https://codeblind.ai/docs/guides/fleet-updates/#rolling-update-strategy&#34;&gt;rolling update&lt;/a&gt;). The
-canary &lt;code&gt;Fleet&lt;/code&gt; can then be deleted or updated to a new testing version of the game server process.&lt;/p&gt;
-&lt;a href=&#34;../../../diagrams/canary-testing.puml.png&#34; target=&#34;_blank&#34;&gt;
-&lt;img src=&#34;../../../diagrams/canary-testing.puml.png&#34; alt=&#34;Canary Fleet Diagram&#34; /&gt;
-&lt;/a&gt;
-&lt;h2 id=&#34;sample-gameserverallocation&#34;&gt;Sample &lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;To ensure we don&amp;rsquo;t have to change the Allocation system every time we have a canary &lt;code&gt;Fleet&lt;/code&gt;, in this example, we will
-state that in our system, the label &lt;code&gt;canary: &amp;quot;true&amp;quot;&lt;/code&gt; will be added to any canary &lt;code&gt;Fleet&lt;/code&gt; in the cluster.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GameServerAllocation&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;preferred&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;canary&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;required&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;stable&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The above &lt;code&gt;Allocation&lt;/code&gt; will then preferentially choose the &lt;code&gt;Fleet&lt;/code&gt; that has &lt;code&gt;GameServers&lt;/code&gt; with the label and key
-value of&lt;code&gt;canary:&amp;quot;true&amp;quot;&lt;/code&gt;, if it exists, and has remaining Ready &lt;code&gt;GameServers&lt;/code&gt;, and if not, will apply the
-&lt;code&gt;Allocation&lt;/code&gt; to the &lt;code&gt;Fleet&lt;/code&gt; named &amp;ldquo;stable&amp;rdquo;.&lt;/p&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Read about different &lt;a href=&#34;https://codeblind.ai/docs/guides/fleet-updates/&#34;&gt;&lt;code&gt;Fleet&lt;/code&gt; update&lt;/a&gt; options and strategies that are
-available.&lt;/li&gt;
-&lt;li&gt;Have a look at all the options available on a
-&lt;a href=&#34;https://codeblind.ai/docs/reference/gameserverallocation/&#34;&gt;&lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Review the &lt;a href=&#34;https://codeblind.ai/docs/reference/fleet/&#34;&gt;&lt;code&gt;Fleet&lt;/code&gt; reference&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Reusing Allocated GameServers for more than one game session</title>
-      <link>https://codeblind.ai/docs/integration-patterns/reusing-gameservers/</link>
-      <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/reusing-gameservers/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Having a &lt;code&gt;GameServer&lt;/code&gt; terminate after a single player session is better for packing and optimisation of
-infrastructure usage, as well as safety to ensure the process returns to an absolute zero state.&lt;/p&gt;
-&lt;p&gt;However, depending on the &lt;code&gt;GameServer&lt;/code&gt; startup time, or other factors there may be reasons you wish to reuse a
-&lt;code&gt;GameServer&lt;/code&gt; for &lt;em&gt;n&lt;/em&gt; number of sessions before finally shutting it down.&lt;/p&gt;
-&lt;p&gt;The &amp;ldquo;magic trick&amp;rdquo; to this is knowing that the &lt;code&gt;GameServer&lt;/code&gt; process can call
-&lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/#ready&#34;&gt;&lt;code&gt;SDK.Ready()&lt;/code&gt;&lt;/a&gt; to return to a &lt;code&gt;Ready&lt;/code&gt;
-state after the &lt;code&gt;GameServer&lt;/code&gt; has been allocated.&lt;/p&gt;
-&lt;p&gt;It is then up to the game developer to ensure that the game server process returns to a zero state once a game
-session has been completed.&lt;/p&gt;
-&lt;a href=&#34;../../../diagrams/reusing-gameservers.puml.png&#34; target=&#34;_blank&#34;&gt;
-&lt;img src=&#34;../../../diagrams/reusing-gameservers.puml.png&#34; alt=&#34;Reserved Lifecycle Sequence Diagram&#34; /&gt;
-&lt;/a&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Have a look at all commands the &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/&#34;&gt;Client SDK&lt;/a&gt; provides.&lt;/li&gt;
-&lt;li&gt;If you aren&amp;rsquo;t familiar with the term &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pod&lt;/a&gt;, this shouldw
-provide a reference.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: High Density GameServers</title>
-      <link>https://codeblind.ai/docs/integration-patterns/high-density-gameservers/</link>
-      <pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/high-density-gameservers/</guid>
-      <description>
-        
-        
-        &lt;p&gt;Depending on the setup and resource requirements of your game server process, sometimes it can be a more economical
-use of resources to run multiple concurrent game sessions from within a single &lt;code&gt;GameServer&lt;/code&gt; instance.&lt;/p&gt;
-&lt;p&gt;The tradeoff here is that this requires more management on behalf of the integrated game server process and external
-systems, since it works around the common Kubernetes and/or Code Blind container lifecycle.&lt;/p&gt;
-&lt;p&gt;Utilising the new allocation &lt;code&gt;gameServerState&lt;/code&gt; filter as well as the existing ability to edit the
-&lt;code&gt;GameServer&lt;/code&gt; labels at both &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserverallocation/&#34;&gt;allocation time&lt;/a&gt;, and from
-within the game server process, &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/#setlabelkey-value&#34;&gt;via the SDK&lt;/a&gt;,
-means Code Blind is able to atomically remove a &lt;code&gt;GameServer&lt;/code&gt; from the list of potentially allocatable
-&lt;code&gt;GameServers&lt;/code&gt; at allocation time, and then return it back into the pool of allocatable &lt;code&gt;GameServers&lt;/code&gt; if and when the
-game server process deems that is has room to host another game session.&lt;/p&gt;
-&lt;a href=&#34;../../../diagrams/high-density.puml.png&#34; target=&#34;_blank&#34;&gt;
-&lt;img src=&#34;../../../diagrams/high-density.puml.png&#34; alt=&#34;High Density Allocation Diagram&#34; /&gt;
-&lt;/a&gt;
-
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Info&lt;/h4&gt;
-
-    To watch for Allocation events, there is the initial &lt;code&gt;GameServer.status.state&lt;/code&gt; change from &lt;code&gt;Ready&lt;/code&gt; to &lt;code&gt;Allocated&lt;/code&gt;,
-but it is also useful to know that the value of &lt;code&gt;GameServer.metadata.annotations[&amp;quot;agones.dev/last-allocated&amp;quot;]&lt;/code&gt; will
+&lt;/div>
+&lt;h2 id="next-steps">Next Steps:&lt;/h2>
+&lt;ul>
+&lt;li>Read the various references, including the
+&lt;a href="http://localhost:1313/docs/reference/gameserver/">GameServer&lt;/a> and &lt;a href="http://localhost:1313/docs/reference/fleet/">Fleet&lt;/a>
+reference materials.&lt;/li>
+&lt;li>Review the specifics of &lt;a href="http://localhost:1313/docs/guides/health-checking/">Health Checking&lt;/a>.&lt;/li>
+&lt;li>See all the commands the &lt;a href="http://localhost:1313/docs/guides/client-sdks/">Client SDK&lt;/a> provides - we only show a
+few here!&lt;/li>
+&lt;li>If you aren&amp;rsquo;t familiar with the term &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod&lt;/a>, this should
+provide a reference.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Canary Testing a new Fleet</title><link>http://localhost:1313/docs/integration-patterns/canary-testing/</link><pubDate>Tue, 27 Jul 2021 23:49:14 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/canary-testing/</guid><description>
+&lt;p>To &lt;a href="https://martinfowler.com/bliki/CanaryRelease.html">canary release/test&lt;/a> a new &lt;code>Fleet&lt;/code>,
+we can run a small, fixed size &lt;code>Fleet&lt;/code> of the new version of our GameServer, while also running the current stable
+production version.&lt;/p>
+&lt;p>&lt;code>Allocations&lt;/code> can then &lt;code>prefer&lt;/code> to come from the canary &lt;code>Fleet&lt;/code>, but if all &lt;code>GameServers&lt;/code> are already allocated from the
+canary &lt;code>Fleet&lt;/code>, players will be allocated to the current stable Fleets.&lt;/p>
+&lt;p>Over time, if the monitoring of those playing on the canary &lt;code>Fleet&lt;/code> is working as expected, the size of the canary
+&lt;code>Fleet&lt;/code> can be grown until you feel confident in its stability.&lt;/p>
+&lt;p>Once confidence has been achieved, the configuration for stable &lt;code>Fleet&lt;/code> can be updated to match the canary (usually
+triggering a &lt;a href="http://localhost:1313/docs/guides/fleet-updates/#rolling-update-strategy">rolling update&lt;/a>). The
+canary &lt;code>Fleet&lt;/code> can then be deleted or updated to a new testing version of the game server process.&lt;/p>
+&lt;a href="../../../diagrams/canary-testing.puml.png" target="_blank">
+&lt;img src="../../../diagrams/canary-testing.puml.png" alt="Canary Fleet Diagram" />
+&lt;/a>
+&lt;h2 id="sample-gameserverallocation">Sample &lt;code>GameServerAllocation&lt;/code>&lt;/h2>
+&lt;p>To ensure we don&amp;rsquo;t have to change the Allocation system every time we have a canary &lt;code>Fleet&lt;/code>, in this example, we will
+state that in our system, the label &lt;code>canary: &amp;quot;true&amp;quot;&lt;/code> will be added to any canary &lt;code>Fleet&lt;/code> in the cluster.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">GameServerAllocation&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">preferred&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">canary&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">required&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">stable&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The above &lt;code>Allocation&lt;/code> will then preferentially choose the &lt;code>Fleet&lt;/code> that has &lt;code>GameServers&lt;/code> with the label and key
+value of&lt;code>canary:&amp;quot;true&amp;quot;&lt;/code>, if it exists, and has remaining Ready &lt;code>GameServers&lt;/code>, and if not, will apply the
+&lt;code>Allocation&lt;/code> to the &lt;code>Fleet&lt;/code> named &amp;ldquo;stable&amp;rdquo;.&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>Read about different &lt;a href="http://localhost:1313/docs/guides/fleet-updates/">&lt;code>Fleet&lt;/code> update&lt;/a> options and strategies that are
+available.&lt;/li>
+&lt;li>Have a look at all the options available on a
+&lt;a href="http://localhost:1313/docs/reference/gameserverallocation/">&lt;code>GameServerAllocation&lt;/code>&lt;/a>.&lt;/li>
+&lt;li>Review the &lt;a href="http://localhost:1313/docs/reference/fleet/">&lt;code>Fleet&lt;/code> reference&lt;/a>.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Reusing Allocated GameServers for more than one game session</title><link>http://localhost:1313/docs/integration-patterns/reusing-gameservers/</link><pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/reusing-gameservers/</guid><description>
+&lt;p>Having a &lt;code>GameServer&lt;/code> terminate after a single player session is better for packing and optimisation of
+infrastructure usage, as well as safety to ensure the process returns to an absolute zero state.&lt;/p>
+&lt;p>However, depending on the &lt;code>GameServer&lt;/code> startup time, or other factors there may be reasons you wish to reuse a
+&lt;code>GameServer&lt;/code> for &lt;em>n&lt;/em> number of sessions before finally shutting it down.&lt;/p>
+&lt;p>The &amp;ldquo;magic trick&amp;rdquo; to this is knowing that the &lt;code>GameServer&lt;/code> process can call
+&lt;a href="http://localhost:1313/docs/guides/client-sdks/#ready">&lt;code>SDK.Ready()&lt;/code>&lt;/a> to return to a &lt;code>Ready&lt;/code>
+state after the &lt;code>GameServer&lt;/code> has been allocated.&lt;/p>
+&lt;p>It is then up to the game developer to ensure that the game server process returns to a zero state once a game
+session has been completed.&lt;/p>
+&lt;a href="../../../diagrams/reusing-gameservers.puml.png" target="_blank">
+&lt;img src="../../../diagrams/reusing-gameservers.puml.png" alt="Reserved Lifecycle Sequence Diagram" />
+&lt;/a>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>Have a look at all commands the &lt;a href="http://localhost:1313/docs/guides/client-sdks/">Client SDK&lt;/a> provides.&lt;/li>
+&lt;li>If you aren&amp;rsquo;t familiar with the term &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod&lt;/a>, this shouldw
+provide a reference.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: High Density GameServers</title><link>http://localhost:1313/docs/integration-patterns/high-density-gameservers/</link><pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/high-density-gameservers/</guid><description>
+&lt;p>Depending on the setup and resource requirements of your game server process, sometimes it can be a more economical
+use of resources to run multiple concurrent game sessions from within a single &lt;code>GameServer&lt;/code> instance.&lt;/p>
+&lt;p>The tradeoff here is that this requires more management on behalf of the integrated game server process and external
+systems, since it works around the common Kubernetes and/or Code Blind container lifecycle.&lt;/p>
+&lt;p>Utilising the new allocation &lt;code>gameServerState&lt;/code> filter as well as the existing ability to edit the
+&lt;code>GameServer&lt;/code> labels at both &lt;a href="http://localhost:1313/docs/reference/gameserverallocation/">allocation time&lt;/a>, and from
+within the game server process, &lt;a href="http://localhost:1313/docs/guides/client-sdks/#setlabelkey-value">via the SDK&lt;/a>,
+means Code Blind is able to atomically remove a &lt;code>GameServer&lt;/code> from the list of potentially allocatable
+&lt;code>GameServers&lt;/code> at allocation time, and then return it back into the pool of allocatable &lt;code>GameServers&lt;/code> if and when the
+game server process deems that is has room to host another game session.&lt;/p>
+&lt;a href="../../../diagrams/high-density.puml.png" target="_blank">
+&lt;img src="../../../diagrams/high-density.puml.png" alt="High Density Allocation Diagram" />
+&lt;/a>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Info&lt;/h4>
+To watch for Allocation events, there is the initial &lt;code>GameServer.status.state&lt;/code> change from &lt;code>Ready&lt;/code> to &lt;code>Allocated&lt;/code>,
+but it is also useful to know that the value of &lt;code>GameServer.metadata.annotations[&amp;quot;agones.dev/last-allocated&amp;quot;]&lt;/code> will
 change as it is set by Code Blind with each allocation with the current timestamp, regardless of if there
 is a state change or not.
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;example-gameserverallocation&#34;&gt;Example &lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;The below &lt;code&gt;Allocation&lt;/code&gt; will first attempt to find a &lt;code&gt;GameServer&lt;/code&gt; from the &lt;code&gt;Fleet&lt;/code&gt; &lt;code&gt;simple-udp&lt;/code&gt; that is already
-Allocated and also has the label &lt;code&gt;agones.dev/sdk-gs-session-ready&lt;/code&gt; with the value of &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The above condition indicates that the matching game server process behind the matched &lt;code&gt;GameServer&lt;/code&gt; record is able to
-accept another game session at this time.&lt;/p&gt;
-&lt;p&gt;If an Allocated &lt;code&gt;GameServer&lt;/code&gt; does not exist with the desired labels, then use the next selector to allocate a Ready
-&lt;code&gt;GameServer&lt;/code&gt; from the &lt;code&gt;simple-udp&lt;/code&gt; &lt;code&gt;Fleet&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Whichever condition is met, once allocation is made against a &lt;code&gt;GameServer&lt;/code&gt;, its label of &lt;code&gt;agones.dev/sdk-gs-session-ready&lt;/code&gt;
-will be set to the value of &lt;code&gt;false&lt;/code&gt; and it will no longer match the first selector, thereby removing it from any
-future allocations with the below schema.&lt;/p&gt;
-&lt;p&gt;It will then be up to the game server process to decide on if and when it is appropriate to set the
-&lt;code&gt;agones.dev/sdk-gs-session-ready&lt;/code&gt; value back to &lt;code&gt;true&lt;/code&gt;, thereby indicating that it can accept another concurrent
-gameplay session.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GameServerAllocation&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selectors&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;simple-udp&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/sdk-gs-session-ready&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# this is important&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;gameServerState: Allocated # new state filter&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;allocate from Allocated servers&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;simple-udp&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;gameServerState&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Ready&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Allocate out of the Ready Pool (which would be default, so backward compatible)&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;labels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/sdk-gs-session-ready&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;false&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# this removes it from the pool&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Info&lt;/h4&gt;
-
-    It&amp;rsquo;s important to note that the labels that the &lt;code&gt;GameServer&lt;/code&gt; process use to add itself back into the pool of
-allocatable instances, must start with the prefix &lt;code&gt;agones.dev/sdk-&lt;/code&gt;, since only labels that have this prefix are
+&lt;/div>
+&lt;h2 id="example-gameserverallocation">Example &lt;code>GameServerAllocation&lt;/code>&lt;/h2>
+&lt;p>The below &lt;code>Allocation&lt;/code> will first attempt to find a &lt;code>GameServer&lt;/code> from the &lt;code>Fleet&lt;/code> &lt;code>simple-udp&lt;/code> that is already
+Allocated and also has the label &lt;code>agones.dev/sdk-gs-session-ready&lt;/code> with the value of &lt;code>true&lt;/code>.&lt;/p>
+&lt;p>The above condition indicates that the matching game server process behind the matched &lt;code>GameServer&lt;/code> record is able to
+accept another game session at this time.&lt;/p>
+&lt;p>If an Allocated &lt;code>GameServer&lt;/code> does not exist with the desired labels, then use the next selector to allocate a Ready
+&lt;code>GameServer&lt;/code> from the &lt;code>simple-udp&lt;/code> &lt;code>Fleet&lt;/code>.&lt;/p>
+&lt;p>Whichever condition is met, once allocation is made against a &lt;code>GameServer&lt;/code>, its label of &lt;code>agones.dev/sdk-gs-session-ready&lt;/code>
+will be set to the value of &lt;code>false&lt;/code> and it will no longer match the first selector, thereby removing it from any
+future allocations with the below schema.&lt;/p>
+&lt;p>It will then be up to the game server process to decide on if and when it is appropriate to set the
+&lt;code>agones.dev/sdk-gs-session-ready&lt;/code> value back to &lt;code>true&lt;/code>, thereby indicating that it can accept another concurrent
+gameplay session.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">GameServerAllocation&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">selectors&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">simple-udp&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/sdk-gs-session-ready&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;true&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># this is important&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">gameServerState: Allocated # new state filter&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">allocate from Allocated servers&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">simple-udp&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">gameServerState&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Ready&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># Allocate out of the Ready Pool (which would be default, so backward compatible)&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">metadata&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">labels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/sdk-gs-session-ready&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;false&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#8f5902;font-style:italic"># this removes it from the pool&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Info&lt;/h4>
+It&amp;rsquo;s important to note that the labels that the &lt;code>GameServer&lt;/code> process use to add itself back into the pool of
+allocatable instances, must start with the prefix &lt;code>agones.dev/sdk-&lt;/code>, since only labels that have this prefix are
 available to be [updated from the SDK][sdk].
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;consistency&#34;&gt;Consistency&lt;/h2&gt;
-&lt;p&gt;Code Blind, and Kubernetes itself are built as eventually consistent, self-healing systems. To that end, it is worth
-noting that there may be minor delays between each of the operations in the above flow.  For example, depending on the
-cluster load, it may take up to a second for an &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/#setlabelkey-value&#34;&gt;SDK driven label change&lt;/a&gt; on a &lt;code&gt;GameServer&lt;/code&gt; record to be
-visible to the Code Blind allocation system. We recommend building your integrations with Code Blind with this in mind.&lt;/p&gt;
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;View the details about &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/#setlabelkey-value&#34;&gt;using the SDK&lt;/a&gt; to set
-labels on the &lt;code&gt;GameServer&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Check all the options available on &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserverallocation/&#34;&gt;&lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>Docs: Allocating based on GameServer Player Capacity</title>
-      <link>https://codeblind.ai/docs/integration-patterns/player-capacity/</link>
-      <pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeblind.ai/docs/integration-patterns/player-capacity/</guid>
-      <description>
-        
-        
-        
-&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
-    &lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
-    &lt;p&gt;The Player Tracking and Allocation Player Filter features are currently &lt;strong&gt;&lt;a href=&#34;https://codeblind.ai/docs/guides/feature-stages/#alpha&#34;&gt;Alpha&lt;/a&gt;&lt;/strong&gt;,
-        not enabled by default, and may change in the future.&lt;/p&gt;
-&lt;p&gt;Use the FeatureGates  &lt;code&gt;PlayerTracking&lt;/code&gt;, and &lt;code&gt;PlayerAllocationFilter&lt;/code&gt;
-to enable and test these features.&lt;/p&gt;
-    &lt;p&gt;See the &lt;a href=&#34;https://codeblind.ai/docs/guides/feature-stages/#feature-gates&#34;&gt;Feature Gate documentation&lt;/a&gt; for details on how to enable features.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Using this approach, we are able to be able to make a request that is akin to: &amp;ldquo;Find me a &lt;code&gt;GameServer&lt;/code&gt; that is already
-allocated, with room for &lt;em&gt;n&lt;/em&gt; number of players, and if one is not available, allocate me a &lt;code&gt;Ready&lt;/code&gt; &lt;code&gt;GameServer&lt;/code&gt;&amp;rdquo;.&lt;/p&gt;
-&lt;p&gt;Common applications of this type of allocation are Lobby servers where players await matchmaking, or a
-persistent world server where players connect and disconnect from a large map.&lt;/p&gt;
-&lt;a href=&#34;../../../diagrams/allocation-player-capacity.puml.png&#34; target=&#34;_blank&#34;&gt;
-&lt;img src=&#34;../../../diagrams/allocation-player-capacity.puml.png&#34; alt=&#34;Player Capacity Allocation Diagram&#34; /&gt;
-&lt;/a&gt;
-&lt;h2 id=&#34;example-gameserverallocation&#34;&gt;Example &lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;The below allocation will attempt to find an already Allocated &lt;code&gt;GameServer&lt;/code&gt; from the &lt;code&gt;Fleet&lt;/code&gt; &amp;ldquo;lobby&amp;rdquo; with room for 10
-to 15 players, and if it cannot find one, will allocate a Ready one from the same &lt;code&gt;Fleet&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;GameServerAllocation&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selectors&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;lobby&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;gameServerState&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Allocated&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;      &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;players&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;minAvailable&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;maxAvailable&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;matchLabels&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/fleet&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;lobby&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
-&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
-
-    We recommend doing an extra check when players connect to a &lt;code&gt;GameServer&lt;/code&gt; that there is the expected player capacity
-on the &lt;code&gt;GameServer&lt;/code&gt; as there can be a small delay between a player connecting and it being reported
+&lt;/div>
+&lt;h2 id="consistency">Consistency&lt;/h2>
+&lt;p>Code Blind, and Kubernetes itself are built as eventually consistent, self-healing systems. To that end, it is worth
+noting that there may be minor delays between each of the operations in the above flow. For example, depending on the
+cluster load, it may take up to a second for an &lt;a href="http://localhost:1313/docs/guides/client-sdks/#setlabelkey-value">SDK driven label change&lt;/a> on a &lt;code>GameServer&lt;/code> record to be
+visible to the Code Blind allocation system. We recommend building your integrations with Code Blind with this in mind.&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>View the details about &lt;a href="http://localhost:1313/docs/guides/client-sdks/#setlabelkey-value">using the SDK&lt;/a> to set
+labels on the &lt;code>GameServer&lt;/code>.&lt;/li>
+&lt;li>Check all the options available on &lt;a href="http://localhost:1313/docs/reference/gameserverallocation/">&lt;code>GameServerAllocation&lt;/code>&lt;/a>.&lt;/li>
+&lt;/ul></description></item><item><title>Docs: Allocating based on GameServer Player Capacity</title><link>http://localhost:1313/docs/integration-patterns/player-capacity/</link><pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate><guid>http://localhost:1313/docs/integration-patterns/player-capacity/</guid><description>
+&lt;div class="alert alert-warning" role="alert">
+&lt;h4 class="alert-heading">Warning&lt;/h4>
+&lt;p>The Player Tracking and Allocation Player Filter features are currently &lt;strong>&lt;a href="http://localhost:1313/docs/guides/feature-stages/#alpha">Alpha&lt;/a>&lt;/strong>,
+not enabled by default, and may change in the future.&lt;/p>
+&lt;p>Use the FeatureGates &lt;code>PlayerTracking&lt;/code>, and &lt;code>PlayerAllocationFilter&lt;/code>
+to enable and test these features.&lt;/p>
+&lt;p>See the &lt;a href="http://localhost:1313/docs/guides/feature-stages/#feature-gates">Feature Gate documentation&lt;/a> for details on how to enable features.&lt;/p>
+&lt;/div>
+&lt;p>Using this approach, we are able to be able to make a request that is akin to: &amp;ldquo;Find me a &lt;code>GameServer&lt;/code> that is already
+allocated, with room for &lt;em>n&lt;/em> number of players, and if one is not available, allocate me a &lt;code>Ready&lt;/code> &lt;code>GameServer&lt;/code>&amp;rdquo;.&lt;/p>
+&lt;p>Common applications of this type of allocation are Lobby servers where players await matchmaking, or a
+persistent world server where players connect and disconnect from a large map.&lt;/p>
+&lt;a href="../../../diagrams/allocation-player-capacity.puml.png" target="_blank">
+&lt;img src="../../../diagrams/allocation-player-capacity.puml.png" alt="Player Capacity Allocation Diagram" />
+&lt;/a>
+&lt;h2 id="example-gameserverallocation">Example &lt;code>GameServerAllocation&lt;/code>&lt;/h2>
+&lt;p>The below allocation will attempt to find an already Allocated &lt;code>GameServer&lt;/code> from the &lt;code>Fleet&lt;/code> &amp;ldquo;lobby&amp;rdquo; with room for 10
+to 15 players, and if it cannot find one, will allocate a Ready one from the same &lt;code>Fleet&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">apiVersion&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#4e9a06">&amp;#34;allocation.agones.dev/v1&amp;#34;&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">kind&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">GameServerAllocation&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline">&lt;/span>&lt;span style="color:#204a87;font-weight:bold">spec&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">selectors&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">lobby&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">gameServerState&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">Allocated&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">players&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">minAvailable&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">10&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">maxAvailable&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#0000cf;font-weight:bold">15&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>- &lt;span style="color:#204a87;font-weight:bold">matchLabels&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#204a87;font-weight:bold">agones.dev/fleet&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline"> &lt;/span>&lt;span style="color:#000">lobby&lt;/span>&lt;span style="color:#f8f8f8;text-decoration:underline">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;div class="alert alert-info" role="alert">
+&lt;h4 class="alert-heading">Note&lt;/h4>
+We recommend doing an extra check when players connect to a &lt;code>GameServer&lt;/code> that there is the expected player capacity
+on the &lt;code>GameServer&lt;/code> as there can be a small delay between a player connecting and it being reported
 to Code Blind.
-
-&lt;/div&gt;
-
-&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Have a look at all commands the &lt;a href=&#34;https://codeblind.ai/docs/guides/client-sdks/&#34;&gt;Client SDK&lt;/a&gt; provides.&lt;/li&gt;
-&lt;li&gt;Check all the options available on &lt;a href=&#34;https://codeblind.ai/docs/reference/gameserverallocation/&#34;&gt;&lt;code&gt;GameServerAllocation&lt;/code&gt;&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;If you aren&amp;rsquo;t familiar with the term &lt;a href=&#34;https://kubernetes.io/docs/concepts/workloads/pods/pod/&#34;&gt;Pod&lt;/a&gt;, this should
-provide a reference.&lt;/li&gt;
-&lt;/ul&gt;
-
-      </description>
-    </item>
-    
-  </channel>
-</rss>
+&lt;/div>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;ul>
+&lt;li>Have a look at all commands the &lt;a href="http://localhost:1313/docs/guides/client-sdks/">Client SDK&lt;/a> provides.&lt;/li>
+&lt;li>Check all the options available on &lt;a href="http://localhost:1313/docs/reference/gameserverallocation/">&lt;code>GameServerAllocation&lt;/code>&lt;/a>.&lt;/li>
+&lt;li>If you aren&amp;rsquo;t familiar with the term &lt;a href="https://kubernetes.io/docs/concepts/workloads/pods/pod/">Pod&lt;/a>, this should
+provide a reference.&lt;/li>
+&lt;/ul></description></item></channel></rss>
