@@ -1,0 +1,532 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> – Create Kubernetes Cluster</title>
+    <link>https://codeblind.ai/docs/installation/creating-cluster/</link>
+    <description>Recent content in Create Kubernetes Cluster on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    
+	  <atom:link href="https://codeblind.ai/docs/installation/creating-cluster/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: Google Kubernetes Engine</title>
+      <link>https://codeblind.ai/docs/installation/creating-cluster/gke/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/creating-cluster/gke/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;before-you-begin&#34;&gt;Before you begin&lt;/h2&gt;
+&lt;p&gt;Take the following steps to enable the Kubernetes Engine API:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Visit the &lt;a href=&#34;https://console.cloud.google.com/kubernetes/list&#34;&gt;Kubernetes Engine&lt;/a&gt; page in the Google Cloud Platform Console.&lt;/li&gt;
+&lt;li&gt;Create or select a project.&lt;/li&gt;
+&lt;li&gt;Wait for the API and related services to be enabled. This can take several minutes.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://support.google.com/cloud/answer/6293499#enable-billing&#34;&gt;Enable billing&lt;/a&gt; for your project.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;If you are not an existing GCP user, you may be able to enroll for a $300 US &lt;a href=&#34;https://cloud.google.com/free/&#34;&gt;Free Trial&lt;/a&gt; credit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;choosing-a-shell&#34;&gt;Choosing a shell&lt;/h3&gt;
+&lt;p&gt;To complete this quickstart, we can use either &lt;a href=&#34;https://cloud.google.com/shell/&#34;&gt;Google Cloud Shell&lt;/a&gt; or a local shell.&lt;/p&gt;
+&lt;p&gt;Google Cloud Shell is a shell environment for managing resources hosted on Google Cloud Platform (GCP). Cloud Shell comes preinstalled with the &lt;a href=&#34;https://cloud.google.com/sdk/gcloud/&#34;&gt;&lt;code&gt;gcloud&lt;/code&gt;&lt;/a&gt; and &lt;a href=&#34;https://kubernetes.io/docs/reference/kubectl/&#34;&gt;&lt;code&gt;kubectl&lt;/code&gt;&lt;/a&gt; command-line tools. &lt;code&gt;gcloud&lt;/code&gt; provides the primary command-line interface for GCP, and &lt;code&gt;kubectl&lt;/code&gt; provides the command-line interface for running commands against Kubernetes clusters.&lt;/p&gt;
+&lt;p&gt;If you prefer using your local shell, you must install the &lt;code&gt;gcloud&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt; command-line tools in your environment.&lt;/p&gt;
+&lt;h4 id=&#34;cloud-shell&#34;&gt;Cloud shell&lt;/h4&gt;
+&lt;p&gt;To launch Cloud Shell, perform the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;a href=&#34;https://console.cloud.google.com/home/dashboard&#34;&gt;Google Cloud Platform Console&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;From the top-right corner of the console, click the
+&lt;strong&gt;Activate Google Cloud Shell&lt;/strong&gt; button: &lt;img alt=&#34;cloud shell&#34; src=&#34;../../../../images/cloud-shell.png&#34;&gt;&lt;/li&gt;
+&lt;li&gt;A Cloud Shell session opens inside a frame at the bottom of the console. Use this shell to run &lt;code&gt;gcloud&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt; commands.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;local-shell&#34;&gt;Local shell&lt;/h4&gt;
+&lt;p&gt;To install &lt;code&gt;gcloud&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt;, perform the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://cloud.google.com/sdk/docs/quickstarts&#34;&gt;Install the Google Cloud SDK&lt;/a&gt;, which includes the &lt;code&gt;gcloud&lt;/code&gt; command-line tool.&lt;/li&gt;
+&lt;li&gt;Initialize some default configuration by running the following command.
+&lt;ul&gt;
+&lt;li&gt;When asked &lt;code&gt;Do you want to configure a default Compute Region and Zone? (Y/n)?&lt;/code&gt;, enter &lt;code&gt;Y&lt;/code&gt; and choose a zone in your geographical region of choice.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;Install the &lt;code&gt;kubectl&lt;/code&gt; command-line tool by running the following command:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud components install kubectl
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;choosing-a-regional-or-zonal-cluster&#34;&gt;Choosing a Regional or Zonal Cluster&lt;/h3&gt;
+&lt;p&gt;You will need to pick a geographical region or zone where you want to deploy your cluster, and whether to
+create a &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/types-of-clusters&#34;&gt;regional or zonal cluster&lt;/a&gt;.
+We recommend using a Regional cluster, as the zonal GKE control plane can go down temporarily to adjust for cluster resizing,
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades&#34;&gt;automatic upgrades&lt;/a&gt; and
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/maintenance-windows-and-exclusions#repairs&#34;&gt;repairs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;After choosing a cluster type, &lt;a href=&#34;https://cloud.google.com/compute/docs/regions-zones/#available&#34;&gt;choose a region or zone&lt;/a&gt;. The region you chose is &lt;code&gt;COMPUTE_REGION&lt;/code&gt; below.
+(Note that if you chose a zone, replace &lt;code&gt;--region=[COMPUTE_REGION]&lt;/code&gt; with &lt;code&gt;--zone=[COMPUTE_ZONE]&lt;/code&gt; in commands below.)&lt;/p&gt;
+&lt;h3 id=&#34;choosing-a-release-channel-and-optional-version&#34;&gt;Choosing a Release Channel and Optional Version&lt;/h3&gt;
+&lt;p&gt;We recommend using the &lt;code&gt;regular&lt;/code&gt; release channel, which offers a balance between stability and freshness.
+If you&amp;rsquo;d like to read more, see our guide on &lt;a href=&#34;https://codeblind.ai/docs/guides/best-practices/gke/#release-channels&#34;&gt;Release Channels&lt;/a&gt;.
+The release channel you chose is &lt;code&gt;RELEASE_CHANNEL&lt;/code&gt; below.&lt;/p&gt;
+&lt;p&gt;(Optional) During cluster creation, to set a specific available version in the release channel, use the &lt;code&gt;--cluster-version=[VERSION]&lt;/code&gt; flag, e.g. &lt;code&gt;--cluster-version=1.27&lt;/code&gt;. Be sure to choose a &lt;a href=&#34;https://codeblind.ai/docs/installation/#usage-requirements&#34;&gt;version supported by Code Blind&lt;/a&gt;. (If you rely on release channels, the latest Code Blind release &lt;a href=&#34;https://codeblind.ai/docs/installation/#agones-and-kubernetes-supported-versions&#34;&gt;should be supported&lt;/a&gt; by the default versions of all channels.)&lt;/p&gt;
+&lt;h3 id=&#34;choosing-a-gke-cluster-mode&#34;&gt;Choosing a GKE cluster mode&lt;/h3&gt;
+&lt;p&gt;A &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture&#34;&gt;cluster&lt;/a&gt; consists of at least one &lt;em&gt;control plane&lt;/em&gt; machine and multiple worker machines called &lt;em&gt;nodes&lt;/em&gt;. In Google Kubernetes Engine, nodes are &lt;a href=&#34;https://cloud.google.com/compute/docs/instances/&#34;&gt;Compute Engine virtual machine&lt;/a&gt; instances that run the Kubernetes processes necessary to make them part of the cluster.&lt;/p&gt;
+&lt;p&gt;Code Blind supports both GKE Standard mode and GKE Autopilot mode.
+Code Blind &lt;code&gt;GameServer&lt;/code&gt; and &lt;code&gt;Fleet&lt;/code&gt; manifests that work on Standard are compatible
+on Autopilot with some constraints, described in the following section. We recommend
+running GKE Autopilot clusters, if you meet the constraints.&lt;/p&gt;
+&lt;p&gt;You can&amp;rsquo;t convert existing Standard clusters to Autopilot; create new Autopilot
+clusters instead.&lt;/p&gt;
+&lt;h4 id=&#34;code-blind-on-gke-autopilot&#34;&gt;Code Blind on GKE Autopilot&lt;/h4&gt;
+&lt;p&gt;Autopilot is GKE&amp;rsquo;s fully-managed mode. GKE configures, maintains, scales, and
+upgrades nodes for you, which can reduce your maintenance and operating
+overhead. You only pay for the resources requested by your running Pods, and
+you don&amp;rsquo;t pay for unused node capacity or Kubernetes system workloads.&lt;/p&gt;
+&lt;p&gt;This section describes the Code Blind-specific considerations in Autopilot
+clusters. For a general comparison between Autopilot and Standard, refer to
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/choose-cluster-mode&#34;&gt;Choose a GKE mode of operation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Autopilot nodes are, by default, optimized for most workloads. If some of your
+workloads have broad compute requirements such as Arm architecture or a minimum
+CPU platform, you can also choose a
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes&#34;&gt;compute class&lt;/a&gt;
+that meets that requirement. However, if you have specialized hardware needs
+that require fine-grained control over machine configuration, consider using
+GKE Standard.&lt;/p&gt;
+&lt;p&gt;Code Blind on Autopilot has pre-configured opinionated constraints. Evaluate
+whether these constraints impact your workloads:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Operating system:&lt;/strong&gt; No Windows containers.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Resource requests:&lt;/strong&gt; Autopilot has pre-determined
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-resource-requests#min-max-requests&#34;&gt;minimum Pod resource requests&lt;/a&gt;.
+If your game servers require less than those minimums, use GKE Standard.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://codeblind.ai/docs/advanced/scheduling-and-autoscaling/#fleet-scheduling&#34;&gt;Scheduling strategy&lt;/a&gt;:&lt;/strong&gt;
+&lt;code&gt;Packed&lt;/code&gt; is supported, which is the Code Blind default. &lt;code&gt;Distributed&lt;/code&gt; is not
+supported.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://codeblind.ai/docs/reference/agones_crd_api_reference/#agones.dev/v1.GameServerPort&#34;&gt;Host port policy&lt;/a&gt;:&lt;/strong&gt; &lt;code&gt;Dynamic&lt;/code&gt; is supported, which is the Code Blind default.
+&lt;code&gt;Static&lt;/code&gt; and &lt;code&gt;Passthrough&lt;/code&gt; are not supported.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Seccomp profile:&lt;/strong&gt; Code Blind sets the seccomp profile to &lt;code&gt;Unconfined&lt;/code&gt; to
+avoid unexpected container creation delays that might occur because
+Autopilot enables the
+&lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/seccomp-in-gke&#34;&gt;&lt;code&gt;RuntimeDefault&lt;/code&gt; seccomp profile&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://codeblind.ai/docs/advanced/controlling-disruption/#eviction-api&#34;&gt;Pod disruption policy&lt;/a&gt;:&lt;/strong&gt;
+&lt;code&gt;eviction.safe: Never&lt;/code&gt; is supported, which is the Code Blind
+default. &lt;code&gt;eviction.safe: Always&lt;/code&gt; is supported. &lt;code&gt;eviction.safe: OnUpgrade&lt;/code&gt; is
+not supported. If your game sessions exceed one hour, refer to
+&lt;a href=&#34;https://codeblind.ai/docs/advanced/controlling-disruption/#considerations-for-long-sessions&#34;&gt;Considerations for long sessions&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;choosing-a-gcp-network&#34;&gt;Choosing a GCP network&lt;/h3&gt;
+&lt;p&gt;By default, &lt;code&gt;gcloud&lt;/code&gt; and the Cloud Console use the VPC named &lt;code&gt;default&lt;/code&gt; for all new resources. If you
+plan to create a &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips#dual-stack&#34;&gt;dual-stack IPv4/IPv6 cluster&lt;/a&gt; cluster, special considerations need to
+be made. Dual-stack clusters require a &lt;a href=&#34;https://cloud.google.com/vpc/docs/subnets#subnet-types&#34;&gt;dual-stack subnet&lt;/a&gt;, which are only supported in
+&lt;a href=&#34;https://cloud.google.com/vpc/docs/vpc#subnet-ranges&#34;&gt;&lt;em&gt;custom mode&lt;/em&gt;&lt;/a&gt; VPC networks. For a new dual-stack cluster, you can either:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;create a new &lt;em&gt;custom mode&lt;/em&gt; VPC,&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;or if you wish to continue using the &lt;code&gt;default&lt;/code&gt; network, you must &lt;a href=&#34;https://cloud.google.com/vpc/docs/create-modify-vpc-networks#switch-network-mode&#34;&gt;switch it to &lt;em&gt;custom mode&lt;/em&gt;&lt;/a&gt;.
+After switching a network to custom mode, you will need to manually manage subnets within the &lt;code&gt;default&lt;/code&gt; VPC.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once you have a &lt;em&gt;custom mode&lt;/em&gt; VPC, you will need to choose whether to use an existing subnet or create a
+new one - read &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/alias-ips#dual-stack&#34;&gt;VPC-native guide on creating a dual-stack cluster&lt;/a&gt;, but don&amp;rsquo;t create the cluster
+just yet - we&amp;rsquo;ll create the cluster later in this guide. To use the network and/or subnetwork you just created,
+you&amp;rsquo;ll need to add &lt;code&gt;--network&lt;/code&gt; and &lt;code&gt;--subnetwork&lt;/code&gt;, and for GKE Standard, possibly &lt;code&gt;--stack-type&lt;/code&gt; and
+&lt;code&gt;--ipv6-access-type&lt;/code&gt;, depending on whether you created the subnet simultaneously with the cluster.&lt;/p&gt;
+&lt;h2 id=&#34;creating-the-firewall&#34;&gt;Creating the firewall&lt;/h2&gt;
+&lt;p&gt;We need a firewall to allow UDP traffic to nodes tagged as &lt;code&gt;game-server&lt;/code&gt; via ports 7000-8000. These firewall rules apply to cluster nodes you will create in the
+next section.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud compute firewall-rules create game-server-firewall &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --allow udp:7000-8000 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --target-tags game-server &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --description &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;Firewall to allow game server udp traffic&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;creating-the-cluster&#34;&gt;Creating the cluster&lt;/h2&gt;
+&lt;p&gt;Create a GKE cluster in which you&amp;rsquo;ll install Code Blind. You can use
+&lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#create-a-standard-mode-cluster-for-agones&#34;&gt;GKE Standard mode&lt;/a&gt;
+or &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#create-an-autopilot-mode-cluster-for-agones&#34;&gt;GKE Autopilot mode&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;create-a-standard-mode-cluster-for-code-blind&#34;&gt;Create a Standard mode cluster for Code Blind&lt;/h3&gt;
+&lt;p&gt;Create the cluster:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container clusters create &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --release-channel&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;RELEASE_CHANNEL&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --tags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;game-server &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --scopes&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;gke-default &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --num-nodes&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --enable-image-streaming &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --machine-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;e2-standard-4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[CLUSTER_NAME]&lt;/code&gt;: The name of the cluster you want to create&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[COMPUTE_REGION]&lt;/code&gt;: The GCP region to create the cluster in, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;chosen above&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[RELEASE_CHANNEL]&lt;/code&gt;: The GKE release channel, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-release-channel-and-optional-version&#34;&gt;chosen above&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flag explanations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--region&lt;/code&gt;: The compute region &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--release-channel&lt;/code&gt;: The release channel &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-release-channel-and-optional-version&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--tags&lt;/code&gt;: Defines the tags that will be attached to new nodes in the cluster. This is to grant access through ports via the &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#creating-the-firewall&#34;&gt;firewall created above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--scopes&lt;/code&gt;: Defines the Oauth scopes required by the nodes.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--num-nodes&lt;/code&gt;: The number of nodes to be created in each of the cluster&amp;rsquo;s zones. Default: 4. Depending on the needs of your game, this parameter should be adjusted.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--enable-image-streaming&lt;/code&gt;: Use &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming&#34;&gt;Image streaming&lt;/a&gt; to pull container images, which leads to significant improvements in initialization times. &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#limitations&#34;&gt;Limitations&lt;/a&gt; apply to enable this feature.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--machine-type&lt;/code&gt;: The type of machine to use for nodes. Default: &lt;code&gt;e2-standard-4&lt;/code&gt;. Depending on the needs of your game, you may wish to &lt;a href=&#34;https://cloud.google.com/compute/docs/machine-types&#34;&gt;have smaller or larger machines&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;optional-creating-a-dedicated-node-pool&#34;&gt;(Optional) Creating a dedicated node pool&lt;/h4&gt;
+&lt;p&gt;Create a &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/concepts/node-pools&#34;&gt;dedicated node pool&lt;/a&gt;
+for the Code Blind resources to be installed in. If you skip this step, the Code Blind controllers will
+share the default node pool with your game servers, which is fine for experimentation but not
+recommended for a production deployment.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container node-pools create agones-system &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --cluster&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --node-taints agones.dev/agones-system&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;true:NoExecute &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --node-labels agones.dev/agones-system&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --num-nodes&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --machine-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;e2-standard-4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[CLUSTER_NAME]&lt;/code&gt;: The name of the cluster you created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[COMPUTE_REGION]&lt;/code&gt;: The GCP region to create the cluster in, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;chosen above&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flag explanations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--cluster&lt;/code&gt;: The name of the cluster you created.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--region&lt;/code&gt;: The compute region &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--node-taints&lt;/code&gt;: The Kubernetes taints to automatically apply to nodes in this node pool.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--node-labels&lt;/code&gt;: The Kubernetes labels to automatically apply to nodes in this node pool.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--num-nodes&lt;/code&gt;: The number of nodes per cluster zone. For regional clusters, &lt;code&gt;--num-nodes=1&lt;/code&gt; creates one node in 3 separate zones in the region, giving you faster recovery time in the event of a node failure.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--machine-type&lt;/code&gt;: The type of machine to use for nodes. Default: &lt;code&gt;e2-standard-4&lt;/code&gt;. Depending on the needs of your game, you may wish to &lt;a href=&#34;https://cloud.google.com/compute/docs/machine-types&#34;&gt;have smaller or larger machines&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;optional-creating-a-metrics-node-pool&#34;&gt;(Optional) Creating a metrics node pool&lt;/h4&gt;
+&lt;p&gt;Create a node pool for &lt;a href=&#34;https://codeblind.ai/docs/guides/metrics/&#34;&gt;Metrics&lt;/a&gt; if you want to monitor the
+Code Blind system using Prometheus with Grafana or Cloud Logging and Monitoring.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container node-pools create agones-metrics &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --cluster&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --node-taints agones.dev/agones-metrics&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;true:NoExecute &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --node-labels agones.dev/agones-metrics&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#204a87&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --num-nodes&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --machine-type&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;e2-standard-4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[CLUSTER_NAME]&lt;/code&gt;: The name of the cluster you created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[COMPUTE_REGION]&lt;/code&gt;: The GCP region to create the cluster in, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;chosen above&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flag explanations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--cluster&lt;/code&gt;: The name of the cluster you created.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--region&lt;/code&gt;: The compute region &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--node-taints&lt;/code&gt;: The Kubernetes taints to automatically apply to nodes in this node pool.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--node-labels&lt;/code&gt;: The Kubernetes labels to automatically apply to nodes in this node pool.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--num-nodes&lt;/code&gt;: The number of nodes per cluster zone. For regional clusters, &lt;code&gt;--num-nodes=1&lt;/code&gt; creates one node in 3 separate zones in the region, giving you faster recovery time in the event of a node failure.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--machine-type&lt;/code&gt;: The type of machine to use for nodes. Default: &lt;code&gt;e2-standard-4&lt;/code&gt;. Depending on the needs of your game, you may wish to &lt;a href=&#34;https://cloud.google.com/compute/docs/machine-types&#34;&gt;have smaller or larger machines&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;optional-creating-a-node-pool-for-windows&#34;&gt;(Optional) Creating a node pool for Windows&lt;/h4&gt;
+&lt;p&gt;If you run game servers on Windows, you
+need to create a dedicated node pool for those servers. Windows Server 2019 (&lt;code&gt;WINDOWS_LTSC_CONTAINERD&lt;/code&gt;) is the recommended image for Windows
+game servers.&lt;/p&gt;
+
+
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
+
+    Running &lt;code&gt;GameServers&lt;/code&gt; on Windows nodes is currently Alpha. Feel free to file feedback
+through &lt;a href=&#34;https://github.com/googleforgames/agones/issues&#34;&gt;Github issues&lt;/a&gt;.
+
+&lt;/div&gt;
+
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container node-pools create windows &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --cluster&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --image-type WINDOWS_LTSC_CONTAINERD &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --machine-type e2-standard-4 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --num-nodes&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[CLUSTER_NAME]&lt;/code&gt;: The name of the cluster you created&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[COMPUTE_REGION]&lt;/code&gt;: The GCP region to create the cluster in, &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;chosen above&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flag explanations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--cluster&lt;/code&gt;: The name of the cluster you created.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--region&lt;/code&gt;: The compute region &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--image-type&lt;/code&gt;: The image type of the instances in the node pool - &lt;code&gt;WINDOWS_LTSC_CONTAINERD&lt;/code&gt; in this case.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--machine-type&lt;/code&gt;: The type of machine to use for nodes. Default: &lt;code&gt;e2-standard-4&lt;/code&gt;. Depending on the needs of your game, you may wish to &lt;a href=&#34;https://cloud.google.com/compute/docs/machine-types&#34;&gt;have smaller or larger machines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--num-nodes&lt;/code&gt;: The number of nodes per cluster zone. For regional clusters, &lt;code&gt;--num-nodes=1&lt;/code&gt; creates one node in 3 separate zones in the region, giving you faster recovery time in the event of a node failure.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;create-an-autopilot-mode-cluster-for-code-blind&#34;&gt;Create an Autopilot mode cluster for Code Blind&lt;/h3&gt;
+
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    These installation instructions apply to Code Blind 1.30+
+
+&lt;/div&gt;
+
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Choose a &lt;a href=&#34;https://codeblind.ai/docs/guides/best-practices/gke/#release-channels&#34;&gt;Release Channel&lt;/a&gt; (Autopilot clusters must be on a Release Channel).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create the cluster:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container clusters create-auto &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --release-channel&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;RELEASE_CHANNEL&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --autoprovisioning-network-tags&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;game-server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Replace the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[CLUSTER_NAME]&lt;/code&gt;: The name of your cluster.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[COMPUTE_REGION]&lt;/code&gt;: the GCP region to create the cluster in.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;[RELEASE_CHANNEL]&lt;/code&gt;: one of &lt;code&gt;rapid&lt;/code&gt;, &lt;code&gt;regular&lt;/code&gt;, or &lt;code&gt;stable&lt;/code&gt;, chosen &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-release-channel-and-optional-version&#34;&gt;above&lt;/a&gt;. The default is &lt;code&gt;regular&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Flag explanations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;--region&lt;/code&gt;: The compute region &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-gke-cluster-mode&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--release-channel&lt;/code&gt;: The release channel &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#choosing-a-release-channel-and-optional-version&#34;&gt;you chose above&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--autoprovisioning-network-tags&lt;/code&gt;: Defines the tags that will be attached to new nodes in the cluster. This is to grant access through ports via the &lt;a href=&#34;https://codeblind.ai/docs/installation/creating-cluster/gke/#creating-the-firewall&#34;&gt;firewall created above&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;setting-up-cluster-credentials&#34;&gt;Setting up cluster credentials&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;gcloud container clusters create&lt;/code&gt; configurates credentials for &lt;code&gt;kubectl&lt;/code&gt; automatically. If you ever lose those, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;gcloud container clusters get-credentials &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;[&lt;/span&gt;CLUSTER_NAME&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt; --region&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=[&lt;/span&gt;COMPUTE_REGION&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/&#34;&gt;Install Code Blind&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon Elastic Kubernetes Service</title>
+      <link>https://codeblind.ai/docs/installation/creating-cluster/eks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/creating-cluster/eks/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Create your EKS Cluster using the &lt;a href=&#34;https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html&#34;&gt;Getting Started Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Possible steps are the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Create new IAM role for cluster management.&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;aws configure&lt;/code&gt; to authorize your &lt;code&gt;awscli&lt;/code&gt; with proper &lt;code&gt;AWS Access Key ID&lt;/code&gt; and &lt;code&gt;AWS Secret Access Key&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Create an example cluster:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;eksctl create cluster &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--name prod &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--version 1.28 &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--nodegroup-name standard-workers &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--node-type t3.medium &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--nodes &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--nodes-min &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;--nodes-max &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    EKS does not use the normal Kubernetes networking since it
+is &lt;a href=&#34;https://itnext.io/kubernetes-is-hard-why-eks-makes-it-easier-for-network-and-security-architects-ea6d8b2ca965&#34;&gt;incompatible with Amazon VPC networking&lt;/a&gt;.
+
+&lt;/div&gt;
+
+&lt;h2 id=&#34;allowing-udp-traffic&#34;&gt;Allowing UDP Traffic&lt;/h2&gt;
+&lt;p&gt;For Code Blind to work correctly, we need to allow UDP traffic to pass through to our EKS cluster worker nodes. To achieve this, we must update the workers&amp;rsquo; nodepool SG (Security Group) with the proper rule. A simple way to do that is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log in to the AWS Management Console&lt;/li&gt;
+&lt;li&gt;Go to the VPC Dashboard and select &lt;strong&gt;Security Groups&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Find the Security Group for the workers nodepool, which will be named something like &lt;code&gt;eksctl-[cluster-name]-nodegroup-[cluster-name]-workers/SG&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Inbound Rules&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit Rules&lt;/strong&gt; to add a new &lt;strong&gt;Custom UDP Rule&lt;/strong&gt; with a 7000-8000 port range and an appropriate &lt;strong&gt;Source&lt;/strong&gt; CIDR range (&lt;code&gt;0.0.0.0/0&lt;/code&gt; allows all traffic)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/&#34;&gt;Install Code Blind&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Azure Kubernetes Service</title>
+      <link>https://codeblind.ai/docs/installation/creating-cluster/aks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/creating-cluster/aks/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;choosing-your-shell&#34;&gt;Choosing your shell&lt;/h2&gt;
+&lt;p&gt;You can use either &lt;a href=&#34;https://docs.microsoft.com/azure/cloud-shell/overview&#34;&gt;Azure Cloud Shell&lt;/a&gt; or install the &lt;a href=&#34;https://docs.microsoft.com/cli/azure/?view=azure-cli-latest&#34;&gt;Azure CLI&lt;/a&gt; on your local shell in order to install AKS in your own Azure subscription. Cloud Shell comes preinstalled with &lt;code&gt;az&lt;/code&gt; and &lt;code&gt;kubectl&lt;/code&gt; utilities whereas you need to install them locally if you want to use your local shell. If you use Windows 10, you can use the &lt;a href=&#34;https://docs.microsoft.com/windows/wsl/install-win10&#34;&gt;WIndows Subsystem for Windows&lt;/a&gt; as well.&lt;/p&gt;
+&lt;h2 id=&#34;creating-the-aks-cluster&#34;&gt;Creating the AKS cluster&lt;/h2&gt;
+&lt;p&gt;If you are using Azure CLI from your local shell, you need to log in to your Azure account by executing the &lt;code&gt;az login&lt;/code&gt; command and following the login procedure.&lt;/p&gt;
+&lt;p&gt;Here are the steps you need to follow to create a new AKS cluster (additional instructions and clarifications are listed &lt;a href=&#34;https://docs.microsoft.com/azure/aks/kubernetes-walkthrough&#34;&gt;here&lt;/a&gt;):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Declare necessary variables, modify them according to your needs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;AKS_RESOURCE_GROUP&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;akstestrg     &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of the resource group your AKS cluster will be created in&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;AKS_NAME&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;akstest                 &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Name of your AKS cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#000&#34;&gt;AKS_LOCATION&lt;/span&gt;&lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;=&lt;/span&gt;westeurope          &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Azure region in which you&amp;#39;ll deploy your AKS cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Create the Resource Group where your AKS resource will be installed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az group create --name &lt;span style=&#34;color:#000&#34;&gt;$AKS_RESOURCE_GROUP&lt;/span&gt; --location &lt;span style=&#34;color:#000&#34;&gt;$AKS_LOCATION&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Create the AKS cluster - this might take some time. Type &amp;#39;az aks create -h&amp;#39; to see all available options&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# The following command will create a four Node AKS cluster. Node size is Standard A1 v1 and Kubernetes version is 1.28.0. Plus, SSH keys will be generated for you, use --ssh-key-value to provide your values&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az aks create --resource-group &lt;span style=&#34;color:#000&#34;&gt;$AKS_RESOURCE_GROUP&lt;/span&gt; --name &lt;span style=&#34;color:#000&#34;&gt;$AKS_NAME&lt;/span&gt; --node-count &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;4&lt;/span&gt; --generate-ssh-keys --node-vm-size Standard_A4_v2 --kubernetes-version 1.28.0 --enable-node-public-ip
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Install kubectl&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo az aks install-cli
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# Get credentials for your new AKS cluster&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az aks get-credentials --resource-group &lt;span style=&#34;color:#000&#34;&gt;$AKS_RESOURCE_GROUP&lt;/span&gt; --name &lt;span style=&#34;color:#000&#34;&gt;$AKS_NAME&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Alternatively, you can use the &lt;a href=&#34;https://portal.azure.com&#34;&gt;Azure Portal&lt;/a&gt; to create a new AKS cluster &lt;a href=&#34;https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal&#34;&gt;(instructions)&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;allowing-udp-traffic&#34;&gt;Allowing UDP traffic&lt;/h3&gt;
+&lt;p&gt;For Code Blind to work correctly, we need to allow UDP traffic to pass through to our AKS cluster. To achieve this, we must update the NSG (Network Security Group) with the proper rule. A simple way to do that is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Log in to the &lt;a href=&#34;https://portal.azure.com/&#34;&gt;Azure Portal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Find the resource group where the AKS(Azure Kubernetes Service) resources are kept, which should have a name like &lt;code&gt;MC_resourceGroupName_AKSName_westeurope&lt;/code&gt;. Alternative, you can type &lt;code&gt;az resource show --namespace Microsoft.ContainerService --resource-type managedClusters -g $AKS_RESOURCE_GROUP -n $AKS_NAME -o json | jq .properties.nodeResourceGroup&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Find the Network Security Group object, which should have a name like &lt;code&gt;aks-agentpool-********-nsg&lt;/code&gt; (ie. aks-agentpool-55978144-nsg for dns-name-prefix agones)&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Inbound Security Rules&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Add&lt;/strong&gt; to create a new Rule with &lt;strong&gt;UDP&lt;/strong&gt; as the protocol and &lt;strong&gt;7000-8000&lt;/strong&gt; as the Destination Port Ranges. Pick a proper name and leave everything else at their default values&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Alternatively, you can use the following command, after modifying the &lt;code&gt;RESOURCE_GROUP_WITH_AKS_RESOURCES&lt;/code&gt; and &lt;code&gt;NSG_NAME&lt;/code&gt; values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;az network nsg rule create &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --resource-group RESOURCE_GROUP_WITH_AKS_RESOURCES &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --nsg-name NSG_NAME &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --name AgonesUDP &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --access Allow &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --protocol Udp &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --direction Inbound &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --priority &lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;520&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --source-port-range &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&lt;/span&gt;  --destination-port-range 7000-8000
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;getting-public-ips-to-nodes&#34;&gt;Getting Public IPs to Nodes&lt;/h3&gt;
+&lt;h4 id=&#34;kubernetes-version-prior-to-11819-11911-and-1207&#34;&gt;Kubernetes version prior to 1.18.19, 1.19.11 and 1.20.7&lt;/h4&gt;
+&lt;p&gt;To find a resource&amp;rsquo;s public IP, search for &lt;a href=&#34;https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.Compute%2FvirtualMachineScaleSets&#34;&gt;Virtual Machine Scale Sets&lt;/a&gt; -&amp;gt; click on the set name(inside  &lt;code&gt;MC_resourceGroupName_AKSName_westeurope&lt;/code&gt; group) -&amp;gt; click &lt;code&gt;Instances&lt;/code&gt; -&amp;gt; click on the instance name -&amp;gt; view &lt;code&gt;Public IP address&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;To get public IP via API &lt;a href=&#34;https://github.com/Azure/azure-libraries-for-net/issues/1185#issuecomment-747919226&#34;&gt;look here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more information on Public IPs for VM NICs, see &lt;a href=&#34;https://docs.microsoft.com/azure/virtual-network/virtual-network-network-interface-addresses&#34;&gt;this document&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;kubernetes-version-starting-11819-11911-and-1207&#34;&gt;Kubernetes version starting 1.18.19, 1.19.11 and 1.20.7&lt;/h4&gt;
+&lt;p&gt;Virtual Machines public IP is available directly in Kubernetes EXTERNAL-IP.&lt;/p&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/&#34;&gt;Install Code Blind&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Minikube</title>
+      <link>https://codeblind.ai/docs/installation/creating-cluster/minikube/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeblind.ai/docs/installation/creating-cluster/minikube/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;installing-minikube&#34;&gt;Installing Minikube&lt;/h2&gt;
+&lt;p&gt;First, &lt;a href=&#34;https://minikube.sigs.k8s.io/docs/start/&#34;&gt;install Minikube&lt;/a&gt;, which may also require you to install
+a virtualisation solution, such as &lt;a href=&#34;https://www.virtualbox.org&#34;&gt;VirtualBox&lt;/a&gt; as well.&lt;/p&gt;
+&lt;h2 id=&#34;starting-minikube&#34;&gt;Starting Minikube&lt;/h2&gt;
+&lt;p&gt;Minikube will need to be started with the supported version of Kubernetes that is supported with Code Blind, via the
+&lt;code&gt;--kubernetes-version&lt;/code&gt; command line flag.&lt;/p&gt;
+&lt;p&gt;Optionally, we also recommend starting with an &lt;code&gt;agones&lt;/code&gt; profile, using &lt;code&gt;-p&lt;/code&gt; to keep this cluster separate from any other
+clusters you may have running with Minikube.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;minikube start --kubernetes-version v1.27.6 -p agones
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Check the official &lt;a href=&#34;https://minikube.sigs.k8s.io/docs/commands/start/&#34;&gt;minikube start&lt;/a&gt; reference for more options that
+may be required for your platform of choice.&lt;/p&gt;
+
+
+&lt;div class=&#34;alert alert-info&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Note&lt;/h4&gt;
+
+    &lt;p&gt;You may need to increase the &lt;code&gt;--cpu&lt;/code&gt; or &lt;code&gt;--memory&lt;/code&gt; values for your minikube instance, depending on what resources are
+available on the host and/or how many GameServers you wish to run locally.&lt;/p&gt;
+&lt;p&gt;Depending on your Operating System, you may also need to change the &lt;code&gt;--driver&lt;/code&gt;
+(&lt;a href=&#34;https://minikube.sigs.k8s.io/docs/drivers/&#34;&gt;driver list&lt;/a&gt;) to enable &lt;code&gt;GameServer&lt;/code&gt; connectivity with or without
+some workarounds listed below.&lt;/p&gt;
+
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;known-working-drivers&#34;&gt;Known working drivers&lt;/h3&gt;
+&lt;p&gt;Other operating systems and drivers may work, but at this stage have not been verified to work with UDP connections
+via Code Blind exposed ports.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux (amd64)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Docker (default)&lt;/li&gt;
+&lt;li&gt;kvm2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Mac (amd64)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Docker (default)&lt;/li&gt;
+&lt;li&gt;Hyperkit&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Windows (amd64)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hyper-v (might need
+&lt;a href=&#34;https://blog.thepolyglotprogrammer.com/setting-up-kubernetes-on-wsl-to-work-with-minikube-on-windows-10-90dac3c72fa1&#34;&gt;this blog post&lt;/a&gt;
+and/or &lt;a href=&#34;https://github.com/microsoft/WSL/issues/4288#issuecomment-652259640&#34;&gt;this comment&lt;/a&gt; for WSL support)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;If you have successfully tested with other platforms and drivers, please click &amp;ldquo;edit this page&amp;rdquo; in the top right hand
+side and submit a pull request to let us know.&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&#34;local-connection-workarounds&#34;&gt;Local connection workarounds&lt;/h2&gt;
+&lt;p&gt;Depending on your operating system and virtualization platform that you are using with Minikube, it may not be
+possible to connect directly to a &lt;code&gt;GameServer&lt;/code&gt; hosted on Code Blind as you would on a cloud hosted Kubernetes cluster.&lt;/p&gt;
+&lt;p&gt;If you are unable to do so, the following workarounds are available, and may work on your platform:&lt;/p&gt;
+&lt;h3 id=&#34;minikube-ip&#34;&gt;minikube ip&lt;/h3&gt;
+&lt;p&gt;Rather than using the published IP of a &lt;code&gt;GameServer&lt;/code&gt; to connect, run &lt;code&gt;minikube ip -p agones&lt;/code&gt; to get the local IP for
+the minikube node, and connect to that address.&lt;/p&gt;
+&lt;h3 id=&#34;create-a-service&#34;&gt;Create a service&lt;/h3&gt;
+&lt;p&gt;This would only be for local development, but if none of the other workarounds work, creating a Service for the
+&lt;code&gt;GameServer&lt;/code&gt; you wish to connect to is a valid solution, to tunnel traffic to the appropriate GameServer container.&lt;/p&gt;
+&lt;p&gt;Use the following yaml:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;apiVersion&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;v1&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;kind&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Service&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;metadata&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;agones-gameserver&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;spec&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LoadBalancer&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;selector&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;agones.dev/gameserver&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;${GAMESERVER_NAME}&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;ports&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;  &lt;/span&gt;- &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;protocol&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;UDP&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;port&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0000cf;font-weight:bold&#34;&gt;7000&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;# local port&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;targetPort&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;${GAMESERVER_CONTAINER_PORT}&lt;/span&gt;&lt;span style=&#34;color:#f8f8f8;text-decoration:underline&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Where &lt;code&gt;${GAMESERVER_NAME}&lt;/code&gt; is replaced with the GameServer you wish to connect to, and &lt;code&gt;${GAMESERVER_CONTAINER_PORT}&lt;/code&gt;
+is replaced with the container port GameServer exposes for connection.&lt;/p&gt;
+&lt;p&gt;Running &lt;code&gt;minikube service list -p agones&lt;/code&gt; will show you the IP and port to connect to locally in the &lt;code&gt;URL&lt;/code&gt; field.&lt;/p&gt;
+&lt;p&gt;To connect to a different &lt;code&gt;GameServer&lt;/code&gt;, run &lt;code&gt;kubectl edit service agones-gameserver&lt;/code&gt; and edit the &lt;code&gt;${GAMESERVER_NAME}&lt;/code&gt;
+value to point to the new &lt;code&gt;GameServer&lt;/code&gt; instance and/or the &lt;code&gt;${GAMESERVER_CONTAINER_PORT}&lt;/code&gt; value as appropriate.&lt;/p&gt;
+
+
+&lt;div class=&#34;alert alert-warning&#34; role=&#34;alert&#34;&gt;
+&lt;h4 class=&#34;alert-heading&#34;&gt;Warning&lt;/h4&gt;
+
+    &lt;code&gt;minikube tunnel&lt;/code&gt; (&lt;a href=&#34;https://minikube.sigs.k8s.io/docs/handbook/accessing/&#34;&gt;docs&lt;/a&gt;)
+does not support UDP (&lt;a href=&#34;https://github.com/kubernetes/minikube/issues/12362&#34;&gt;Github Issue&lt;/a&gt;) on some combination of
+operating system, platforms and drivers, but is required when using the &lt;code&gt;Service&lt;/code&gt; workaround.
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;use-a-different-driver&#34;&gt;Use a different driver&lt;/h3&gt;
+&lt;p&gt;If you cannot connect through the &lt;code&gt;Service&lt;/code&gt;or use other workarounds, you may want to try a different
+&lt;a href=&#34;https://minikube.sigs.k8s.io/docs/drivers/&#34;&gt;minikube driver&lt;/a&gt;, and if that doesn&amp;rsquo;t work, connection via UDP may not
+be possible with minikube, and you may want to try either a
+&lt;a href=&#34;https://kubernetes.io/docs/tasks/tools/&#34;&gt;different local Kubernetes tool&lt;/a&gt; or use a cloud hosted Kubernetes cluster.&lt;/p&gt;
+&lt;h2 id=&#34;next-steps&#34;&gt;Next Steps&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Continue to &lt;a href=&#34;https://codeblind.ai/docs/installation/install-agones/&#34;&gt;Install Code Blind&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
