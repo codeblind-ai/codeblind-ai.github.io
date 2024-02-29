@@ -87,7 +87,7 @@ The first step to publishing an SPA is to create a new repository on Github. Ass
 
 <details open>
   <summary>1.2 Ensure your repository name is correct</summary>
-  For the site to be hosted on Github Pages, the repository name must be in the format `username.github.io` where `username` is your Github username or organization name.
+  For the site to be hosted on Github Pages, the repository name must be in the format <code>username.github.io</code> where <code>username</code> is your Github username or organization name.
 </details>
 
 <details open>
@@ -95,7 +95,7 @@ The first step to publishing an SPA is to create a new repository on Github. Ass
   
   In the <code>Pages</code> section of the repository settings, ensure the <code>Source</code> is set to <code>Github Actions</code> in the Build and deploy section.
 
-  <img src="./spa-hosting/setting-build-and-deploy.png" alt="Setting the build and deploy options" style="width: 70%; display: block; margin-left: auto; margin-right: auto;">
+  <img src="/images/blogs/spa-hosting/setting-build-and-deploy.png" alt="Setting the build and deploy options" style="width: 40%; display: block; margin-left: auto; margin-right: auto;">
 
   <br/>
 
@@ -197,13 +197,13 @@ This work will happen in two parts, one phase on [Namecheap][namecheap] and the 
   
   2. **Select Domain List from the left sidebar and click on the Manage button next to your domain name:**
   
-  <img src="./spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+  <img src="/images/blogs/spa-hosting/nc_manage.png" alt="Manage Domain" style="width: 70%; display: block; margin-left: auto; margin-right: auto;" />
   
   3. **Navigate to the Advanced DNS tab and click on the Add New Record button:**
   
-  <img src="./spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 90%; display: block; margin-left: auto; margin-right: auto;" />
+  <img src="/images/blogs/spa-hosting/nc_addnewrecord.png" alt="Manage Domain" style="width: 70%; display: block; margin-left: auto; margin-right: auto;" />
   
-  1. **Add the following records to your domain:**
+  4. **Add the following records to your domain:**
 
   <table>
     <tr>
