@@ -323,7 +323,7 @@ In our [previous post]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" 
   #### Configure MetalLB
 
   ```bash
-  cat <<EOF | kubectl apply -f -
+  cat <<EOF > metallb-config.yaml
   apiVersion: metallb.io/v1beta1
   kind: IPAddressPool
   metadata:
@@ -346,6 +346,8 @@ In our [previous post]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" 
     - default
   status: {}
   ---
+  EOF
+  kubectl apply -f metallb-config.yaml
   ```
 
   > <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color: orange;">&nbsp;</i> The `addresses` range should be within the same subnet as your personal LAN network. For example, I login to the admin console on my ISP provided router. In the DHCP settings, I can limit the block of addresses on my network (for example from 192.168.1.2 to 192.168.1.64). This allows me to use address ranges outside of that for LoadBalancer IP addresses assigned by MetalLB. 
