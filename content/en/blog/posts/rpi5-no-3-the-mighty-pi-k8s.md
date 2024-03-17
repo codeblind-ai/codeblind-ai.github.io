@@ -317,34 +317,42 @@ In our [previous post]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" 
 
 
   ```bash
-  kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/namespace.yaml
-  kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.12.1/manifests/metallb.yaml
+  kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.3/config/manifests/metallb-native.yaml
   ```
-  > **Note:** I am using version `0.12.1` because I experienced some issues with current versions. I hope to resolve this later and will upgrade these instructions.
 
   #### Configure MetalLB
 
   ```bash
   cat <<EOF | kubectl apply -f -
-  apiVersion: v1
-  kind: ConfigMap
+  apiVersion: metallb.io/v1beta1
+  kind: IPAddressPool
   metadata:
+    creationTimestamp: null
+    name: default
     namespace: metallb-system
-    name: config
-  data:
-    config: |
-      address-pools:
-      - name: default
-        protocol: layer2
-        addresses:
-        - 192.168.1.65-192.168.1.250
+  spec:
+    addresses:
+    - 192.168.1.65-192.168.1.250
+  status: {}
   ---
-  EOF
+  apiVersion: metallb.io/v1beta1
+  kind: L2Advertisement
+  metadata:
+    creationTimestamp: null
+    name: l2advertisement1
+    namespace: metallb-system
+  spec:
+    ipAddressPools:
+    - default
+  status: {}
+  ---
   ```
 
   > <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color: orange;">&nbsp;</i> The `addresses` range should be within the same subnet as your personal LAN network. For example, I login to the admin console on my ISP provided router. In the DHCP settings, I can limit the block of addresses on my network (for example from 192.168.1.2 to 192.168.1.64). This allows me to use address ranges outside of that for LoadBalancer IP addresses assigned by MetalLB. 
   >
-  > Thus, you should log into your router, and find the DHCP settings to see what range of addresses are being used. Then you can use the remaining addresses for MetalLB. You may want to adjust the range, but note that the changes will not automatically reassign IP addresses to existing divices (such as your TV), so you may need to reboot devices to get a new IP address.
+  > Thus, you should log into your router, and find the DHCP settings to see what range of addresses are being used. Then you can use the remaining addresses for MetalLB. You may want to adjust the range, but note that the changes will not automatically reassign IP addresses to existing devices (such as your TV), so you may need to reboot devices to get a new IP address.
+  >
+  > *Additionally* - this is using L2 ARP to advertise the IP addresses. This is the simplest way to get MetalLB working, but it may not work in all environments. I might recommend becoming familiar with the differences. BGP is much more efficient, but our scale is not large enough to warrant the complexity of BGP. Read more about the [differences here](https://metallb.universe.tf/concepts/layer2/).
 
 </details>
 
