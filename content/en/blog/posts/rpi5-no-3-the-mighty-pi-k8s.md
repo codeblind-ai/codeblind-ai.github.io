@@ -315,13 +315,25 @@ In our [previous post]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" 
 
   <img src="/images/blogs/rpi5-cloud/rpi5-k8s-10.png" alt="Raspberry Pi 5" style="width: 90%; display: block; margin-left: auto; margin-right: auto;">
 
+  #### Enable APR advertisement in IPVS mode for kube-proxy
+  ```bash
+  # see what changes would be made, returns nonzero returncode if different
+  kubectl get configmap kube-proxy -n kube-system -o yaml | \
+  sed -e "s/strictARP: false/strictARP: true/" | \
+  kubectl diff -f - -n kube-system
 
+  # actually apply the changes, returns nonzero returncode on errors only
+  kubectl get configmap kube-proxy -n kube-system -o yaml | \
+  sed -e "s/strictARP: false/strictARP: true/" | \
+  kubectl apply -f - -n kube-system
+  ```
+
+  #### Add metallb to the cluster
   ```bash
   kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.3/config/manifests/metallb-native.yaml
   ```
 
   #### Configure MetalLB
-
   ```bash
   cat <<EOF > metallb-config.yaml
   apiVersion: metallb.io/v1beta1
