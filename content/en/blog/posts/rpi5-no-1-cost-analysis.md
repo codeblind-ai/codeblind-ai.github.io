@@ -388,22 +388,6 @@ This signifies a savings of $115.75 USD per month, or $1,389 USD per year. 🤯 
 
 ---
 
-Next Steps
-==========
-
-In future blog posts, we will be doing the following:
-
-1. [Setting up a RPi 5 for the first time]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" >}})
-2. [Installing Kubernetes on the RPi 5]({{< ref "/blog/posts/rpi5-no-3-the-mighty-pi-k8s.md" >}})
-3. Enabling a Load Balancer (like the AWS NLBs) - but local
-4. Enabling VM support (kata containers & firecracker) 
-5. Exposure of services to the internet with REAL domain name
-6. Enabling an AWS like API for use with Terraform
-7. Expanding our hardware to 15 machines!
-
-So stay tuned, this will bring all of the basics of hosting together in a way that you can understand and use in your own home. And by the end, you may just be asking yourself if you really need AWS!
-
----
 
 ### Special Dedication
 
