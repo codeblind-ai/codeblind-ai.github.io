@@ -98,7 +98,7 @@ Previously in the series we've creates a Kubernetes cluster on Raspberry Pi 5. I
   ```
 </details>
 
-<details>
+<details open>
   <summary>4. Update the containerd configuration</summary>
 
   #### We are **overwriting** the current containerd configuration
@@ -144,7 +144,7 @@ Previously in the series we've creates a Kubernetes cluster on Raspberry Pi 5. I
 
 </details>
 
-<details>
+<details open>
   <summary>5. Enable Kata Containers Runtime Class</summary>
 
   ```bash
@@ -160,7 +160,7 @@ Previously in the series we've creates a Kubernetes cluster on Raspberry Pi 5. I
   ```
 </details>
 
-<details>
+<details open>
   <summary>6. Redeploy PingPong using kata containers and QEMU</summary>
 
   ```bash
@@ -221,7 +221,7 @@ Previously in the series we've creates a Kubernetes cluster on Raspberry Pi 5. I
   ```
 </details>
 
-<details>
+<details open>
   <summary>7. Check hypervisor is running</summary>
 
   
