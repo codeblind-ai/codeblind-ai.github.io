@@ -315,7 +315,7 @@ In our [previous post]({{< ref "/blog/posts/rpi5-no-2-the-mighty-pi-hw-prep.md" 
 
   <img src="/images/blogs/rpi5-cloud/rpi5-k8s-10.png" alt="Raspberry Pi 5" style="width: 90%; display: block; margin-left: auto; margin-right: auto;">
 
-  #### Enable APR advertisement in IPVS mode for kube-proxy
+  #### Enable ARP advertisement in IPVS mode for kube-proxy
   ```bash
   # see what changes would be made, returns nonzero returncode if different
   kubectl get configmap kube-proxy -n kube-system -o yaml | \

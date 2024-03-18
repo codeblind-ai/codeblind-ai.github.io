@@ -1,5 +1,5 @@
 ---
-title: "Pi goes Great with Kata 🫙"
+title: "Pi goes Great with Kata 🥧"
 linkTitle: "🧞 Bottling Genies"
 date: 2024-03-18
 description: >
