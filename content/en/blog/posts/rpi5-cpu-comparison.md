@@ -1,6 +1,6 @@
 ---
-title: "Pi Berries 🤖"
-linkTitle: "👾 The Cloud Natives"
+title: "Comparing the Berries 🍓"
+linkTitle: "🤖 Berry Pis"
 date: 2024-03-14
 description: >
     A quick look at processors used in Raspberry Pi models and how they compare to processors used in IaaS machine instances.
